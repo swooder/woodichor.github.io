@@ -100,7 +100,7 @@ google_analytics_tracking_id:
 facebook_like: false
 
 #weibo like
-weibo: true
+weibo_share: true
 weibo_uid: 1706688983
 weibo_verifier: 1a722b18
 weibo_fansline: 0   # 粉丝显示多少行

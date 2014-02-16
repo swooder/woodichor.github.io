@@ -9,8 +9,8 @@
   <meta name="author" content="Shao jie">
 
   
-  <meta name="description" content="
-">
+  <meta name="description" content="1.Octopress需要Ruby环境，RVM(Ruby Version Manager)负责安装和管理Ruby的环境。所以我们先在终端输入如下命令，来安装RVM 1
+curl -L https://get.rvm.io | bash -s stable --ruby 安装ruby1.9.3 1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -92,7 +92,323 @@
   </header>
 
 
-<div class="entry-content">
+<div class="entry-content"><h3>1.Octopress需要Ruby环境，RVM(Ruby Version Manager)负责安装和管理Ruby的环境。所以我们先在终端输入如下命令，来安装RVM</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>curl -L https://get.rvm.io | bash -s stable --ruby</span></code></pre></td></tr></table></div></figure>
+
+
+<p>安装ruby1.9.3</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rvm install 1.9.3
+</span><span class='line'>rvm use 1.9.3
+</span><span class='line'>rvm rubygems lastest</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>2.安装Octpress</h3>
+
+<p>在安装octpress之前，确保安装了git。
+下载octpress</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/imathis/octopress.git octopress
+</span><span class='line'>cd octpress</span></code></pre></td></tr></table></div></figure>
+
+
+<p>安装相关依赖</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install bundler
+</span><span class='line'>rbenv rehash
+</span><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>安装默认的Octpress主题</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake install</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>3.将博客部署到Github上</h3>
+
+<p>Github的Page service可以免费托管博客，并且还可以自定义域名。</p>
+
+<p>首先需要在GitHub上创建一个仓库，并将仓库名称按照这样的方式进行命名：<code>username.github.com</code>或<code>organization.github.com</code>。等后面配置完毕之后，我们就可以在浏览器中使用页面地址<code>http://username.github.com</code>来访问我们的博客。一般来说，我们希望在将博客的源码放到source分支下，并把生成的内容提交到master分支。</p>
+
+<p>创建好仓库之后，我们需要利用octopress的一个配置rake任务来自动配置上面创建的仓库：可以让我们方便的部署GitHub page。在终端输入如下命令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake setup_github_pages</span></code></pre></td></tr></table></div></figure>
+
+
+<p>完成上面的命令之后，我们就可以生成博客并真正的部署到仓库中了。执行如下命令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake generate
+</span><span class='line'>rake deploy</span></code></pre></td></tr></table></div></figure>
+
+
+<p>现在可以访问<code>http://username.github.com</code>了。注意：有时候可能会有延时，要等等10分钟左右才能打开。</p>
+
+<p>不过博客的source需要单独提交，执行如下命令就可以将source提交到仓库的source分支下。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git add .
+</span><span class='line'>git commit -m 'Initial souece comment'
+</span><span class='line'>git push origin source</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果在部署到仓库之前，需要先预览一下博客，可以在终端输入</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake preview</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后就能在浏览器中进行本地预览访问了：<code>http://127.0.0.1:4000/</code>或<code>http://localhost:4000/</code>，效果跟仓库中的一样。</p>
+
+<h3>4.开始写博客</h3>
+
+<p>新建一篇文章</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake 'new_post[title]'
+</span><span class='line'>其中title为博文的文件名，创建出来的文件默认是markdown格式。上面的命令会创建出这样一个文件：source/_posts/2014-2-16-title.markdown</span></code></pre></td></tr></table></div></figure>
+
+
+<p>打开这篇文章，可以看到</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>---
+</span><span class='line'>layout: post
+</span><span class='line'>title: title
+</span><span class='line'>date: 2014-0-16 00:33:40 +0800
+</span><span class='line'>comments: true
+</span><span class='line'>categoryies:
+</span><span class='line'>---</span></code></pre></td></tr></table></div></figure>
+
+
+<p>categories 填写文章的分类名</p>
+
+<p>接着我们就可以在这个文件中写我们的博文。完成之后，我们可以预览和部署博文。下面是创建并部署博文的一个完整过程</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake 'new_post[title]'
+</span><span class='line'>rake generate
+</span><span class='line'>git add .
+</span><span class='line'>git commit -am "add new post"
+</span><span class='line'>git push origin source
+</span><span class='line'>rake deploy</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>5.添加分类列表</h3>
+
+<p>保存一下代码到 plugins/category_list_tag.rb:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>module Jekyll
+</span><span class='line'>  class CategoryListTag &lt; Liquid::Tag
+</span><span class='line'>    def render(context)
+</span><span class='line'>      html = ""
+</span><span class='line'>      categories = context.registers[:site].categories.keys
+</span><span class='line'>      categories.sort.each do |category|
+</span><span class='line'>        posts_in_category = context.registers[:site].categories[category].size
+</span><span class='line'>        category_dir = context.registers[:site].config['category_dir']
+</span><span class='line'>        category_url = File.join(category_dir, category.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').downcase)
+</span><span class='line'>        html &lt;&lt; "&lt;li class='category'&gt;&lt;a href='/#{category_url}/'&gt;#{category} (#{posts_in_category})&lt;/a&gt;&lt;/li&gt;\n"
+</span><span class='line'>      end
+</span><span class='line'>      html
+</span><span class='line'>    end
+</span><span class='line'>  end
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>Liquid::Template.register_tag('category_list', Jekyll::CategoryListTag)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这个插件会向liquid注册一个名为category_list的tag，该tag就是以li的形式将站点所有的category组织起来。如果要将category加入到侧边导航栏，需要增加一个aside。
+增加aside
+复制以下代码到source/_includes/asides/category_list.html。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>&lt;section&gt;
+</span><span class='line'>  &lt;h1&gt;Categories&lt;/h1&gt;
+</span><span class='line'>  &lt;ul id="categories"&gt;
+</span><span class='line'>    {% category_list %}
+</span><span class='line'>  &lt;/ul&gt;
+</span><span class='line'>&lt;/section&gt;
+</span><span class='line'></span></code></pre></td></tr></table></div></figure>
+
+
+<p>配置侧边栏需要修改_config.yml文件，修改其default_asides项:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>default_asides: [asides/category_list.html, asides/recent_posts.html]</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>6.添加微博秀</h3>
+
+<p>先到微博秀里面生成自己的微博秀嵌入代码</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;iframe width="100%"
+</span><span class='line'> height="550" 
+</span><span class='line'> class="share_self"  
+</span><span class='line'> frameborder="0" 
+</span><span class='line'> scrolling="no" 
+</span><span class='line'> src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2
+</span><span class='line'>&ptype=1&speed=0&skin=1&isTitle=1&noborder=1
+</span><span class='line'>&isWeibo=1&isFans=1&uid=1706688983
+</span><span class='line'>&verifier=1a722b18&dpc=1"&gt;
+</span><span class='line'>&lt;/iframe&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>新建一个weibo.html 到source/_include/asides的下面</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>{% if site.weibo_uid %}
+</span><span class='line'>&lt;section&gt;
+</span><span class='line'>  &lt;h1&gt;新浪微博&lt;/h1&gt;
+</span><span class='line'>  &lt;ul id="weibo"&gt;
+</span><span class='line'>    &lt;li&gt;
+</span><span class='line'>      &lt;iframe 
+</span><span class='line'>        width="100%" 
+</span><span class='line'>        height="550" 
+</span><span class='line'>        class="share_self" 
+</span><span class='line'>        frameborder="0" 
+</span><span class='line'>        scrolling="no" 
+</span><span class='line'>        src="http://widget.weibo.com/weiboshow/index.php?width=0&height=550
+</span><span class='line'>        &ptype={% if site.weibo_pic %}1{% else %}0{% endif %}&speed=0&skin={{weibo_skin}}&isTitle=0&noborder=1
+</span><span class='line'>&isWeibo={% if site.weibo_show %}1{% else %}0{% endif %}&isFans={{weibo_fansline}}&uid={{site.weibo_uid}}&verifier={{site.weibo_verifier}}"&gt;
+</span><span class='line'>      &lt;/iframe&gt;
+</span><span class='line'>    &lt;/li&gt;
+</span><span class='line'>  &lt;/ul&gt;
+</span><span class='line'>&lt;/section&gt;
+</span><span class='line'>{% endif %}
+</span><span class='line'></span></code></pre></td></tr></table></div></figure>
+
+
+<p>修改_config.xml中default_aside部分</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>... 
+</span><span class='line'>default_asides: [asides/recent_posts.html, asides/weibo.html, asides/github.html, asides/[Twitter][].html, asides/googleplus.html]
+</span><span class='line'>...
+</span><span class='line'>weibo_uid: 1098907490
+</span><span class='line'>weibo_verifier: abd54ad9
+</span><span class='line'>weibo_fansline: 0   # 粉丝显示多少行
+</span><span class='line'>weibo_show: true    # 是否显示最近微博内容
+</span><span class='line'>weibo_pic: true     # 是否显示微博中的图片
+</span><span class='line'>weibo_skin: 10      # 使用哪种配色风格，数字为从1开始的微博秀风格序号
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>7.评论和分享</h3>
+
+<p>在<em>config.yml中增加一项： weibo_share: true
+修改 source/</em>includes/post/sharing.html ，增加：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>{% if site.weibo_share %}
+</span><span class='line'>     {% include post/weibo.html %}
+</span><span class='line'> {% endif %}
+</span><span class='line'> </span></code></pre></td></tr></table></div></figure>
+
+
+<p>增加文件：source/_includes/post/weibo.html</p>
+
+<p>访问<a href="http://www.jiathis.com/">http://www.jiathis.com/</a> , 获取分享的代码</p>
+
+<p>访问<a href="http://uyan.cc/,">http://uyan.cc/,</a> 获取评论的代码</p>
+
+<p>把代码都加到weibo.html中</p>
 </div>
 
 
@@ -118,6 +434,12 @@
 <time datetime="2014-02-16T00:33:40+08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
       
 
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/sui-ji/'>随记</a>
+  
+</span>
+
 
     </p>
     
@@ -127,6 +449,21 @@
   
   
   
+  
+   <div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js"></script>
+
+ 
 </div>
 
     
@@ -144,7 +481,8 @@
     <section>
   <h1>Categories</h1>
   <ul id="categories">
-    
+    <li class='category'><a href='/blog/categories/随记/'>随记 (1)</a></li>
+
   </ul>
 </section>
 

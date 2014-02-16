@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 随记 | Shaojie's Blog]]></title>
+  <link href="http://www.shaojie.name/blog/categories/sui-ji/atom.xml" rel="self"/>
+  <link href="http://www.shaojie.name/"/>
+  <updated>2014-02-16T12:33:19+08:00</updated>
+  <id>http://www.shaojie.name/</id>
+  <author>
+    <name><![CDATA[Shao jie]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[搭建博客环境]]></title>
+    <link href="http://www.shaojie.name/blog/2014/02/16/da-jian-bo-ke-huan-jing/"/>
+    <updated>2014-02-16T00:33:40+08:00</updated>
+    <id>http://www.shaojie.name/blog/2014/02/16/da-jian-bo-ke-huan-jing</id>
+    <content type="html"><![CDATA[<h3>1.Octopress需要Ruby环境，RVM(Ruby Version Manager)负责安装和管理Ruby的环境。所以我们先在终端输入如下命令，来安装RVM</h3>
+
+<p><code>
+curl -L https://get.rvm.io | bash -s stable --ruby
+</code>
+安装ruby1.9.3
+<code>
+rvm install 1.9.3
+rvm use 1.9.3
+rvm rubygems lastest
+</code></p>
+
+<h3>2.安装Octpress</h3>
+
+<p>在安装octpress之前，确保安装了git。
+下载octpress
+<code>
+git clone git://github.com/imathis/octopress.git octopress
+cd octpress
+</code>
+安装相关依赖
+<code>
+gem install bundler
+rbenv rehash
+bundle install
+</code>
+安装默认的Octpress主题
+<code>
+rake install
+</code></p>
+
+<h3>3.将博客部署到Github上</h3>
+
+<p>Github的Page service可以免费托管博客，并且还可以自定义域名。</p>
+
+<p>首先需要在GitHub上创建一个仓库，并将仓库名称按照这样的方式进行命名：<code>username.github.com</code>或<code>organization.github.com</code>。等后面配置完毕之后，我们就可以在浏览器中使用页面地址<code>http://username.github.com</code>来访问我们的博客。一般来说，我们希望在将博客的源码放到source分支下，并把生成的内容提交到master分支。</p>
+
+<p>创建好仓库之后，我们需要利用octopress的一个配置rake任务来自动配置上面创建的仓库：可以让我们方便的部署GitHub page。在终端输入如下命令：
+<code>
+rake setup_github_pages
+</code>
+完成上面的命令之后，我们就可以生成博客并真正的部署到仓库中了。执行如下命令：
+<code>
+rake generate
+rake deploy
+</code>
+现在可以访问<code>http://username.github.com</code>了。注意：有时候可能会有延时，要等等10分钟左右才能打开。</p>
+
+<p>不过博客的source需要单独提交，执行如下命令就可以将source提交到仓库的source分支下。
+<code>
+git add .
+git commit -m 'Initial souece comment'
+git push origin source
+</code>
+如果在部署到仓库之前，需要先预览一下博客，可以在终端输入
+<code>
+rake preview
+</code>
+然后就能在浏览器中进行本地预览访问了：<code>http://127.0.0.1:4000/</code>或<code>http://localhost:4000/</code>，效果跟仓库中的一样。</p>
+
+<h3>4.开始写博客</h3>
+
+<p>新建一篇文章
+<code>
+rake 'new_post[title]'
+其中title为博文的文件名，创建出来的文件默认是markdown格式。上面的命令会创建出这样一个文件：source/_posts/2014-2-16-title.markdown
+</code>
+打开这篇文章，可以看到</p>
+
+<h2>```</h2>
+
+<p>layout: post
+title: title
+date: 2014-0-16 00:33:40 +0800
+comments: true</p>
+
+<h2>categoryies:</h2>
+
+<p>```
+categories 填写文章的分类名</p>
+
+<p>接着我们就可以在这个文件中写我们的博文。完成之后，我们可以预览和部署博文。下面是创建并部署博文的一个完整过程
+<code>
+rake 'new_post[title]'
+rake generate
+git add .
+git commit -am "add new post"
+git push origin source
+rake deploy
+</code></p>
+
+<h3>5.添加分类列表</h3>
+
+<p>保存一下代码到 plugins/category_list_tag.rb:
+```
+module Jekyll
+  class CategoryListTag &lt; Liquid::Tag</p>
+
+<pre><code>def render(context)
+  html = ""
+  categories = context.registers[:site].categories.keys
+  categories.sort.each do |category|
+    posts_in_category = context.registers[:site].categories[category].size
+    category_dir = context.registers[:site].config['category_dir']
+    category_url = File.join(category_dir, category.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').downcase)
+    html &lt;&lt; "&lt;li class='category'&gt;&lt;a href='http://www.shaojie.name/#{category_url}/'&gt;#{category} (#{posts_in_category})&lt;/a&gt;&lt;/li&gt;\n"
+  end
+  html
+end
+</code></pre>
+
+<p>  end
+end</p>
+
+<p>Liquid::Template.register_tag(&lsquo;category_list&rsquo;, Jekyll::CategoryListTag)
+```</p>
+
+<p>这个插件会向liquid注册一个名为category_list的tag，该tag就是以li的形式将站点所有的category组织起来。如果要将category加入到侧边导航栏，需要增加一个aside。
+增加aside
+复制以下代码到source/_includes/asides/category_list.html。
+```
+
+<section>
+  <h1>Categories</h1>
+  <ul id="categories"></p>
+
+<pre><code>{% category_list %}
+</code></pre>
+
+<p>  </ul>
+</section>
+
+```</p>
+
+<p>配置侧边栏需要修改_config.yml文件，修改其default_asides项:
+<code>
+default_asides: [asides/category_list.html, asides/recent_posts.html]
+</code></p>
+
+<h3>6.添加微博秀</h3>
+
+<p>先到微博秀里面生成自己的微博秀嵌入代码
+```</p>
+
+<iframe width="100%"
+ height="550" 
+ class="share_self"  
+ frameborder="0" 
+ scrolling="no" 
+ src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2
+&ptype=1&speed=0&skin=1&isTitle=1&noborder=1
+&isWeibo=1&isFans=1&uid=1706688983
+&verifier=1a722b18&dpc=1">
+</iframe>
+
+
+<p>```</p>
+
+<p>新建一个weibo.html 到source/_include/asides的下面
+```
+
+{% if site.weibo_uid %}
+<section>
+  <h1>新浪微博</h1>
+  <ul id="weibo"></p>
+
+<pre><code>&lt;li&gt;
+  &lt;iframe 
+    width="100%" 
+    height="550" 
+    class="share_self" 
+    frameborder="0" 
+    scrolling="no" 
+    src="http://widget.weibo.com/weiboshow/index.php?width=0&amp;height=550
+    &amp;ptype={% if site.weibo_pic %}1{% else %}0{% endif %}&amp;speed=0&amp;skin={{weibo_skin}}&amp;isTitle=0&amp;noborder=1
+</code></pre>
+
+<p>&amp;isWeibo={% if site.weibo_show %}1{% else %}0{% endif %}&amp;isFans={{weibo_fansline}}&amp;uid={{site.weibo_uid}}&amp;verifier={{site.weibo_verifier}}&ldquo;></p>
+
+<pre><code>  &lt;/iframe&gt;
+&lt;/li&gt;
+</code></pre>
+
+<p>  </ul>
+</section>
+{% endif %}
+
+<code>
+修改_config.xml中default_aside部分
+</code>
+&hellip;
+default_asides: [asides/recent_posts.html, asides/weibo.html, asides/github.html, asides/[Twitter][].html, asides/googleplus.html]
+&hellip;
+weibo_uid: 1098907490
+weibo_verifier: abd54ad9
+weibo_fansline: 0   # 粉丝显示多少行
+weibo_show: true    # 是否显示最近微博内容
+weibo_pic: true     # 是否显示微博中的图片
+weibo_skin: 10      # 使用哪种配色风格，数字为从1开始的微博秀风格序号
+&hellip;
+```</p>
+
+<h3>7.评论和分享</h3>
+
+<p>在<em>config.yml中增加一项： weibo_share: true
+修改 source/</em>includes/post/sharing.html ，增加：
+```
+
+{% if site.weibo_share %}</p>
+
+<pre><code> {% include post/weibo.html %}
+</code></pre>
+
+<p> {% endif %}
+ 
+```
+增加文件：source/_includes/post/weibo.html</p>
+
+<p>访问<a href="http://www.jiathis.com/">http://www.jiathis.com/</a> , 获取分享的代码</p>
+
+<p>访问<a href="http://uyan.cc/,">http://uyan.cc/,</a> 获取评论的代码</p>
+
+<p>把代码都加到weibo.html中</p>
+]]></content>
+  </entry>
+  
+</feed>

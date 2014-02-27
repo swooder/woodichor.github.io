@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>GitHub Search Syntax - Shaojie's Blog</title>
+  <meta name="author" content="Shao jie">
+
+  
+  <meta name="description" content="Search Syntax 如果你想精确的查找搜索结果，你可以一直使用高级搜索,但是，使用正确的搜索语法可以帮助你更快速的找到你想要的结果，下面就介绍几种搜索语法。 Greater Than Queries 设想你想找所有与‘cats’有关的项目，而且筛选出它被用户标记星号(stars) &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.shaojie.name/blog/2014/02/27/github-search-syntax">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Shaojie's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Shaojie's Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.shaojie.name" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">GitHub Search Syntax</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-27T23:36:54+08:00" pubdate data-updated="true">Feb 27<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h3>Search Syntax</h3>
+
+<p>如果你想精确的查找搜索结果，你可以一直使用<a href="/blog/2014/02/23/advanced-search/">高级搜索</a>,但是，使用正确的搜索语法可以帮助你更快速的找到你想要的结果，下面就介绍几种搜索语法。</p>
+
+<h4>Greater Than Queries</h4>
+
+<p>设想你想找所有与‘cats’有关的项目，而且筛选出它被用户标记星号(stars)的次数大于10次。你可以使用一些操作符帮助你完成。</p>
+
+<p><p>><code>&gt;</code> 和 <code>&gt;=</code>符号代表“大于”和&#8221;大于等于&#8221;。例如下边的两个例子是等价的
+<p>><code>cats stars:"&gt;10"</code>
+<p>><code>cats stars:"&gt;=10"</code>
+<br>
+<br>
+<p>>你也可以使用更加程序化的符号<code>..*</code>,它等价于<code>&gt;=</code>,代表查找所有大于等于10的。
+<p>><code>cats stars:"10..*"</code>
+<br>
+<br></p>
+
+<p><p>>符号<code>*</code>可以代表任意数字，所以<code>10 .. 50</code>等价于&#8221;所有大约等于10取小于等于50&#8221;。</p>
+
+<h4>Less Than Queries</h4>
+
+<p>如果你想找所有与‘cats’有关的项目，而且筛选出它被用户标记星号(stars)的次数小于10次。你可以使用类似的一些操作符帮助你完成。
+<p>><code>&lt;</code> 和 <code>&lt;=</code>符号代表“小于”和&#8221;小于等于&#8221;。例如下边的两个例子是等价的
+<p>><code>cats stars:"&lt;10"</code>
+<p>><code>cats stars:"&lt;=9"</code>
+<br>
+<br>
+<p>>你也可以使用更加程序化的符号<code>*..</code>,它等价于<code>&lt;=</code>,代表查找所有小等于10的。
+<p>><code>cats stars:"*..10"</code>
+<br>
+<br></p>
+
+<p><p>>符号<code>*</code>可以代表任意数字，所以<code>1 .. 10</code>等价于&#8221;所有大约等于1取小于等于10&#8221;。</p>
+
+<h4>Range Queries</h4>
+
+<p>当你要查找一些没有‘数量’标记的项目时，range查询这时就能显出2它的威力来了，比如你还是要查找与&#8217;cat&#8217;相关的项目，并且上次的更新时间在2014年1月低到今天的2014年2月28
+<p>><code>cats pushed:2014-01-31..2014-02-28</code></p>
+
+<p><br>
+<br>
+<br></p>
+
+<h4>Omitting Spaces</h4>
+
+<p>如果你更倾向更短的标记和更少的字符的话，你可以删除引号以及查询条件中多余的空格，仅当查询的条件中包含空格的时候才需要引号
+<p>><code>cats stars:&gt;10</code>
+<p>><code>cats stars:&lt;10</code>
+<p>><code>cats pushed:2014-01-30..2014-02-28</code></p>
+
+<h4>The power of NOT</h4>
+
+<p>你可以使用<code>NOT</code>符号从你的搜索条件中排除关键字的项目，比如搜索···Hello···会返回很多包含<code>Hello World</code>相关的项目，但是如果在搜索条件中加入NOT像这样：
+<p>><code>Hello NOT World</code>
+<p>就会过滤掉排除包含<code>World</code>的。
+<p><code>`NOT</code>符号只能用于String类型的关键字</p>
+
+<h4>Filtering using Exclusion</h4>
+
+<p>另一种缩小搜索范围的方式是排除子集。在搜索的条件的前面带上<code>-</code>，就能排除所有符合条件的结果集
+<p>比如你想查找所有包含&#8217;cats&#8217;并且&#8217;stars&#8217;数量大于10并且不使用&#8217;javascript&#8217;
+<p>><code>cats stars:&gt;10 -language:javascript</code></p>
+
+<p><p>查找所有没有@defunkt的issues:
+<p>><code>mentions:defunkt -user:github</code></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Shao jie</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-27T23:36:54+08:00" pubdate data-updated="true">Feb 27<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/github/'>Github</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.shaojie.name/blog/2014/02/27/github-search-syntax/" data-via="" data-counturl="http://www.shaojie.name/blog/2014/02/27/github-search-syntax/" >Tweet</a>
+  
+  
+  
+  
+   <div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js"></script>
+
+ 
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/02/23/advanced-search/" title="Previous Post: Github高级搜索">&laquo; Github高级搜索</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/github/'>Github (3)</a></li>
+<li class='category'><a href='/blog/categories/other/'>other (1)</a></li>
+
+  </ul>
+</section>
+
+<section>
+  <h1>新浪微博</h1>
+  <ul id="weibo">
+    <li>
+      <iframe 
+        width="100%" 
+        height="550" 
+        class="share_self" 
+        frameborder="0" 
+        scrolling="no" 
+        src="http://widget.weibo.com/weiboshow/index.php?width=0&height=550&ptype=1&speed=0&skin=&isTitle=0&noborder=1&isWeibo=1&isFans=&uid=1706688983&verifier=1a722b18">
+      </iframe>
+    </li>
+  </ul>
+</section>
+
+<div class="github-card" data-github="shaojie519" data-width="400" data-height="150"></div>
+<script src="http://lab.lepture.com/github-cards/widget.js"></script>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/02/27/github-search-syntax/">GitHub Search Syntax</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/23/advanced-search/">Github高级搜索</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/22/searching-github/">Searching Github</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/16/da-jian-bo-ke-huan-jing/">搭建博客环境</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Shao jie -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

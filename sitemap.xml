@@ -2,15 +2,27 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://www.shaojie.name/blog/2014/02/16/da-jian-bo-ke-huan-jing/</loc>
-        <lastmod>2014-02-16T12:25:17+08:00</lastmod>
+        <lastmod>2014-02-28T00:39:19+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.shaojie.name/blog/2014/02/22/searching-github/</loc>
+        <lastmod>2014-02-28T00:38:24+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.shaojie.name/blog/2014/02/23/advanced-search/</loc>
+        <lastmod>2014-02-28T00:34:46+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.shaojie.name/blog/2014/02/27/github-search-syntax/</loc>
+        <lastmod>2014-02-28T00:35:30+08:00</lastmod>
     </url>
     <url>
         <loc>http://www.shaojie.name/blog/archives/</loc>
-        <lastmod>2014-02-16T12:25:17+08:00</lastmod>
+        <lastmod>2014-02-28T00:39:19+08:00</lastmod>
     </url>
     <url>
         <loc>http://www.shaojie.name/</loc>
-        <lastmod>2014-02-16T12:25:17+08:00</lastmod>
+        <lastmod>2014-02-28T00:39:19+08:00</lastmod>
     </url>
     <url>
         <loc>http://www.shaojie.name/robots.txt</loc>

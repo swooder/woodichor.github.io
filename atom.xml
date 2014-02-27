@@ -4,7 +4,7 @@
   <title><![CDATA[Shaojie's Blog]]></title>
   <link href="http://www.shaojie.name/atom.xml" rel="self"/>
   <link href="http://www.shaojie.name/"/>
-  <updated>2014-02-16T12:33:19+08:00</updated>
+  <updated>2014-02-28T00:39:24+08:00</updated>
   <id>http://www.shaojie.name/</id>
   <author>
     <name><![CDATA[Shao jie]]></name>
@@ -12,6 +12,162 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[GitHub Search Syntax]]></title>
+    <link href="http://www.shaojie.name/blog/2014/02/27/github-search-syntax/"/>
+    <updated>2014-02-27T23:36:54+08:00</updated>
+    <id>http://www.shaojie.name/blog/2014/02/27/github-search-syntax</id>
+    <content type="html"><![CDATA[<h3>Search Syntax</h3>
+
+<p>如果你想精确的查找搜索结果，你可以一直使用<a href="http://www.shaojie.name/blog/2014/02/23/advanced-search/">高级搜索</a>,但是，使用正确的搜索语法可以帮助你更快速的找到你想要的结果，下面就介绍几种搜索语法。</p>
+
+<h4>Greater Than Queries</h4>
+
+<p>设想你想找所有与‘cats’有关的项目，而且筛选出它被用户标记星号(stars)的次数大于10次。你可以使用一些操作符帮助你完成。</p>
+
+<p><p>><code>&gt;</code> 和 <code>&gt;=</code>符号代表“大于”和&#8221;大于等于&#8221;。例如下边的两个例子是等价的
+<p>><code>cats stars:"&gt;10"</code>
+<p>><code>cats stars:"&gt;=10"</code>
+<br>
+<br>
+<p>>你也可以使用更加程序化的符号<code>..*</code>,它等价于<code>&gt;=</code>,代表查找所有大于等于10的。
+<p>><code>cats stars:"10..*"</code>
+<br>
+<br></p>
+
+<p><p>>符号<code>*</code>可以代表任意数字，所以<code>10 .. 50</code>等价于&#8221;所有大约等于10取小于等于50&#8221;。</p>
+
+<h4>Less Than Queries</h4>
+
+<p>如果你想找所有与‘cats’有关的项目，而且筛选出它被用户标记星号(stars)的次数小于10次。你可以使用类似的一些操作符帮助你完成。
+<p>><code>&lt;</code> 和 <code>&lt;=</code>符号代表“小于”和&#8221;小于等于&#8221;。例如下边的两个例子是等价的
+<p>><code>cats stars:"&lt;10"</code>
+<p>><code>cats stars:"&lt;=9"</code>
+<br>
+<br>
+<p>>你也可以使用更加程序化的符号<code>*..</code>,它等价于<code>&lt;=</code>,代表查找所有小等于10的。
+<p>><code>cats stars:"*..10"</code>
+<br>
+<br></p>
+
+<p><p>>符号<code>*</code>可以代表任意数字，所以<code>1 .. 10</code>等价于&#8221;所有大约等于1取小于等于10&#8221;。</p>
+
+<h4>Range Queries</h4>
+
+<p>当你要查找一些没有‘数量’标记的项目时，range查询这时就能显出2它的威力来了，比如你还是要查找与&#8217;cat&#8217;相关的项目，并且上次的更新时间在2014年1月低到今天的2014年2月28
+<p>><code>cats pushed:2014-01-31..2014-02-28</code></p>
+
+<p><br>
+<br>
+<br></p>
+
+<h4>Omitting Spaces</h4>
+
+<p>如果你更倾向更短的标记和更少的字符的话，你可以删除引号以及查询条件中多余的空格，仅当查询的条件中包含空格的时候才需要引号
+<p>><code>cats stars:&gt;10</code>
+<p>><code>cats stars:&lt;10</code>
+<p>><code>cats pushed:2014-01-30..2014-02-28</code></p>
+
+<h4>The power of NOT</h4>
+
+<p>你可以使用<code>NOT</code>符号从你的搜索条件中排除关键字的项目，比如搜索···Hello···会返回很多包含<code>Hello World</code>相关的项目，但是如果在搜索条件中加入NOT像这样：
+<p>><code>Hello NOT World</code>
+<p>就会过滤掉排除包含<code>World</code>的。
+<p><code>`NOT</code>符号只能用于String类型的关键字</p>
+
+<h4>Filtering using Exclusion</h4>
+
+<p>另一种缩小搜索范围的方式是排除子集。在搜索的条件的前面带上<code>-</code>，就能排除所有符合条件的结果集
+<p>比如你想查找所有包含&#8217;cats&#8217;并且&#8217;stars&#8217;数量大于10并且不使用&#8217;javascript&#8217;
+<p>><code>cats stars:&gt;10 -language:javascript</code></p>
+
+<p><p>查找所有没有@defunkt的issues:
+<p>><code>mentions:defunkt -user:github</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Github高级搜索]]></title>
+    <link href="http://www.shaojie.name/blog/2014/02/23/advanced-search/"/>
+    <updated>2014-02-23T01:24:57+08:00</updated>
+    <id>http://www.shaojie.name/blog/2014/02/23/advanced-search</id>
+    <content type="html"><![CDATA[<h3>Advanced Search</h3>
+
+<p>使用<a href="https://github.com/search/advanced">高级搜索</a>可以让你近一步缩小搜索范围，你可以通过stars数目、forks数目、文件后缀名等过滤。当你在条件输入框填写条件的时候，它会自动的把高级查询拼接到上面的输入框中。</p>
+
+<p><img src="https://github-images.s3.amazonaws.com/help/search/advanced_search.png" alt="Github " /></p>
+
+<h3>总结</h3>
+
+<p>关于高级查询，我们可以指定很多的参数，以方便我们快速查询，下一篇介绍<a href="http://www.shaojie.name/blog/2014/02/27/github-search-syntax/">搜索语法</a>;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Searching Github]]></title>
+    <link href="http://www.shaojie.name/blog/2014/02/22/searching-github/"/>
+    <updated>2014-02-22T23:41:43+08:00</updated>
+    <id>http://www.shaojie.name/blog/2014/02/22/searching-github</id>
+    <content type="html"><![CDATA[<h3>Searching Github</h3>
+
+<p><p>目前Gihtub上有数以万计的开源项目、用户、代码段，要想从中搜索到自己想要的真是件让人头疼的事情。幸好，有一些搜索技巧可以帮助你快速找到你的结果。</p>
+
+<h3>Find all the Things</h3>
+
+<p><a href="https://github.com/search">Github Search</a> 的功能是基于<a href="https://help.github.com/articles/using-the-command-bar">CommandBar</a>。你可以输入任何你想要的查询条件，它会把所有符合条件的结果高亮显示出来。你也可以点击左侧选择一种编程语言或者点击搜索结果项目列表来进一步缩小搜索范围。</p>
+
+<p>在这个搜索引擎下，搜索就像一个弹性的搜索集合，当有push代码到Github你就可以实时的检索到它们。这些结果来自Github上的开源项目，也包括你有权限操作的私有项目。</p>
+
+<p>为了让搜索关联性更加准确，Github很保守的给出搜索索引，例如，forks的项目一般是不会被搜索出来的，除非这个项目比原始项目有更多的stars。</p>
+
+<p><img src="https://github-images.s3.amazonaws.com/help/search/search_overview.png" alt="Github " /></p>
+
+<h3>搜索类型</h3>
+
+<h4>项目（Repositories）</h4>
+
+<p>每个搜索项目都有一个项目活动的展示，这个可以帮助你找到一些活跃的项目，当然也包括你的私有项目
+当你的搜索结果很多足有好几页的搜索结果，你可以对这些结果按照条件进行排序以便更容易找到结果</p>
+
+<p>关于更好的搜索项目相关说明，你查看<a href="http://www.shaojie.name/https://help.github.com/articles/searching-repositories">搜索项目</a></p>
+
+<h4>问题(Issues)</h4>
+
+<p>Issues search可以让你浏览所有的public的项目以及你有权限的私有项目的问答。你可以选择查看某个组织的问答，也可以选择与某个用户相关的问答。</p>
+
+<p>更多关于如何查找问题。请查看<a href="http://www.shaojie.name/https://help.github.com/articles/searching-issues">搜索问题</a></p>
+
+<h4>代码(code)</h4>
+
+<p>代码搜索可以让你查看所有的public项目以及你有权限的私有项目的代码。你可以带上下边的参数</p>
+
+<ul>
+<li>搜索结果的行号</li>
+<li>代码语法的高亮显示</li>
+<li>上次检索时间</li>
+<li>通过文件后缀查找</li>
+<li>通过路径查找</li>
+<li>只查找我自己的项目</li>
+</ul>
+
+
+<p>更多关于如何搜索代码，请查看<a href="http://www.shaojie.name/https://help.github.com/articles/searching-code">代码搜索</a></p>
+
+<h4>用户(Users)</h4>
+
+<p>用户搜索界面包含所有你要的一切：精确的结果、你可以直接Follow这些用户
+更多关于如果搜索用户，请查看<a href="http://www.shaojie.name/https://help.github.com/articles/searching-users">搜索用户</a></p>
+
+<h3>结果排序</h3>
+
+<p>默认，Github搜索结果以搜索匹配(best match)降序排序的，当然你也可以选择其他的排序方式。比如，你可以现在按照 Star fork 数量排序。对于问答（Issues），你可以按照创建时间或者更新时间排序</p>
+
+<h3>总结</h3>
+
+<p>Github Seaching基本的内容介绍完了，下一篇<a href="http://www.shaojie.name/blog/2014/02/23/advanced-search/">高级搜索</a>;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[搭建博客环境]]></title>

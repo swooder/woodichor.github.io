@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Github | Shaojie's Blog]]></title>
   <link href="http://www.shaojie.name/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://www.shaojie.name/"/>
-  <updated>2014-02-28T00:39:24+08:00</updated>
+  <updated>2014-03-03T23:18:17+08:00</updated>
   <id>http://www.shaojie.name/</id>
   <author>
     <name><![CDATA[Shao jie]]></name>
@@ -57,10 +57,6 @@
 
 <p>当你要查找一些没有‘数量’标记的项目时，range查询这时就能显出2它的威力来了，比如你还是要查找与'cat'相关的项目，并且上次的更新时间在2014年1月低到今天的2014年2月28
 <p>><code>cats pushed:2014-01-31..2014-02-28</code></p>
-
-<p><br>
-<br>
-<br></p>
 
 <h4>Omitting Spaces</h4>
 

@@ -1,0 +1,396 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Android Asynchronous 介绍 - Shaojie's Blog</title>
+  <meta name="author" content="Shao jie">
+
+  
+  <meta name="description" content="进程与线程 如果某个应用程序组件是第一次被启动，且这时应用程序也没有其他组件在运行，则Android系统会为应用程序创建一个包含单个线程的linux进程。默认情况下，同一个应用程序的所有组件都运行在同一个进程和线程里（叫做“main”主线程）。如果组件启动时，已经存在应用程序的进程了（ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.shaojie.name/blog/2014/03/03/android-asynchronous-jie-shao">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Shaojie's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Shaojie's Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.shaojie.name" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Android Asynchronous 介绍</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-03T22:02:37+08:00" pubdate data-updated="true">Mar 3<span>rd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h3>进程与线程</h3>
+
+<p>如果某个应用程序组件是第一次被启动，且这时应用程序也没有其他组件在运行，则Android系统会为应用程序创建一个包含单个线程的linux进程。默认情况下，同一个应用程序的所有组件都运行在同一个进程和线程里（叫做“main”主线程）。如果组件启动时，已经存在应用程序的进程了（因为应用程序的其它组件已经在运行了），则此组件会在已有的进程和线程中启动运行。不过，可以指定组件运行在其他进程里，也可以为任何进程创建额外的线程。</p>
+
+<h4>进程</h4>
+
+<p>默认情况下，同一个应用程序内的所有组件都是运行在同一个进程中的，大部分应用程序也不会去改变它。不过，如果需要指定某个特定组件所属的进程，则可以利用manifest 文件来达到目的。</p>
+
+<p>manifest文件中的每种组件元素——<activity>、 <service>、 <receiver>和<provider>——都支持定义android:process属性，用于指定组件运行的进程。设置此属性即可实现每个组件在各自的进程中运行，或者某几个组件共享一个进程而其它组件运行于独立的进程。设置此属性也可以让不同应用程序的组件运行在同一个进程中——实现多个应用程序共享同一个Linux用户ID、赋予同样的权限。</p>
+
+<p><application>元素也支持android:process属性，用于指定所有组件的默认进程。</p>
+
+<p>如果内存不足，可又有其它为用户提供更紧急服务的进程需要更多内存，Android可能会决定关闭一个进程。在此进程中运行着的应用程序组件也会因此被销毁。当需要再次工作时，会为这些组件重新创建一个进程。</p>
+
+<p>在决定关闭哪个进程的时候，Android系统会权衡它们相对用户的重要程度。比如，相对于一个拥有可见activity的进程，更有可能去关闭一个activity已经在屏幕上看不见的进程。也就是说，是否终止一个进程，取决于运行在此进程中组件的状态。终止进程的判定规则将在后续内容中讨论。</p>
+
+<h3>进程的生命周期</h3>
+
+<p>Android系统试图尽可能长时间地保持应用程序进程，但为了新建或者运行更加重要的进程，总是需要清除过时进程来回收内存。为了决定保留或终止哪个进程，根据进程内运行的组件及这些组件的状态，系统把每个进程都划入一个“重要性层次结构”中。重要性最低的进程首先会被清除，然后是下一个最低的，依此类推，这都是回收系统资源所必需的。</p>
+
+<p>重要性层次结构共有5级，以下列表按照重要程度列出了各类进程（第一类进程是最重要的，将最后一个被终止）：</p>
+
+<h5>1. 前台进程</h5>
+
+<p>用户当前操作所必须的进程。满足以下任一条件时，进程被视作处于前台：</p>
+
+<p>o     其中运行着正与用户交互的Activity（Activity对象的 onResume() 方法已被调用）。</p>
+
+<p>o     其中运行着被正与用户交互的activity绑定的服务Service。</p>
+
+<p>o     其中运行着“前台”服务Service——服务以startForeground()方式被调用。</p>
+
+<p>o     其中运行着正在执行生命周期回调方法（onCreate()、onStart()或onDestroy()）的服务Service。</p>
+
+<p>o     其中运行着正在执行onReceive()方法的BroadcastReceiver。</p>
+
+<p>一般而言，任何时刻前台进程都是为数不多的，只有作为最后的策略——当内存不足以维持它们同时运行时——才会被终止。通常，设备这时候已经到了内存分页状态(memory paging state)的地步，终止一些前台进程是为了保证用户界面的及时响应。</p>
+
+<h4>2. 可见进程</h4>
+
+<p>没有前台组件、但仍会影响用户在屏幕上所见内容的进程。满足以下任一条件时，进程被认为是可见的：</p>
+
+<p>o     其中运行着不在前台的Activity，但用户仍然可见到此activity（onPause()方法被调用了）。比如以下场合就可能发生这种情况：前台activity打开了一个对话框，而之前的activity还允许显示在后面。</p>
+
+<p>o     其中运行着被可见（或前台）activity绑定的服务Service。</p>
+
+<p>可见进程被认为是非常重要的进程，除非无法维持所有前台进程同时运行了，它们是不会被终止的。</p>
+
+<h4>3. 服务进程</h4>
+
+<p>此进程运行着由startService()方法启动的服务，它不会升级为上述两级别。尽管服务进程不直接和用户所见内容关联，但他们通常在执行一些用户关心的操作（比如在后台播放音乐或从网络下载数据）。因此，除非内存不足以维持所有前台、可见进程同时运行，系统会保持服务进程的运行。</p>
+
+<h4>4. 后台进程</h4>
+
+<p>包含目前用户不可见activity（Activity对象的onStop()方法已被调用）的进程。这些进程对用户体验没有直接的影响，系统可能在任意时间终止它们，以回收内存供前台进程、可见进程及服务进程使用。通常会有很多后台进程在运行，所以它们被保存在一个LRU（最近最少使用）列表中，以确保最近被用户使用的activity最后一个被终止。如果一个activity正确实现了生命周期方法，并保存了当前的状态，则终止此类进程不会对用户体验产生可见的影响。因为在用户返回时，activity会恢复所有可见的状态。关于保存和恢复状态的详细信息，请参阅Activities文档。</p>
+
+<h4>5. 空进程</h4>
+
+<p>不含任何活动应用程序组件的进程。保留这种进程的唯一目的就是用作缓存，以改善下次在此进程中运行组件的启动时间。为了在进程缓存和内核缓存间平衡系统整体资源，系统经常会终止这种进程。</p>
+
+<p>依据进程中目前活跃组件的重要程度，Android会给进程评估一个尽可能高的级别。例如：如果一个进程中运行着一个服务和一个用户可见的activity，则此进程会被评定为可见进程，而不是服务进程。</p>
+
+<p>此外，一个进程的级别可能会由于其它进程的依赖而被提高——为其它进程提供服务的进程级别永远不会低于使用此服务的进程。比如：如果A进程中的content provider为进程B中的客户端提供服务，或进程A中的服务被进程B中的组件所调用，则A进程至少被视为与进程B同样重要。</p>
+
+<p>因为运行服务的进程级别是高于后台activity进程的，所以，如果activity需要启动一个长时间运行的操作，则为其启动一个服务service会比简单地创建一个工作线程更好些——尤其是在此操作时间比activity本身存在时间还要长久的情况下。比如，一个activity要把图片上传至Web网站，就应该创建一个服务来执行之，即使用户离开了此activity，上传还是会在后台继续运行。不论activity发生什么情况，使用服务可以保证操作至少拥有“服务进程”的优先级。同理，上一篇中的广播接收器broadcast receiver也是使用服务而非线程来处理耗时任务的。</p>
+
+<h3>线程</h3>
+
+<p>应用程序启动时，系统会为它创建一个名为“main”的主线程。主线程非常重要，因为它负责把事件分发给相应的用户界面widget——包括屏幕绘图事件。它也是应用程序与Android UI组件包（来自android.widget和android.view包）进行交互的线程。因此，主线程有时也被叫做UI线程。</p>
+
+<p>系统并不会为每个组件的实例都创建单独的线程。运行于同一个进程中的所有组件都是在UI线程中实例化的，对每个组件的系统调用也都是由UI线程分发的。因此，对系统回调进行响应的方法（比如报告用户操作的onKeyDown()或生命周期回调方法）总是运行在UI线程中。</p>
+
+<p>举个例子，当用户触摸屏幕上的按钮时，应用程序的UI线程把触摸事件分发给widget，widget先把自己置为按下状态，再发送一个显示区域已失效（invalidate）的请求到事件队列中。UI线程从队列中取出此请求，并通知widget重绘自己。</p>
+
+<p>如果应用程序在与用户交互的同时需要执行繁重的任务，单线程模式可能会导致运行性能很低下，除非应用程序的执行时机刚好很合适。如果UI线程需要处理每一件事情，那些耗时很长的操作——诸如访问网络或查询数据库等——将会阻塞整个UI（线程）。一旦线程被阻塞，所有事件都不能被分发，包括屏幕绘图事件。从用户的角度看来，应用程序看上去像是挂起了。更糟糕的是，如果UI线程被阻塞超过一定时间（目前大约是5秒钟），用户就会被提示那个可恶的“应用程序没有响应”(ANR)对话框。如果引起用户不满，他可能就会决定退出并删除这个应用程序。</p>
+
+<p>此外，Andoid的UI组件包并不是线程安全的。因此不允许从工作线程中操作UI——只能从UI线程中操作用户界面。于是，Andoid的单线程模式必须遵守两个规则：</p>
+
+<ol>
+<li>不要阻塞UI线程。</li>
+<li>不要在UI线程之外访问Andoid的UI组件包。</li>
+</ol>
+
+
+<h3>ANR</h3>
+
+<p>ANR定义：在Android上，如果你的应用程序有一段时间响应不够灵敏，系统会向用户显示一个对话框，这个对话框称作应用程序无响应（ANR：Application Not Responding）对话框。用户可以选择“等待”而让程序继续运行，也可以选择“强制关闭”。所以一个流畅的合理的应用程序中不能出现anr，而让用户每次都要处理这个对话框。因此，在程序里对响应性能的设计很重要，这样系统不会显示ANR给用户。</p>
+
+<p>默认情况下，在android中Activity的最长执行时间是5秒，BroadcastReceiver的最长执行时间则是10秒。</p>
+
+<h4>第一：什么会引发ANR？</h4>
+
+<p>在Android里，应用程序的响应性是由Activity Manager和WindowManager系统服务监视的 。当它监测到以下情况中的一个时，Android就会针对特定的应用程序显示ANR：
+1.在5秒内没有响应输入的事件（例如，按键按下，屏幕触摸）
+2.BroadcastReceiver在10秒内没有执行完毕
+造成以上两点的原因有很多，比如在主线程中做了非常耗时的操作，比如说是下载，io异常等。</p>
+
+<p>潜在的耗时操作，例如网络或数据库操作，或者高耗时的计算如改变位图尺寸，应该在子线程里（或者以数据库操作为例，通过异步请求的方式）来完成。然而，不是说你的主线程阻塞在那里等待子线程的完成——也不是调用 Thread.wait()或是Thread.sleep()。替代的方法是，主线程应该为子线程提供一个Handler，以便完成时能够提交给主线程。以这种方式设计你的应用程序，将能保证你的主线程保持对输入的响应性并能避免由于5秒输入事件的超时引发的ANR对话框。</p>
+
+<h4>第二：如何避免ANR？</h4>
+
+<ol>
+<li><p>运行在主线程里的任何方法都尽可能少做事情。特别是，Activity应该在它的关键生命周期方法（如onCreate()和onResume()）里尽可能少的去做创建操作。（可以采用重新开启子线程的方式，然后使用Handler+Message的方式做一些操作，比如更新主线程中的ui等）</p></li>
+<li><p>应用程序应该避免在BroadcastReceiver里做耗时的操作或计算。但不再是在子线程里做这些任务（因为 BroadcastReceiver的生命周期短），替代的是，如果响应Intent广播需要执行一个耗时的动作的话，应用程序应该启动一个 Service。（此处需要注意的是可以在广播接受者中启动Service，但是却不可以在Service中启动broadcasereciver,关于原因后续会有介绍，此处不是本文重点）</p></li>
+<li><p>避免在Intent Receiver里启动一个Activity，因为它会创建一个新的画面，并从当前用户正在运行的程序上抢夺焦点。如果你的应用程序在响应Intent广 播时需要向用户展示什么，你应该使用Notification Manager来实现。</p></li>
+</ol>
+
+
+<h3>后台线程（非UI线程）</h3>
+
+<p>点击按钮下载图片</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public void onClick(View v){
+</span><span class='line'>  Bitmap b = loadImageFormNetWork("http://xxxxx.png");
+</span><span class='line'>  mImageView.setImageBitmap(b);
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上面的代码在UI线程中执行，很容易导致ANR。所以一些耗时的操作，还是用异步方式来处理吧。后面将分别介绍Android平台可以使用的方式。</p>
+
+<ol>
+<li>Thread</li>
+<li>Executor</li>
+<li>HandlerThread</li>
+<li>AsyncTask</li>
+<li>Service</li>
+<li>IntentService</li>
+<li>AsyncQuery</li>
+<li>Loader</li>
+</ol>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Shao jie</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-03T22:02:37+08:00" pubdate data-updated="true">Mar 3<span>rd</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android/'>Android</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.shaojie.name/blog/2014/03/03/android-asynchronous-jie-shao/" data-via="" data-counturl="http://www.shaojie.name/blog/2014/03/03/android-asynchronous-jie-shao/" >Tweet</a>
+  
+  
+  
+  
+   <div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js"></script>
+
+ 
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/02/27/github-search-syntax/" title="Previous Post: GitHub Search Syntax">&laquo; GitHub Search Syntax</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/03/03/android-asynchronous-Thread/" title="Next Post: Android Asynchronous Thread">Android Asynchronous Thread &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/android/'>Android (2)</a></li>
+<li class='category'><a href='/blog/categories/github/'>Github (3)</a></li>
+<li class='category'><a href='/blog/categories/other/'>other (1)</a></li>
+
+  </ul>
+</section>
+
+<section>
+  <h1>新浪微博</h1>
+  <ul id="weibo">
+    <li>
+      <iframe 
+        width="100%" 
+        height="550" 
+        class="share_self" 
+        frameborder="0" 
+        scrolling="no" 
+        src="http://widget.weibo.com/weiboshow/index.php?width=0&height=550&ptype=1&speed=0&skin=&isTitle=0&noborder=1&isWeibo=1&isFans=&uid=1706688983&verifier=1a722b18">
+      </iframe>
+    </li>
+  </ul>
+</section>
+
+<div class="github-card" data-github="shaojie519" data-width="400" data-height="150"></div>
+<script src="http://lab.lepture.com/github-cards/widget.js"></script>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/03/03/android-asynchronous-Thread/">Android Asynchronous Thread</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/03/android-asynchronous-jie-shao/">Android Asynchronous 介绍</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/27/github-search-syntax/">GitHub Search Syntax</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/23/advanced-search/">Github高级搜索</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/22/searching-github/">Searching Github</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Shao jie -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

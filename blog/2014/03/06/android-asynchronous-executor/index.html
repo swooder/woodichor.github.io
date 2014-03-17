@@ -1,0 +1,398 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Android Asynchronous Executor - Shaojie's Blog</title>
+  <meta name="author" content="Shao jie">
+
+  
+  <meta name="description" content="Executor框架便是Java 5中引入的，其内部使用了线程池机制，它在java.util.cocurrent 包下，通过该框架来控制线程的启动、执行和关闭，可以简化并发编程的操作。因此，在Java 5之后，通过Executor来启动线程比使用Thread的start方法更好，除了更易管理， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.shaojie.name/blog/2014/03/06/android-asynchronous-executor">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Shaojie's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Shaojie's Blog</a></h1>
+  
+    <h2>专注移动开发Android&IOS&PHP&NODEJS</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.shaojie.name" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Android Asynchronous Executor</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-06T00:22:27+08:00" pubdate data-updated="true">Mar 6<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Executor框架便是Java 5中引入的，其内部使用了线程池机制，它在java.util.cocurrent 包下，通过该框架来控制线程的启动、执行和关闭，可以简化并发编程的操作。因此，在Java 5之后，通过Executor来启动线程比使用Thread的start方法更好，除了更易管理，效率更好（用线程池实现，节约开销）外，还有关键的一点：有助于避免this逃逸问题——如果我们在构造器中启动一个线程，因为另一个任务可能会在构造器结束之前开始执行，此时可能会访问到初始化了一半的对象用Executor在构造器中。</p>
+
+<p>Executor框架包括：线程池，Executor，Executors，ExecutorService，CompletionService，Future，Callable等。</p>
+
+<p>Executor接口中之定义了一个方法execute（Runnable command），该方法接收一个Runable实例，它用来执行一个任务，任务即一个实现了Runnable接口的类。</p>
+
+<figure class='code'><figcaption><span>thread</span><a href='http://www.shaojie.name'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'> <span class="n">Executor</span> <span class="n">executor</span> <span class="o">=</span> <span class="n">anExecutor</span><span class="o">;</span>
+</span><span class='line'> <span class="n">executor</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="n">RunnableTask1</span><span class="o">());</span>
+</span><span class='line'> <span class="n">executor</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="n">RunnableTask2</span><span class="o">());</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>你可以使用同步的方式，新任务没有启用新线程</p>
+
+<figure class='code'><figcaption><span>thread</span><a href='http://www.shaojie.name'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">class</span> <span class="nc">DirectExecutor</span> <span class="kd">implements</span> <span class="n">Executor</span> <span class="o">{</span>
+</span><span class='line'>   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">execute</span><span class="o">(</span><span class="n">Runnable</span> <span class="n">r</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>     <span class="n">r</span><span class="o">.</span><span class="na">run</span><span class="o">();</span>
+</span><span class='line'> <span class="o">}}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>或者异步的方式，每个新任务启用新线程。</p>
+
+<figure class='code'><figcaption><span>thread</span><a href='http://www.shaojie.name'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'> <span class="kd">class</span> <span class="nc">ThreadPerTaskExecutor</span> <span class="kd">implements</span> <span class="n">Executor</span> <span class="o">{</span>
+</span><span class='line'>   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">execute</span><span class="o">(</span><span class="n">Runnable</span> <span class="n">r</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>     <span class="k">new</span> <span class="nf">Thread</span><span class="o">(</span><span class="n">r</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
+</span><span class='line'> <span class="o">}}</span>
+</span><span class='line'> <span class="o">}}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ExecutorService接口继承自Executor接口，它提供了更丰富的实现多线程的方法
+ExecutorService是线程池的一个服务，可以随时关闭线程池，是继承Executor的。Executors是个工厂类，专门创建各种线程池。</p>
+
+<p>Android常用的线程池有一下几种，在Executors里面对应的方法：</p>
+
+<h4>newFixedThreadPool</h4>
+
+<p>创建一个可重用固定线程数的线程池，以共享的无界队列方式来运行这些线程。在任意点，在大多数 nThreads 线程会处于处理任务的活动状态。如果在所有线程处于活动状态时提交附加任务，则在有可用线程之前，附加任务将在队列中等待。如果在关闭前的执行期间由于失败而导致任何线程终止，那么一个新线程将代替它执行后续的任务（如果需要）。在某个线程被显式地关闭之前，池中的线程将一直存在。</p>
+
+<p>-newFixedThreadPool与cacheThreadPool差不多，也是能reuse就用，但不能随时建新的线程
+-其独特之处:任意时间点，最多只能有固定数目的活动线程存在，此时如果有新的线程要建立，只能放在另外的队列中等待，直到当前的线程中某个线程终止直接被移出池子</p>
+
+<p>-和cacheThreadPool不同，FixedThreadPool没有IDLE机制（可能也有，但既然文档没提，肯定非常长，类似依赖上层的TCP或UDP IDLE机制之类的），所以FixedThreadPool多数针对一些很稳定很固定的正规并发线程，多用于服务器</p>
+
+<p>-从方法的源代码看，cache池和fixed 池调用的是同一个底层池，只不过参数不同:
+fixed池线程数固定，并且是0秒IDLE（无IDLE）
+cache池线程数支持0-Integer.MAX_VALUE(显然完全没考虑主机的资源承受能力），60秒IDLE</p>
+
+<figure class='code'><figcaption><span>newFixedThreadPool</span><a href='http://www.shaojie.name'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="err">　　</span><span class="n">ExecutorService</span> <span class="n">pool</span> <span class="o">=</span> <span class="n">Executors</span><span class="o">.</span><span class="na">newFixedThreadPool</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+</span><span class='line'><span class="err">　　</span><span class="c1">//创建实现了Runnable接口对象，Thread对象当然也实现了Runnable接口</span>
+</span><span class='line'><span class="err">　　</span><span class="n">Thread</span> <span class="n">t1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyThread</span><span class="o">();</span>
+</span><span class='line'><span class="err">　　</span><span class="n">Thread</span> <span class="n">t2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyThread</span><span class="o">();</span>
+</span><span class='line'><span class="err">　　</span><span class="n">Thread</span> <span class="n">t3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyThread</span><span class="o">();</span>
+</span><span class='line'><span class="err">　　</span><span class="n">Thread</span> <span class="n">t4</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyThread</span><span class="o">();</span><span class="err">　</span>
+</span><span class='line'><span class="err">　　</span><span class="n">Thread</span> <span class="n">t5</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyThread</span><span class="o">();</span>
+</span><span class='line'><span class="err">　　</span><span class="c1">//将线程放入池中进行执行</span>
+</span><span class='line'><span class="err">　　</span><span class="n">pool</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="n">t1</span><span class="o">);</span>
+</span><span class='line'><span class="err">　　</span><span class="n">pool</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="n">t2</span><span class="o">);</span>
+</span><span class='line'><span class="err">　　</span><span class="n">pool</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="n">t3</span><span class="o">);</span>
+</span><span class='line'><span class="err">　　</span><span class="n">pool</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="n">t4</span><span class="o">);</span>
+</span><span class='line'><span class="err">　　</span><span class="n">pool</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="n">t5</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>　　
+　　</p>
+
+<h4>单任务线程池，newSingleThreadExecutor：</h4>
+
+<p>创建一个可根据需要创建新线程的线程池，但是在以前构造的线程可用时将重用它们。对于执行很多短期异步任务的程序而言，这些线程池通常可提高程序性能。调用 execute 将重用以前构造的线程（如果线程可用）。如果现有线程没有可用的，则创建一个新线程并添加到池中。终止并从缓存中移除那些已有 60 秒钟未被使用的线程。因此，长时间保持空闲的线程池不会使用任何资源。注意，可以使用 ThreadPoolExecutor 构造方法创建具有类似属性但细节不同（例如超时参数）的线程池。</p>
+
+<p>-缓存型池子，先查看池中有没有以前建立的线程，如果有，就reuse.如果没有，就建一个新的线程加入池中
+-缓存型池子通常用于执行一些生存期很短的异步型任务</p>
+
+<p>-能reuse的线程，必须是timeout IDLE内的池中线程，缺省timeout是60s,超过这个IDLE时长，线程实例将被终止及移出池。
+注意，放入CachedThreadPool的线程不必担心其结束，超过TIMEOUT不活动，其会自动被终止。</p>
+
+<h4>newSingleThreadExecutor</h4>
+
+<p>创建一个使用单个 worker 线程的 Executor，以无界队列方式来运行该线程。（注意，如果因为在关闭前的执行期间出现失败而终止了此单个线程，那么如果需要，一个新线程将代替它执行后续的任务）。可保证顺序地执行各个任务，并且在任意给定的时间不会有多个线程是活动的。与其他等效的 newFixedThreadPool(1) 不同，可保证无需重新配置此方法所返回的执行程序即可使用其他的线程。</p>
+
+<p>-单例线程，任意时间池中只能有一个线程
+-用的是和cache池和fixed池相同的底层池，但线程数目是1,0秒IDLE（无IDLE）</p>
+
+<h4>newScheduledThreadPool</h4>
+
+<p>-调度型线程池
+-这个池子里的线程可以按schedule依次delay执行，或周期执行</p>
+
+<figure class='code'><figcaption><span>newScheduledThreadPool</span><a href='http://shaojie.name'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">ScheduledExecutorService</span> <span class="c1">//执行周期性或定时任务</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">schedule</span><span class="o">(</span><span class="n">Callable</span><span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">callable</span><span class="o">,</span> <span class="kt">long</span> <span class="n">delay</span><span class="o">,</span> <span class="n">TimeUnit</span> <span class="n">unit</span><span class="o">)</span> <span class="c1">//创建并执行在给定延迟后启用的 ScheduledFuture。</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">schedule</span><span class="o">(</span><span class="n">Runnable</span> <span class="n">command</span><span class="o">,</span> <span class="kt">long</span> <span class="n">delay</span><span class="o">,</span> <span class="n">TimeUnit</span> <span class="n">unit</span><span class="o">)</span> <span class="c1">//创建并执行在给定延迟后启用的一次性操作。</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">scheduleAtFixedRate</span><span class="o">(</span><span class="n">Runnable</span> <span class="n">command</span><span class="o">,</span> <span class="kt">long</span> <span class="n">initialDelay</span><span class="o">,</span> <span class="kt">long</span> <span class="n">period</span><span class="o">,</span> <span class="n">TimeUnitunit</span><span class="o">)</span><span class="c1">//创建并执行一个在给定初始延迟后首次启用的定期操作，后续操作具有给定的周期；也就是将在 initialDelay 后开始执行，然后在initialDelay+period 后执行，接着在 initialDelay + 2 * period 后执行，依此类推。</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">scheduleWithFixedDelay</span><span class="o">(</span><span class="n">Runnable</span> <span class="n">command</span><span class="o">,</span> <span class="kt">long</span> <span class="n">initialDelay</span><span class="o">,</span> <span class="kt">long</span> <span class="n">delay</span><span class="o">,</span><span class="n">TimeUnit</span> <span class="n">unit</span><span class="o">)</span><span class="c1">//创建并执行一个在给定初始延迟后首次启用的定期操作，随后，在每一次执行终止和下一次执行开始之间都存在给定的延迟。</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Shao jie</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-06T00:22:27+08:00" pubdate data-updated="true">Mar 6<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android/'>Android</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.shaojie.name/blog/2014/03/06/android-asynchronous-executor/" data-via="" data-counturl="http://www.shaojie.name/blog/2014/03/06/android-asynchronous-executor/" >Tweet</a>
+  
+  
+  
+  
+   <div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js"></script>
+
+ 
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/03/03/android-asynchronous-Thread/" title="Previous Post: Android Asynchronous Thread">&laquo; Android Asynchronous Thread</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/03/17/android-asynchronous-handlerthread/" title="Next Post: Android Asynchronous HandlerThread">Android Asynchronous HandlerThread &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/android/'>Android (4)</a></li>
+<li class='category'><a href='/blog/categories/github/'>Github (3)</a></li>
+<li class='category'><a href='/blog/categories/other/'>Other (1)</a></li>
+
+  </ul>
+</section>
+
+<section>
+  <h1>新浪微博</h1>
+  <ul id="weibo">
+    <li>
+      <iframe 
+        width="100%" 
+        height="550" 
+        class="share_self" 
+        frameborder="0" 
+        scrolling="no" 
+        src="http://widget.weibo.com/weiboshow/index.php?width=0&height=550&ptype=1&speed=0&skin=&isTitle=0&noborder=1&isWeibo=1&isFans=&uid=1706688983&verifier=1a722b18">
+      </iframe>
+    </li>
+  </ul>
+</section>
+
+<div class="github-card" data-github="shaojie519" data-width="400" data-height="150"></div>
+<script src="http://lab.lepture.com/github-cards/widget.js"></script>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/03/17/android-asynchronous-handlerthread/">Android Asynchronous HandlerThread</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/06/android-asynchronous-executor/">Android Asynchronous Executor</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/03/android-asynchronous-Thread/">Android Asynchronous Thread</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/03/android-asynchronous-jie-shao/">Android Asynchronous 介绍</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/27/github-search-syntax/">GitHub Search Syntax</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Shao jie -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

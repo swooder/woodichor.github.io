@@ -1,0 +1,542 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Android Asynchronous HandlerThread - Shaojie's Blog</title>
+  <meta name="author" content="Shao jie">
+
+  
+  <meta name="description" content="Looper Looper是用于给一个线程添加一个消息队列(MessageQueue)，并且循环等待，当有消息时会唤起线程来处理消息的一个工具，直到线程结束为止。通常情况下不会用到Looper，因为对于Activity，Service等系统组件，Frameworks已经为我们初始化好了线程( &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.shaojie.name/blog/2014/03/17/android-asynchronous-handlerthread">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Shaojie's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Shaojie's Blog</a></h1>
+  
+    <h2>专注移动开发Android&IOS&PHP&NODEJS</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.shaojie.name" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Android Asynchronous HandlerThread</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-17T23:06:29+08:00" pubdate data-updated="true">Mar 17<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h4>Looper</h4>
+
+<p>Looper是用于给一个线程添加一个消息队列(MessageQueue)，并且循环等待，当有消息时会唤起线程来处理消息的一个工具，直到线程结束为止。通常情况下不会用到Looper，因为对于Activity，Service等系统组件，Frameworks已经为我们初始化好了线程(俗称的UI线程或主线程)，在其内含有一个Looper，和由Looper创建的消息队列，所以主线程会一直运行，处理用户事件，直到某些事件(BACK）退出。
+如果，我们需要新建一个线程，并且这个线程要能够循环处理其他线程发来的消息事件，或者需要长期与其他线程进行复杂的交互，这时就需要用到Looper来给线程建立消息队列.</p>
+
+<h5>使用Looper:</h5>
+
+<figure class='code'><figcaption><span>Looper</span><a href='http://www.shaojie.name'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'>  <span class="kd">class</span> <span class="nc">LooperThread</span> <span class="kd">extends</span> <span class="n">Thread</span> <span class="o">{</span>
+</span><span class='line'>      <span class="kd">public</span> <span class="n">Handler</span> <span class="n">mHandler</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>          <span class="n">Looper</span><span class="o">.</span><span class="na">prepare</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="n">mHandler</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Handler</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>              <span class="kd">public</span> <span class="kt">void</span> <span class="nf">handleMessage</span><span class="o">(</span><span class="n">Message</span> <span class="n">msg</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                  <span class="c1">// process incoming messages here</span>
+</span><span class='line'>              <span class="o">}</span>
+</span><span class='line'>          <span class="o">};</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="n">Looper</span><span class="o">.</span><span class="na">loop</span><span class="o">();</span>
+</span><span class='line'>      <span class="o">}</span>
+</span><span class='line'>  <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这样你的线程就具有了消息处理机制了，在Handler中进行消息处理.
+Looper最主要的有四个:</p>
+
+<figure class='code'><figcaption><span>Looper</span><a href='http://www.shaojie.name'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="nf">prepare</span><span class="o">();</span>
+</span><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="nf">myLooper</span><span class="o">();</span>
+</span><span class='line'> <span class="kd">public</span> <span class="kd">static</span> <span class="nf">loop</span><span class="o">();</span>
+</span><span class='line'> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">quit</span><span class="o">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>使用方法如下：</p>
+
+<ol>
+<li>在每个线程的run()方法中的最开始调用Looper.prepare()，这是为线程初始化消息队列。</li>
+<li>之后调用Looper.myLooper()获取此Looper对象的引用。这不是必须的，但是如果你需要保存Looper对象的话，一定要在prepare()之后，否则调用在此对象上的方法不一定有效果，如looper.quit()就不会退出。</li>
+<li>在run()方法中添加Handler来处理消息</li>
+<li>添加Looper.loop()调用，这是让线程的消息队列开始运行，可以接收消息了。</li>
+<li>在想要退出消息循环时，调用Looper.quit()注意，这个方法是要在对象上面调用，很明显，用对象的意思就是要退出具体哪个Looper。如果run()中无其他操作，线程也将终止运行。</li>
+</ol>
+
+
+<h4>Handler</h4>
+
+<p>Handler是用于操作线程内部的消息队列的类。Looper是用于给线程创建消息队列用的，也就是说Looper可以让消息队列(MessageQueue)附属在线程之内，并让消息队列循环起来，接收并处理消息。但，我们并不直接的操作消息队列，而是用Handler来操作消息队列，给消息队列发送消息，和从消息队列中取出消息并处理。这就是Handler的职责。</p>
+
+<p>Handler主要有二个用途，一个是用于线程内部消息循环； 另外一个就是用于线程间通讯，主要方法：</p>
+
+<figure class='code'><figcaption><span>Looper</span><a href='http://www.shaojie.name'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Handler</span><span class="o">.</span><span class="na">sendEmptyMessageDelayed</span><span class="o">(</span><span class="kt">int</span> <span class="n">msgid</span><span class="o">,</span> <span class="kt">long</span> <span class="n">after</span><span class="o">);</span>
+</span><span class='line'><span class="n">Handler</span><span class="o">.</span><span class="na">sendMessageDelayed</span><span class="o">(</span><span class="n">Message</span> <span class="n">msg</span><span class="o">,</span> <span class="kt">long</span> <span class="n">after</span><span class="o">);</span>
+</span><span class='line'><span class="n">Handler</span><span class="o">.</span><span class="na">postDelayed</span><span class="o">(</span><span class="n">Runnable</span> <span class="n">task</span><span class="o">,</span> <span class="kt">long</span> <span class="n">after</span><span class="o">);</span>
+</span><span class='line'><span class="n">Handler</span><span class="o">.</span><span class="na">sendMessageAtTime</span><span class="o">(</span><span class="n">Message</span> <span class="n">msg</span><span class="o">,</span> <span class="kt">long</span> <span class="n">timeMillis</span><span class="o">);</span>
+</span><span class='line'><span class="n">Handler</span><span class="o">.</span><span class="na">sendEmptyMessageAtTime</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">,</span> <span class="kt">long</span> <span class="n">timeMiilis</span><span class="o">);</span>
+</span><span class='line'><span class="n">Handler</span><span class="o">.</span><span class="na">postAtTime</span><span class="o">(</span><span class="n">Runnable</span> <span class="n">task</span><span class="o">,</span> <span class="kt">long</span> <span class="n">timeMillis</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+需要注意一点的是，线程内部消息循环并不是并发处理，也就是所有的消息都是在Handler所属的线程内处理的，所以虽然你用post(Runnable r)，发给MessageQueue一个Runnable，但这并不会创建新的线程来执行，处理此消息时仅是调用r.run()。（想要另起线程执行，必须把Runnable放到一个Thread中）。</p>
+
+<h4>Handler</h4>
+
+<p>一般会使用Handler handler = new Handler(){&hellip;}创建Handler。这样创建的handler是在主线程即UI线程下的Handler，
+即这个Handler是与UI线程下的默认Looper绑定的。Looper是用于实现消息队列和消息循环机制的。
+因此，如果是默认创建Handler那么如果线程是做一些耗时操作如网络获取数据等操作，这样创建Handler是不行的.
+Android API提供了HandlerThread来创建线程。官网的解释是：Handy class for starting a new thread that has a looper.
+The looper can then be used to create handler classes. Note that start() must still be called.</p>
+
+<p>HandlerThread实际上就一个Thread，只不过它比普通的Thread多了一个Looper。</p>
+
+<figure class='code'><figcaption><span>Looper</span><a href='http://www.shaojie.name'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HandlerThread</span> <span class="kd">extends</span> <span class="n">Thread</span> <span class="o">{</span>
+</span><span class='line'> <span class="kd">private</span> <span class="kt">int</span> <span class="n">mPriority</span><span class="o">;</span>
+</span><span class='line'> <span class="kd">private</span> <span class="kt">int</span> <span class="n">mTid</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+</span><span class='line'> <span class="kd">private</span> <span class="n">Looper</span> <span class="n">mLooper</span><span class="o">;</span>
+</span><span class='line'> <span class="o">....</span>
+</span><span class='line'> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(){</span>
+</span><span class='line'>   <span class="n">mTid</span> <span class="o">=</span> <span class="n">Process</span><span class="o">.</span><span class="na">myTid</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">Looper</span><span class="o">.</span><span class="na">prepare</span><span class="o">();</span>
+</span><span class='line'>        <span class="kd">synchronized</span> <span class="o">(</span><span class="k">this</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">mLooper</span> <span class="o">=</span> <span class="n">Looper</span><span class="o">.</span><span class="na">myLooper</span><span class="o">();</span>
+</span><span class='line'>            <span class="n">Process</span><span class="o">.</span><span class="na">setThreadPriority</span><span class="o">(</span><span class="n">mPriority</span><span class="o">);</span>
+</span><span class='line'>            <span class="n">notifyAll</span><span class="o">();</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>        <span class="n">onLooperPrepared</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">Looper</span><span class="o">.</span><span class="na">loop</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">mTid</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+</span><span class='line'> <span class="o">}</span>
+</span><span class='line'> <span class="o">....</span>
+</span><span class='line'> <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>创建HandlerThread时要把它启动了，即调用start()方法。然后创建Handler时将HandlerThread中的looper对象传入。
+HandlerThread thread = new HandlerThread(&ldquo;MyHandlerThread&rdquo;);
+thread.start();
+mHandler = new Handler(thread.getLooper());
+mHandler.post(new Runnable(){&hellip;});
+那么这个Handler对象就是与HandlerThread这个线程绑定了（这时就不再是与UI线程绑定了，这样它处理耗时操作将不会阻塞UI。</p>
+
+<figure class='code'><figcaption><span>Looper</span><a href='http://www.shaojie.name'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">private</span> <span class="n">Handler</span> <span class="n">mHandler</span><span class="o">;</span>
+</span><span class='line'><span class="kd">private</span> <span class="n">HandlerThread</span> <span class="n">mHandlerThread</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">private</span> <span class="kt">boolean</span> <span class="n">mRunning</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">private</span> <span class="n">Button</span> <span class="n">btn</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nd">@Override</span>
+</span><span class='line'><span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>    <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+</span><span class='line'>    <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">activity_main</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">btn</span> <span class="o">=</span> <span class="o">(</span><span class="n">Button</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">btn</span><span class="o">);</span>
+</span><span class='line'>    <span class="n">btn</span><span class="o">.</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">mHandlerThread</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HandlerThread</span><span class="o">(</span><span class="s">&quot;Test&quot;</span><span class="o">,</span> <span class="mi">5</span><span class="o">);</span>
+</span><span class='line'>    <span class="n">mHandlerThread</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+</span><span class='line'>    <span class="n">mHandler</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Handler</span><span class="o">(</span><span class="n">mHandlerThread</span><span class="o">.</span><span class="na">getLooper</span><span class="o">());</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">private</span> <span class="n">Runnable</span> <span class="n">mRunnable</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Override</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">while</span> <span class="o">(</span><span class="n">mRunning</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">Log</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="s">&quot;MainActivity&quot;</span><span class="o">,</span> <span class="s">&quot;test HandlerThread...&quot;</span><span class="o">);</span>
+</span><span class='line'>            <span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>                <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">200</span><span class="o">);</span>
+</span><span class='line'>            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="nd">@Override</span>
+</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="n">View</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>    <span class="k">switch</span><span class="o">(</span><span class="n">v</span><span class="o">.</span><span class="na">getId</span><span class="o">())</span> <span class="o">{</span>
+</span><span class='line'>    <span class="k">case</span> <span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">btn</span> <span class="o">:</span>
+</span><span class='line'>        <span class="n">mHandler</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">mRunnable</span><span class="o">);</span>
+</span><span class='line'>        <span class="k">break</span><span class="o">;</span>
+</span><span class='line'>    <span class="k">default</span> <span class="o">:</span>
+</span><span class='line'>        <span class="k">break</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nd">@Override</span>
+</span><span class='line'><span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onDestroy</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">mRunning</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">mHandler</span><span class="o">.</span><span class="na">removeCallbacks</span><span class="o">(</span><span class="n">mRunnable</span><span class="o">);</span>
+</span><span class='line'>    <span class="kd">super</span><span class="o">.</span><span class="na">onDestroy</span><span class="o">();</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nd">@Override</span>
+</span><span class='line'><span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onResume</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">mRunning</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>    <span class="kd">super</span><span class="o">.</span><span class="na">onResume</span><span class="o">();</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nd">@Override</span>
+</span><span class='line'><span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onStop</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">mRunning</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+</span><span class='line'>    <span class="kd">super</span><span class="o">.</span><span class="na">onStop</span><span class="o">();</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Shao jie</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-17T23:06:29+08:00" pubdate data-updated="true">Mar 17<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android/'>Android</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.shaojie.name/blog/2014/03/17/android-asynchronous-handlerthread/" data-via="" data-counturl="http://www.shaojie.name/blog/2014/03/17/android-asynchronous-handlerthread/" >Tweet</a>
+  
+  
+  
+  
+   <div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js"></script>
+
+ 
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/03/06/android-asynchronous-executor/" title="Previous Post: Android Asynchronous Executor">&laquo; Android Asynchronous Executor</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/android/'>Android (4)</a></li>
+<li class='category'><a href='/blog/categories/github/'>Github (3)</a></li>
+<li class='category'><a href='/blog/categories/other/'>Other (1)</a></li>
+
+  </ul>
+</section>
+
+<section>
+  <h1>新浪微博</h1>
+  <ul id="weibo">
+    <li>
+      <iframe 
+        width="100%" 
+        height="550" 
+        class="share_self" 
+        frameborder="0" 
+        scrolling="no" 
+        src="http://widget.weibo.com/weiboshow/index.php?width=0&height=550&ptype=1&speed=0&skin=&isTitle=0&noborder=1&isWeibo=1&isFans=&uid=1706688983&verifier=1a722b18">
+      </iframe>
+    </li>
+  </ul>
+</section>
+
+<div class="github-card" data-github="shaojie519" data-width="400" data-height="150"></div>
+<script src="http://lab.lepture.com/github-cards/widget.js"></script>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/03/17/android-asynchronous-handlerthread/">Android Asynchronous HandlerThread</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/06/android-asynchronous-executor/">Android Asynchronous Executor</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/03/android-asynchronous-Thread/">Android Asynchronous Thread</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/03/android-asynchronous-jie-shao/">Android Asynchronous 介绍</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/27/github-search-syntax/">GitHub Search Syntax</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Shao jie -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

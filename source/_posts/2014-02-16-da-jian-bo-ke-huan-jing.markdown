@@ -3,7 +3,7 @@ layout: post
 title: "搭建博客环境"
 date: 2014-02-16 00:33:40 +0800
 comments: true
-categories: other
+categories: Other
 ---
 
 ###1.Octopress需要Ruby环境，RVM(Ruby Version Manager)负责安装和管理Ruby的环境。所以我们先在终端输入如下命令，来安装RVM

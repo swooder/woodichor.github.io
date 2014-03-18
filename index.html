@@ -9,7 +9,7 @@
   <meta name="author" content="Shao jie">
 
   
-  <meta name="description" content="Looper Looper是用于给一个线程添加一个消息队列(MessageQueue)，并且循环等待，当有消息时会唤起线程来处理消息的一个工具，直到线程结束为止。通常情况下不会用到Looper，因为对于Activity，Service等系统组件，Frameworks已经为我们初始化好了线程( &hellip;">
+  <meta name="description" content="AsyncTask介绍 AsyncTask是Android为我们提供的方便编写异步任务的工具类，可以代替Thread和Handler。但是AsyncTask主要还是用来处理耗时不太长的操作，如果你需要保持一个线程在后台运行很长时间，建议使用java.util. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,129 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/18/android-asynchronous-asynctask/">Android Asynchronous AsyncTask</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-18T00:03:02+08:00" pubdate data-updated="true">Mar 18<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h4>AsyncTask介绍</h4>
+
+<p>AsyncTask是Android为我们提供的方便编写异步任务的工具类，可以代替Thread和Handler。但是AsyncTask主要还是用来处理耗时不太长的操作，如果你需要保持一个线程在后台运行很长时间，建议使用java.util.concurrent包下的Executor, ThreadpoolExecutor和FutureTask。
+由于AsyncTask是一个抽象类，所以如果我们想使用它，就必须要创建一个子类去继承它。在继承时我们可以为AsyncTask类指定三个泛型参数，这三个参数的用途如下</p>
+
+<ol>
+<li>Params
+在执行AsyncTask时需要传入的参数，可用于在后台任务中使用。</li>
+<li>Progress
+后台任务执行时，如果需要在界面上显示当前的进度，则使用这里指定的泛型作为进度单位。</li>
+<li>Result
+当任务执行完毕后，如果需要对结果进行返回，则使用这里指定的泛型作为返回值类型。</li>
+</ol>
+
+
+<p>AsyncTask的执行分为四个步骤，每一步都对应一个回调方法，这些方法不应该由应用程序调用，开发者需要做的就是实现这些方法。</p>
+
+<ol>
+<li>onPreExecute(), 该方法将在执行实际的后台操作前被UI thread调用。可以在该方法中做一些准备工作，如在界面上显示一个进度条。</li>
+<li>doInBackground(Params&hellip;), 将在onPreExecute 方法执行后马上执行，该方法运行在后台线程中。这里将主要负责执行那些很耗时的后台计算工作。可以调用 publishProgress方法来更新实时的任务进度。该方法是抽象方法，子类必须实现。</li>
+<li>onProgressUpdate(Progress&hellip;),在publishProgress方法被调用后，UI thread将调用这个方法从而在界面上展示任务的进展情况，例如通过一个进度条进行展示。</li>
+<li>onPostExecute(Result), 在doInBackground 执行完成后，onPostExecute 方法将被UI thread调用，后台的计算结果将通过该方法传递到UI thread.</li>
+</ol>
+
+
+<p>为了正确的使用AsyncTask类，以下是几条必须遵守的准则：</p>
+
+<ol>
+<li>Task的实例必须在UI thread中创建</li>
+<li>execute方法必须在UI thread中调用</li>
+<li>不要手动的调用onPreExecute(), onPostExecute(Result)，doInBackground(Params&hellip;), onProgressUpdate(Progress&hellip;)这几个方法</li>
+<li>该task只能被执行一次，否则多次调用时将会出现异常 doInBackground方法和onPostExecute的参数必须对应，这两个参数在AsyncTask声明的泛型参数列表中指定，第一个为doInBackground接受的参数，第二个为显示进度的参数，第三个为doInBackground返回和onPostExecute传入的参数。</li>
+</ol>
+
+
+<figure class='code'><figcaption><span>AsyncTaks</span><a href='http://www.shaojie.name'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">private</span> <span class="kd">class</span> <span class="nc">DownloadFilesTask</span> <span class="kd">extends</span> <span class="n">AsyncTask</span><span class="o">&lt;</span><span class="n">URL</span><span class="o">,</span> <span class="n">Integer</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="o">{</span>
+</span><span class='line'>     <span class="kd">protected</span> <span class="n">Long</span> <span class="nf">doInBackground</span><span class="o">(</span><span class="n">URL</span><span class="o">...</span> <span class="n">urls</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>         <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="n">urls</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+</span><span class='line'>         <span class="kt">long</span> <span class="n">totalSize</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>         <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">count</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span><span class='line'>             <span class="n">totalSize</span> <span class="o">+=</span> <span class="n">Downloader</span><span class="o">.</span><span class="na">downloadFile</span><span class="o">(</span><span class="n">urls</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+</span><span class='line'>             <span class="n">publishProgress</span><span class="o">((</span><span class="kt">int</span><span class="o">)</span> <span class="o">((</span><span class="n">i</span> <span class="o">/</span> <span class="o">(</span><span class="kt">float</span><span class="o">)</span> <span class="n">count</span><span class="o">)</span> <span class="o">*</span> <span class="mi">100</span><span class="o">));</span>
+</span><span class='line'>             <span class="c1">// Escape early if cancel() is called</span>
+</span><span class='line'>             <span class="k">if</span> <span class="o">(</span><span class="n">isCancelled</span><span class="o">())</span> <span class="k">break</span><span class="o">;</span>
+</span><span class='line'>         <span class="o">}</span>
+</span><span class='line'>         <span class="k">return</span> <span class="n">totalSize</span><span class="o">;</span>
+</span><span class='line'>     <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>     <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onProgressUpdate</span><span class="o">(</span><span class="n">Integer</span><span class="o">...</span> <span class="n">progress</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>         <span class="n">setProgressPercent</span><span class="o">(</span><span class="n">progress</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+</span><span class='line'>     <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>     <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onPostExecute</span><span class="o">(</span><span class="n">Long</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>         <span class="n">showDialog</span><span class="o">(</span><span class="s">&quot;Downloaded &quot;</span> <span class="o">+</span> <span class="n">result</span> <span class="o">+</span> <span class="s">&quot; bytes&quot;</span><span class="o">);</span>
+</span><span class='line'>     <span class="o">}</span>
+</span><span class='line'> <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行Task:</p>
+
+<figure class='code'><figcaption><span>AsyncTaks</span><a href='http://www.shaojie.name'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="k">new</span> <span class="nf">DownloadFilesTask</span><span class="o">().</span><span class="na">execute</span><span class="o">(</span><span class="n">url1</span><span class="o">,</span> <span class="n">url2</span><span class="o">,</span> <span class="n">url3</span><span class="o">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1479,7 +1602,7 @@ cache池线程数支持0-Integer.MAX_VALUE(显然完全没考虑主机的资源�
     <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/android/'>Android (4)</a></li>
+    <li class='category'><a href='/blog/categories/android/'>Android (5)</a></li>
 <li class='category'><a href='/blog/categories/github/'>Github (3)</a></li>
 <li class='category'><a href='/blog/categories/other/'>Other (1)</a></li>
 
@@ -1510,6 +1633,10 @@ cache池线程数支持0-Integer.MAX_VALUE(显然完全没考虑主机的资源�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/03/18/android-asynchronous-asynctask/">Android Asynchronous AsyncTask</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/03/17/android-asynchronous-handlerthread/">Android Asynchronous HandlerThread</a>
       </li>
     
@@ -1523,10 +1650,6 @@ cache池线程数支持0-Integer.MAX_VALUE(显然完全没考虑主机的资源�
     
       <li class="post">
         <a href="/blog/2014/03/03/android-asynchronous-jie-shao/">Android Asynchronous 介绍</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/27/github-search-syntax/">GitHub Search Syntax</a>
       </li>
     
   </ul>

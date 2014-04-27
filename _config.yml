@@ -100,10 +100,16 @@ google_analytics_tracking_id:
 facebook_like: false
 
 #weibo like
-weibo_share: true
+weibo_share: false
 weibo_uid: 1706688983
 weibo_verifier: 1a722b18
 weibo_fansline: 0   # 粉丝显示多少行
 weibo_show: true    # 是否显示最近微博内容
 weibo_pic: true     # 是否显示微博中的图片
-weibo_skin: 10   
+weibo_skin: 10
+dribbble_user: shaojie 
+weibo_user: shaojie520 
+
+
+# Jiathis
+jathis: true 

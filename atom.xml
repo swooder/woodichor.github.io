@@ -4,7 +4,7 @@
   <title><![CDATA[Shaojie's Blog]]></title>
   <link href="http://www.shaojie.name/atom.xml" rel="self"/>
   <link href="http://www.shaojie.name/"/>
-  <updated>2014-03-19T00:40:00+08:00</updated>
+  <updated>2014-04-27T13:35:11+08:00</updated>
   <id>http://www.shaojie.name/</id>
   <author>
     <name><![CDATA[Shao jie]]></name>
@@ -14,7 +14,789 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Android Asynchronous AsyncTask]]></title>
+    <title type="html"><![CDATA[5]]></title>
+    <link href="http://www.shaojie.name/blog/2014/03/24/5/"/>
+    <updated>2014-03-24T23:06:01+08:00</updated>
+    <id>http://www.shaojie.name/blog/2014/03/24/5</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[十四个很准的心里暗示]]></title>
+    <link href="http://www.shaojie.name/blog/2014/03/24/4/"/>
+    <updated>2014-03-24T23:05:55+08:00</updated>
+    <id>http://www.shaojie.name/blog/2014/03/24/4</id>
+    <content type="html"><![CDATA[<p>1、当你对某件事情抱着百分之一万的相信，它最后就会变成事实。</p>
+
+<p>2、期望定律 期望定律告诉我们，当我们怀着对某件事情非常强烈期望的时候，我们所期望的事物就会出现。</p>
+
+<p>3、情绪定律 情绪定律告诉我们，人百分之百是情绪化的。即使有人说某人很理性，其实当这个人很有&#8221;理性&#8221;地思考问题的时候，也是受到他当时情绪状态的影响，&#8221;理性地思考&#8221;本身也是一种情绪状态。所以人百分之百是情绪化的动物，而且任何时候的决定都是情绪化的决定。</p>
+
+<p>4、因果定律 任何事情的发生，都有其必然的原因。有因才有果。换句话说，当你看到任何现象的时候，你不用觉得不可理解或者奇怪，因为任何事情的发生都必有其原因。你今天的现状结果是你过去种下的因导致的结果。</p>
+
+<p>5、吸引定律 当你的思想专注在某一领域的时候，跟这个领域相关的人、事、物就会被你吸引而来。</p>
+
+<p> 6、重复定律 任何的行为和思维，只要你不断的重复就会得到不断的加强。在你的潜意识当中，只要你能够不断地重复一些人、事、物，它们都会在潜意识里变成事实。</p>
+
+<p> 7、累积定律 很多年轻人都曾梦想做一番大事业，其实天下并没有什么大事可做，有的只是小事。一件一件小事累积起来就形成了大事。任何大成就或者大灾难都是累积的结果。</p>
+
+<p>8、辐射定律 当你做一件事情的时候，影响的并不只是这件事情的本身，它还会辐射到相关的其他领域。任何事情都有辐射作用。</p>
+
+<p>9、相关定律 相关定律告诉我们：这个世界上的每一件事情之间都有一定的联系，没有一件事情是完全独立的。要解决某个难题最好从其他相关的某个地方人手，而不只是专注在一个困难点上。</p>
+
+<p> 10、专精定律 专精定律告诉我们，只有专精在一个领域，这个领域才能有所发展。所以无论你做任何的行业都要把做该行业的最顶尖为目标，只有当你能够专精的时候，你所做的领域才会出类拔萃地成长。</p>
+
+<p> 11、替换定律 替换定律就是说，当我们有一项不想要的记忆或者是负面的习惯，我们是无法完全去除掉，只能用一种新的记忆或新的习惯去替换他。</p>
+
+<p> 12、惯性定律 任何事情只要你能够持续不断去加强它，它终究会变成一种习惯。</p>
+
+<p>13、显现定律 显现定律就是说，当我们持续寻找、追问答案的时候，它们最终都必将显现。</p>
+
+<p> 14、需求定律 任何人做任何事情都是带有一种需求。尊重并满足对方的需求，别人才会尊重我们的需求</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Handy adb commands for Android]]></title>
+    <link href="http://www.shaojie.name/blog/2014/03/24/adb-commands-for-android/"/>
+    <updated>2014-03-24T23:05:52+08:00</updated>
+    <id>http://www.shaojie.name/blog/2014/03/24/adb-commands-for-android</id>
+    <content type="html"><![CDATA[<h4>查看连接的设备</h4>
+
+<p>使用这个命令查看当前连接的所有设备和它们的ID</p>
+
+<p><code>adb devices</code></p>
+
+<p>如果你有多个设备连接，使用<code>adb -s DEVICE_ID</code>选中你需要操作的设备</p>
+
+<h4>安装应用</h4>
+
+<p>使用<code>install</code>命令安装apk，如果你已经安装过当前程序，并且想保存当前的数据，可以加上&#8220;-r&#8220;`参数来覆盖安装当前程序</p>
+
+<p><code>
+adb
+</code>
+记录下在使用android adb操作时常用的命令，可以方便我们在开发过程中构建和测试程序。</p>
+
+<h4>卸载程序</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb uninstall PACKAGE_NAME
+</span><span class='line'>//example
+</span><span class='line'>adb uninstall com.shaojie.name.example</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>启动一个Activity</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb shell am start PACKAGE_NAME/ACTIVITY_IN_PACKAGE
+</span><span class='line'>adb shell am start PACKAGE_NAME/FULLY_QUALIFIED_ACTIVITY
+</span><span class='line'>//example
+</span><span class='line'>adb shell am start -n com.shaojie.name.example/.MainActiivty
+</span><span class='line'>adb shell am start -n com.shaojie.name.example/com.shaojie.name.MainActivity</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>进入设备的shell</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb shell</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>截屏</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' &gt; screen.png</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>点击电源键</h4>
+
+<p>这个命令发送一个关闭屏幕的事件到设备</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb shell input keyevent 26</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>屏幕解锁</h4>
+
+<p>与上面的命令作用相反，用于点亮屏幕解锁</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb shell input keyevent 82</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>显示安装的程序包</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb shell pm list packages -f</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Logging</h4>
+
+<p>显示系统的日志到命令行</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb logcat</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>TagName过滤</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb logcat -s TAG_NAME
+</span><span class='line'>adb logcat -s TAG_NAME_1 TAG_NAME_2
+</span><span class='line'>//
+</span><span class='line'>adb logcat -s TEST
+</span><span class='line'>adb logcat -s TEST MYAPP</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>优先级过滤</h4>
+
+<p>显示某个级别以及以上优先级的日志</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb logcat "*:PRIORITY"
+</span><span class='line'>//example
+</span><span class='line'>adb logcat "*:W"</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>V-Verbose</li>
+<li>D_Debug</li>
+<li>I-Info</li>
+<li>W-Warning</li>
+<li>E-Error</li>
+<li>F-Fatal</li>
+<li>S-Silent(最高级别)</li>
+</ul>
+
+
+<h4>优先级和tagname过滤</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb logcat -s TAG_NAME:PRIORITY
+</span><span class='line'>adb logcat -s TAG_NAME_1:PRIORITY TAG_NAME_2:PROPRITY
+</span><span class='line'>//example
+</span><span class='line'>adb logcat -s TEST: W</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>grep过滤</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb logcat | grep "SEARCH_TERM"
+</span><span class='line'>adb logcat | grep "SEARCH_TERM_1\|SEARCH_TERM_2"
+</span><span class='line'>//example
+</span><span class='line'>adb logcat | grep "Exception"
+</span><span class='line'>adb logcat | grep "Exveption\|Error"</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>清除logcat日志</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb logcat -c</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>更多</h4>
+
+<p>更加细节，当然是官方文档，<a href="http://developer.android.com/tools/help/adb.html">传送门</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android Asynchronous Loader]]></title>
+    <link href="http://www.shaojie.name/blog/2014/03/24/android-asynchronous-Loader/"/>
+    <updated>2014-03-24T23:05:43+08:00</updated>
+    <id>http://www.shaojie.name/blog/2014/03/24/android-asynchronous-Loader</id>
+    <content type="html"><![CDATA[<h4>Loader概述</h4>
+
+<p>装载器从android3.0开始引进。它使得在activity或fragment中异步加载数据变得简单。装载器具有如下特性:</p>
+
+<ul>
+<li>它们对每个Activity和Fragment都有效</li>
+<li>他们提供了异步加载数据的能力</li>
+<li>它们监听数据，并在数数据发生变化时传递新的结果</li>
+<li>当由于配置改变而被重新创建后，它们自动重连到上一个加载器的游标，所以不必重新查询数据</li>
+</ul>
+
+
+<h5>API概述</h5>
+
+<h6>LoaderManager</h6>
+
+<p>一个抽像类，关联到一个Activity或Fragment，管理一个或多个装载器的实例。这帮助一个应用管理那些与Activity或Fragment的生命周期相关的长时间运行的的操作。最常见的方式是与一个CursorLoader一起使用，然而应用是可以随便写它们自己的装载器以加载其它类型的数据。
+每个activity或fragment只有一个LoaderManager。但是一个LoaderManager可以拥有多个装载器。</p>
+
+<h6>LoadManager.LoaderCallbacks</h6>
+
+<p>一个用于客户端与LoaderManager交互的回调接口。例如，你使用回调方法onCreateLoader()来创建一个新的装载器。</p>
+
+<h6>Loader</h6>
+
+<p>一个执行异步数据加载的抽象类。它是加载器的基类。你可以使用典型的CursorLoader，但是你也可以实现你自己的子类。一旦装载器被激活，它们将监视它们的数据源并且在数据改变时发送新的结果。</p>
+
+<h6>AsyncTaskLoader</h6>
+
+<p>提供一个AsyncTask来执行异步加载工作的抽象类。</p>
+
+<h6>CursorLoader</h6>
+
+<p>AsyncTaskLoader的子类，它查询ContentResolver然后返回一个Cursor。这个类为查询cursor以标准的方式实现了装载器的协议，它的游标查询是通过AsyncTaskLoader在后台线程中执行，从而不会阻塞界面。使用这个装载器是从一个ContentProvider异步加载数据的最好方式。相比之下，通过fragment或activity的API来执行一个被管理的查询就不行了</p>
+
+<h5>使用</h5>
+
+<p>一个使用装载器的应用会包含如下组件：</p>
+
+<ul>
+<li>一个Activity或Fragment</li>
+<li>一个LoaderManager的实例</li>
+<li>一个加载被ContentProvider所支持的数据的CursorLoader．或者，你可以从Loader或AsyncTaskLoader实现你自己的装载器来从其它源加载数据</li>
+<li>一个LoaderManager.LoaderCallbacks的实现．这是你创建新的装载器以及管理你的已有装载器的引用的地方</li>
+<li>一个显示装载器的数据的途径，例如使用一个SimpleCursorAdapter</li>
+<li>一个数据源，比如当是用CursorLoader时，它将是一个ContentProvider</li>
+</ul>
+
+
+<h5>启动一个装载器</h5>
+
+<p>LoaderManager管理一个Activiry或Fragment中的一个或多个装载器．但每个activity或fragment只拥有一个LoaderManager．</p>
+
+<p>你通常要在activity的onCreate()方法中或fragment的onActivityCreated()方法中初始化一个装载器．你可以如下创建：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>getLoaderManager().initLoader(0,null, this);  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>initLoader()方法有一下参数</p>
+
+<ul>
+<li>一个唯一ID来标志装载器．在这个例子中，ID是0</li>
+<li>可选的参数，用于装载器初始化时(本例中是null)</li>
+<li>一个LoaderManager.LoaderCallbacks的实现．被LoaderManager调用以报告装载器的事件，在这个例子中，类本实现了这个接口，所以传的是它自己：this</li>
+</ul>
+
+
+<p>initLoader()保证一个装载器被初始化并激活．它具有两种可能的结果：</p>
+
+<ul>
+<li>如果ID所指的装载器已经存在，那么这个装载器将被重用</li>
+<li>如果装载器不存在，initLoader()就触发LoaderManager.LoaderCallbacks的方法onCreateLoader()．这是你实例化并返回一个新装载器的地方</li>
+</ul>
+
+
+<p>在这两种情况中，传入的LoaderManager.LoaderCallbacks的实现都与装载器绑定在一起．并且会在装载器状态变化时被调用．如果在调用这个方法时，调用者正处于启动状态，并且所请求的装载器已存在并产生了数据，那么系统会马上调用onLoadFinished()(也就是说在initLoader()还在执行时)．所以你必须为这种情况的发生做好准备.</p>
+
+<h5>重启装载器</h5>
+
+<p>当你使用initLoader()时，如果指定ID的装载器已经存在，则它使用这个装载器．如果不存在呢，它将创建一个新的．但是有时你却是想丢弃旧的然后开始新的数据．</p>
+
+<p>要想丢弃旧数据，你应使用restartLoader()。</p>
+
+<h5>回调</h5>
+
+<p>LoaderManager.LoaderCallbacks是一个回调接口，它使得客户端可以与LoaderManager进行交互．</p>
+
+<p>装载器，一般指的是CursorLoader，我们希望在它停止后依然保持数据．这使得应用可以在activity或fragment的 onStop() 和onStart() 之间保持数据，所以当用户回到一个应用时，它们不需等待数据加载．你使用LoaderManager.LoaderCallbacks 的方法们，在需要时创建新的装载器，并且告诉应用什么时候要停止使用装载器的数据．</p>
+
+<p>LoaderManager.LoaderCallbacks 包含以下方法们:</p>
+
+<ul>
+<li>onCreateLoader() —跟据传入的ID，初始化并返回一个新的装载器．</li>
+<li>onLoadFinished() —当一个装载器完成了它的装载过程后被调用</li>
+<li>onLoaderReset() —当一个装载器被重置而什其数据无效时被调用</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>Loader www.shaojie.name</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">CursorLoaderListFragment</span> <span class="kd">extends</span> <span class="n">ListFragment</span>
+</span><span class='line'>        <span class="kd">implements</span> <span class="n">OnQueryTextListener</span><span class="o">,</span> <span class="n">LoaderManager</span><span class="o">.</span><span class="na">LoaderCallbacks</span><span class="o">&lt;</span><span class="n">Cursor</span><span class="o">&gt;</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// This is the Adapter being used to display the list&#39;s data.</span>
+</span><span class='line'>    <span class="n">SimpleCursorAdapter</span> <span class="n">mAdapter</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// If non-null, this is the current filter the user has provided.</span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">mCurFilter</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="n">onActivityCreated</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="kd">super</span><span class="o">.</span><span class="na">onActivityCreated</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Give some text to display if there is no data.  In a real</span>
+</span><span class='line'>        <span class="c1">// application this would come from a resource.</span>
+</span><span class='line'>        <span class="n">setEmptyText</span><span class="o">(</span><span class="s">&quot;No phone numbers&quot;</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// We have a menu item to show in action bar.</span>
+</span><span class='line'>        <span class="n">setHasOptionsMenu</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Create an empty adapter we will use to display the loaded data.</span>
+</span><span class='line'>        <span class="n">mAdapter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SimpleCursorAdapter</span><span class="o">(</span><span class="n">getActivity</span><span class="o">(),</span>
+</span><span class='line'>                <span class="n">android</span><span class="o">.</span><span class="na">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">simple_list_item_2</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span>
+</span><span class='line'>                <span class="k">new</span> <span class="n">String</span><span class="o">[]</span> <span class="o">{</span> <span class="n">Contacts</span><span class="o">.</span><span class="na">DISPLAY_NAME</span><span class="o">,</span> <span class="n">Contacts</span><span class="o">.</span><span class="na">CONTACT_STATUS</span> <span class="o">},</span>
+</span><span class='line'>                <span class="k">new</span> <span class="kt">int</span><span class="o">[]</span> <span class="o">{</span> <span class="n">android</span><span class="o">.</span><span class="na">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">text1</span><span class="o">,</span> <span class="n">android</span><span class="o">.</span><span class="na">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">text2</span> <span class="o">},</span> <span class="mi">0</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">setListAdapter</span><span class="o">(</span><span class="n">mAdapter</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Prepare the loader.  Either re-connect with an existing one,</span>
+</span><span class='line'>        <span class="c1">// or start a new one.</span>
+</span><span class='line'>        <span class="n">getLoaderManager</span><span class="o">().</span><span class="na">initLoader</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="k">this</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="n">onCreateOptionsMenu</span><span class="o">(</span><span class="n">Menu</span> <span class="n">menu</span><span class="o">,</span> <span class="n">MenuInflater</span> <span class="n">inflater</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="c1">// Place an action bar item for searching.</span>
+</span><span class='line'>        <span class="n">MenuItem</span> <span class="n">item</span> <span class="o">=</span> <span class="n">menu</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;Search&quot;</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">item</span><span class="o">.</span><span class="na">setIcon</span><span class="o">(</span><span class="n">android</span><span class="o">.</span><span class="na">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">ic_menu_search</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">item</span><span class="o">.</span><span class="na">setShowAsAction</span><span class="o">(</span><span class="n">MenuItem</span><span class="o">.</span><span class="na">SHOW_AS_ACTION_IF_ROOM</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">SearchView</span> <span class="n">sv</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SearchView</span><span class="o">(</span><span class="n">getActivity</span><span class="o">());</span>
+</span><span class='line'>        <span class="n">sv</span><span class="o">.</span><span class="na">setOnQueryTextListener</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">item</span><span class="o">.</span><span class="na">setActionView</span><span class="o">(</span><span class="n">sv</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">onQueryTextChange</span><span class="o">(</span><span class="n">String</span> <span class="n">newText</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="c1">// Called when the action bar search text has changed.  Update</span>
+</span><span class='line'>        <span class="c1">// the search filter, and restart the loader to do a new query</span>
+</span><span class='line'>        <span class="c1">// with this filter.</span>
+</span><span class='line'>        <span class="n">mCurFilter</span> <span class="o">=</span> <span class="o">!</span><span class="n">TextUtils</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="n">newText</span><span class="o">)</span> <span class="o">?</span> <span class="n">newText</span> <span class="o">:</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>        <span class="n">getLoaderManager</span><span class="o">().</span><span class="na">restartLoader</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="k">this</span><span class="o">);</span>
+</span><span class='line'>        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="n">onQueryTextSubmit</span><span class="o">(</span><span class="n">String</span> <span class="n">query</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="c1">// Don&#39;t care about this.</span>
+</span><span class='line'>        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="n">onListItemClick</span><span class="o">(</span><span class="n">ListView</span> <span class="n">l</span><span class="o">,</span> <span class="n">View</span> <span class="n">v</span><span class="o">,</span> <span class="kt">int</span> <span class="n">position</span><span class="o">,</span> <span class="kt">long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="c1">// Insert desired behavior here.</span>
+</span><span class='line'>        <span class="n">Log</span><span class="o">.</span><span class="na">i</span><span class="o">(</span><span class="s">&quot;FragmentComplexList&quot;</span><span class="o">,</span> <span class="s">&quot;Item clicked: &quot;</span> <span class="o">+</span> <span class="n">id</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// These are the Contacts rows that we will retrieve.</span>
+</span><span class='line'>    <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span><span class="o">[]</span> <span class="n">CONTACTS_SUMMARY_PROJECTION</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[]</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">Contacts</span><span class="o">.</span><span class="na">_ID</span><span class="o">,</span>
+</span><span class='line'>        <span class="n">Contacts</span><span class="o">.</span><span class="na">DISPLAY_NAME</span><span class="o">,</span>
+</span><span class='line'>        <span class="n">Contacts</span><span class="o">.</span><span class="na">CONTACT_STATUS</span><span class="o">,</span>
+</span><span class='line'>        <span class="n">Contacts</span><span class="o">.</span><span class="na">CONTACT_PRESENCE</span><span class="o">,</span>
+</span><span class='line'>        <span class="n">Contacts</span><span class="o">.</span><span class="na">PHOTO_ID</span><span class="o">,</span>
+</span><span class='line'>        <span class="n">Contacts</span><span class="o">.</span><span class="na">LOOKUP_KEY</span><span class="o">,</span>
+</span><span class='line'>    <span class="o">};</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="n">Loader</span><span class="o">&lt;</span><span class="n">Cursor</span><span class="o">&gt;</span> <span class="nf">onCreateLoader</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">,</span> <span class="n">Bundle</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="c1">// This is called when a new Loader needs to be created.  This</span>
+</span><span class='line'>        <span class="c1">// sample only has one Loader, so we don&#39;t care about the ID.</span>
+</span><span class='line'>        <span class="c1">// First, pick the base URI to use depending on whether we are</span>
+</span><span class='line'>        <span class="c1">// currently filtering.</span>
+</span><span class='line'>        <span class="n">Uri</span> <span class="n">baseUri</span><span class="o">;</span>
+</span><span class='line'>        <span class="k">if</span> <span class="o">(</span><span class="n">mCurFilter</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">baseUri</span> <span class="o">=</span> <span class="n">Uri</span><span class="o">.</span><span class="na">withAppendedPath</span><span class="o">(</span><span class="n">Contacts</span><span class="o">.</span><span class="na">CONTENT_FILTER_URI</span><span class="o">,</span>
+</span><span class='line'>                    <span class="n">Uri</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">mCurFilter</span><span class="o">));</span>
+</span><span class='line'>        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">baseUri</span> <span class="o">=</span> <span class="n">Contacts</span><span class="o">.</span><span class="na">CONTENT_URI</span><span class="o">;</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Now create and return a CursorLoader that will take care of</span>
+</span><span class='line'>        <span class="c1">// creating a Cursor for the data being displayed.</span>
+</span><span class='line'>        <span class="n">String</span> <span class="n">select</span> <span class="o">=</span> <span class="s">&quot;((&quot;</span> <span class="o">+</span> <span class="n">Contacts</span><span class="o">.</span><span class="na">DISPLAY_NAME</span> <span class="o">+</span> <span class="s">&quot; NOTNULL) AND (&quot;</span>
+</span><span class='line'>                <span class="o">+</span> <span class="n">Contacts</span><span class="o">.</span><span class="na">HAS_PHONE_NUMBER</span> <span class="o">+</span> <span class="s">&quot;=1) AND (&quot;</span>
+</span><span class='line'>                <span class="o">+</span> <span class="n">Contacts</span><span class="o">.</span><span class="na">DISPLAY_NAME</span> <span class="o">+</span> <span class="s">&quot; != &#39;&#39; ))&quot;</span><span class="o">;</span>
+</span><span class='line'>        <span class="k">return</span> <span class="k">new</span> <span class="nf">CursorLoader</span><span class="o">(</span><span class="n">getActivity</span><span class="o">(),</span> <span class="n">baseUri</span><span class="o">,</span>
+</span><span class='line'>                <span class="n">CONTACTS_SUMMARY_PROJECTION</span><span class="o">,</span> <span class="n">select</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span>
+</span><span class='line'>                <span class="n">Contacts</span><span class="o">.</span><span class="na">DISPLAY_NAME</span> <span class="o">+</span> <span class="s">&quot; COLLATE LOCALIZED ASC&quot;</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onLoadFinished</span><span class="o">(</span><span class="n">Loader</span><span class="o">&lt;</span><span class="n">Cursor</span><span class="o">&gt;</span> <span class="n">loader</span><span class="o">,</span> <span class="n">Cursor</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="c1">// Swap the new cursor in.  (The framework will take care of closing the</span>
+</span><span class='line'>        <span class="c1">// old cursor once we return.)</span>
+</span><span class='line'>        <span class="n">mAdapter</span><span class="o">.</span><span class="na">swapCursor</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onLoaderReset</span><span class="o">(</span><span class="n">Loader</span><span class="o">&lt;</span><span class="n">Cursor</span><span class="o">&gt;</span> <span class="n">loader</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="c1">// This is called when the last Cursor provided to onLoadFinished()</span>
+</span><span class='line'>        <span class="c1">// above is about to be closed.  We need to make sure we are no</span>
+</span><span class='line'>        <span class="c1">// longer using it.</span>
+</span><span class='line'>        <span class="n">mAdapter</span><span class="o">.</span><span class="na">swapCursor</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Loader的使用分一下几个步骤：</p>
+
+<ul>
+<li>实现自己的异步Loader ,如本篇的AsyncTaskLoader或者CursorLoader或者自己继承Loader，第二步需要用到这个Loader</li>
+<li>创建数据源 XXXAdapter.</li>
+<li>在Activity 或者Fragments 上实现OnQueryTextListener,LoaderManager.LoaderCallbacks接口</li>
+<li>在onCreateLoader里面返回Loader，在onLoadfinished里面做清除动作，在onQueryTextChange或者onQueryTextSubmit改变数据源，在onCreate里面让Loader去执行请求数据getLoaderManager().initLoader(0, null, this)</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android Asynchrous IntentService]]></title>
+    <link href="http://www.shaojie.name/blog/2014/03/24/android-asynchronous-IntentService/"/>
+    <updated>2014-03-24T23:05:38+08:00</updated>
+    <id>http://www.shaojie.name/blog/2014/03/24/android-asynchronous-IntentService</id>
+    <content type="html"><![CDATA[<h4>Service</h4>
+
+<h6>Service种类</h6>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>类别 </th>
+<th> 区别  </th>
+<th>  优点   </th>
+<th>缺点   </th>
+<th>应用   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> 本地服务（Local)  </td>
+<td> 该服务依附在主进程上  </td>
+<td> 服务依附在主进程上而不是独立的进程，这样在一定程度上节约了资源，另外Local服务因为是在同一进程因此不需要IPC，也不需要AIDL。相应bindService会方便很多。  </td>
+<td> 主进程被Kill后，服务便会终止</td>
+<td>非常常见的应用如：音乐播放服务，Push服务。  |   </td>
+</tr>
+<tr>
+<td></td>
+<td> 远程服务（Remote）  </td>
+<td> 该服务是独立的进程  </td>
+<td> 服务为独立的进程，对应进程名格式为所在包名加上你指定的android:process字符串。由于是独立的进程，因此在Activity所在进程被Kill的时候，该服务依然在运行，不受其他进程影响，有利于为多个进程提供服务具有较高的灵活性  </td>
+<td> 该服务是独立的进程，会占用一定资源，并且使用AIDL进行IPC稍微麻烦一点</td>
+<td> 一些提供系统服务的Service，这种Service是常驻的  |   </td>
+</tr>
+</tbody>
+</table>
+
+
+<h5>service运行分类</h5>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>类别 </th>
+<th> 区别 </th>
+<th>应用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>前台服务</td>
+<td>会在通知一栏显示 ONGOING 的 Notification</td>
+<td>当服务被终止的时候，通知一栏的 Notification 也会消失，这样对于用户有一定的通知作用。常见的如音乐播放服务|</td>
+</tr>
+<tr>
+<td></td>
+<td>后台服务</td>
+<td>默认的服务即为后台服务，即不会在通知一栏显示 ONGOING 的 Notification</td>
+<td>当服务被终止的时候，用户是看不到效果的。某些不需要运行或终止提示的服务，如天气更新，日期同步，邮件同步等|</td>
+</tr>
+</tbody>
+</table>
+
+
+<h5>Service 与 Thread的区别</h5>
+
+<ol>
+<li>Thread：Thread是程序执行的最小单元，它是分配CPU的基本单位。可以用 Thread 来执行一些异步的操作。</li>
+<li>Service：Service 是Android的一种机制，当它运行的时候如果是Local Service，那么对应的 Service 是运行在主进程的 main 线程上的。如：onCreate，onStart 这些函数在被系统调用的时候都是在主进程的 main 线程上运行的。如果是Remote Service，那么对应的 Service 则是运行在独立进程的 main 线程上。</li>
+</ol>
+
+
+<p>那么我们为什么要用 Service 呢？其实这跟 android 的系统机制有关，我们先拿 Thread 来说。Thread 的运行是独立于 Activity 的，也就是说当一个 Activity 被 finish 之后，如果你没有主动停止 Thread 或者 Thread 里的 run 方法没有执行完毕的话，Thread 也会一直执行。因此这里会出现一个问题：当 Activity 被 finish 之后，你不再持有该 Thread 的引用。另一方面，你没有办法在不同的 Activity 中对同一 Thread 进行控制。</p>
+
+<h5>Service生命周期</h5>
+
+<ol>
+<li>三个阶段：创建-开始-销毁</li>
+<li>Oncreate();Service 声明周期的开始，完成Service的初始化工作</li>
+<li>OnStartCommand(); 服务声明周期开始，没有对应的停止函数</li>
+<li>OnDestory(); 声明周期的结束，释放Service所占用的资源</li>
+</ol>
+
+
+<h5>Service启动方式</h5>
+
+<ol>
+<li>Conetext.startService()</li>
+<li>Conetext.bindService();</li>
+</ol>
+
+
+<h4>IntentService</h4>
+
+<p>IntentService继承与Service，它最大的特点是对服务请求逐个进行处理。当我们要提供的服务不需要同时处理多个请求的时候，可以选择继承IntentService。</p>
+
+<h5>使用IntentService有几个需要注意的地方：</h5>
+
+<ol>
+<li>它不能直接与用户交互，如果想把数据传递给用户界面，需要把值先传递给Activity</li>
+<li>一个intentService可以处理多个任务，只不过是一个接着一个的顺序来处理的,后面的任务需要在前一个完成后才能执行</li>
+<li>运行在IntetService中的操作是不能被打断的</li>
+</ol>
+
+
+<h6>IntentService的特点</h6>
+
+<ol>
+<li><p>它创建了一个独立的工作线程来处理所有的通过onStartCommand()传递给服务的intents。</p></li>
+<li><p>创建了一个工作队列，来逐个发送intent给onHandleIntent()。</p></li>
+<li><p> 不需要主动调用stopSelft()来结束服务。因为，在所有的intent被处理完后，系统会自动关闭服务。</p></li>
+<li><p> 默认实现的onBind()返回null</p></li>
+<li><p>默认实现的onStartCommand()的目的是将intent插入到工作队列中。</p></li>
+</ol>
+
+
+<h6>源码分析</h6>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>java Interservice www.shaojie.name
+</span><span class='line'>public abstract class IntentService extends Service { 
+</span><span class='line'>
+</span><span class='line'>        private volatile Looper mServiceLooper; 
+</span><span class='line'>        private volatile ServiceHandler mServiceHandler; 
+</span><span class='line'>
+</span><span class='line'>        private String mName; 
+</span><span class='line'>        private boolean mRedelivery; 
+</span><span class='line'>    
+</span><span class='line'>
+</span><span class='line'>        private final class ServiceHandler extends Handler { 
+</span><span class='line'>
+</span><span class='line'>                public ServiceHandler(Looper looper) { 
+</span><span class='line'>                        super(looper); 
+</span><span class='line'>                } 
+</span><span class='line'>    
+</span><span class='line'>                @Override 
+</span><span class='line'>                public void handleMessage(Message msg) { 
+</span><span class='line'>                        onHandleIntent((Intent)msg.obj); 
+</span><span class='line'>                        stopSelf(msg.arg1); 
+</span><span class='line'>                } 
+</span><span class='line'>
+</span><span class='line'>        }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>从源码可以分析出:
+IntentService 实际上是Looper,Handler,Service 的集合体,他不仅有服务的功能,还有处理和循环消息的功能</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@Override 
+</span><span class='line'>public void onCreate() { 
+</span><span class='line'>        super.onCreate(); 
+</span><span class='line'>
+</span><span class='line'>        HandlerThread thread = new HandlerThread("IntentService[" + mName + "]"); 
+</span><span class='line'>        thread.start(); 
+</span><span class='line'>
+</span><span class='line'>        mServiceLooper = thread.getLooper(); 
+</span><span class='line'>        mServiceHandler = new ServiceHandler(mServiceLooper); 
+</span><span class='line'>        }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>IntentService创建时就会创建Handler线程(HandlerThread)并且启动,然后再得到当前线程的Looper对象来初始化IntentService的mServiceLooper,接着创建mServicehandler对象.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@Override 
+</span><span class='line'>        public void onStart(Intent intent, int startId) { 
+</span><span class='line'>                Message msg = mServiceHandler.obtainMessage(); 
+</span><span class='line'>                msg.arg1 = startId; 
+</span><span class='line'>                msg.obj = intent; 
+</span><span class='line'>
+</span><span class='line'>                mServiceHandler.sendMessage(msg); 
+</span><span class='line'>        }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>当你启动IntentService的时候,就会产生一条附带startId和Intent的Message并发送到MessageQueue中,接下来Looper发现MessageQueue中有Message的时候,就会停止Handler处理消息.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> @Override 
+</span><span class='line'>        public void handleMessage(Message msg) { 
+</span><span class='line'>                        onHandleIntent((Intent)msg.obj); 
+</span><span class='line'>                        stopSelf(msg.arg1); 
+</span><span class='line'>        }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>接着调用 onHandleIntent((Intent)msg.obj),这是一个抽象的方法,其实就是我们要重写实现的方法,我们可以在这个方法里面处理我们的工作.当任务完成时就会调用stopSelf(msg.arg1)这个方法来结束指定的工作</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@Override 
+</span><span class='line'>        public void onDestroy() { 
+</span><span class='line'>                mServiceLooper.quit(); 
+</span><span class='line'>        }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>当所有的工作执行完后:就会执行onDestroy方法,服务结束后调用这个方法 mServiceLooper.quit()使looper停下来.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android Asynchronous  AsyncTask]]></title>
     <link href="http://www.shaojie.name/blog/2014/03/18/android-asynchronous-asynctask/"/>
     <updated>2014-03-18T00:03:02+08:00</updated>
     <id>http://www.shaojie.name/blog/2014/03/18/android-asynchronous-asynctask</id>

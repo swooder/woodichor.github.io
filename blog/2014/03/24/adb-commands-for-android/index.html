@@ -1,0 +1,297 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Handy adb commands for Android - Shaojie's Blog</title>
+	<meta name="author" content="Shao jie">
+
+	
+	<meta name="description" content="Handy Adb Commands for Android 查看连接的设备 使用这个命令查看当前连接的所有设备和它们的ID adb devices 如果你有多个设备连接，使用adb -s DEVICE_ID选中你需要操作的设备 安装应用 使用install命令安装apk， &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Shaojie's Blog" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://www.shaojie.name/blog/2014/03/24/adb-commands-for-android/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		document.write("<img src='http://s.gravatar.com/avatar/f46bfa290cab1bcbb8753835f05b302b?s=160" + MD5("") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+	</script>
+</div>
+<h1><a href="/">Shaojie's Blog</a></h1>
+<p class="subtitle">专注移动开发Android&IOS&PHP&NODEJS</p>
+<nav id="main-nav"><ul class="main">
+    <li><a href="/">Blog</a></li>
+    <li><a href="http://about.me/shashankmehta">About</a></li>
+    <li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		<a class="weibo" href="http://www.weibo.com/shaojie520" title="Weibo">Weibo</a>
+		
+		
+		
+		
+		
+		
+		<a class="dribbble" href="http://www.dribbble.com/shaojie" title="Dribbble">Dribbble</a>
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">Handy Adb Commands for Android</h1>
+	<div class="entry-content" itemprop="articleBody"><h4>查看连接的设备</h4>
+
+<p>使用这个命令查看当前连接的所有设备和它们的ID</p>
+
+<p><code>adb devices</code></p>
+
+<p>如果你有多个设备连接，使用<code>adb -s DEVICE_ID</code>选中你需要操作的设备</p>
+
+<h4>安装应用</h4>
+
+<p>使用<code>install</code>命令安装apk，如果你已经安装过当前程序，并且想保存当前的数据，可以加上&#8220;-r&#8220;`参数来覆盖安装当前程序</p>
+
+<p><code>
+adb
+</code>
+记录下在使用android adb操作时常用的命令，可以方便我们在开发过程中构建和测试程序。</p>
+
+<h4>卸载程序</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb uninstall PACKAGE_NAME
+</span><span class='line'>//example
+</span><span class='line'>adb uninstall com.shaojie.name.example</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>启动一个Activity</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb shell am start PACKAGE_NAME/ACTIVITY_IN_PACKAGE
+</span><span class='line'>adb shell am start PACKAGE_NAME/FULLY_QUALIFIED_ACTIVITY
+</span><span class='line'>//example
+</span><span class='line'>adb shell am start -n com.shaojie.name.example/.MainActiivty
+</span><span class='line'>adb shell am start -n com.shaojie.name.example/com.shaojie.name.MainActivity</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>进入设备的shell</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb shell</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>截屏</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' &gt; screen.png</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>点击电源键</h4>
+
+<p>这个命令发送一个关闭屏幕的事件到设备</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb shell input keyevent 26</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>屏幕解锁</h4>
+
+<p>与上面的命令作用相反，用于点亮屏幕解锁</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb shell input keyevent 82</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>显示安装的程序包</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb shell pm list packages -f</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Logging</h4>
+
+<p>显示系统的日志到命令行</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb logcat</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>TagName过滤</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb logcat -s TAG_NAME
+</span><span class='line'>adb logcat -s TAG_NAME_1 TAG_NAME_2
+</span><span class='line'>//
+</span><span class='line'>adb logcat -s TEST
+</span><span class='line'>adb logcat -s TEST MYAPP</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>优先级过滤</h4>
+
+<p>显示某个级别以及以上优先级的日志</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb logcat "*:PRIORITY"
+</span><span class='line'>//example
+</span><span class='line'>adb logcat "*:W"</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>V-Verbose</li>
+<li>D_Debug</li>
+<li>I-Info</li>
+<li>W-Warning</li>
+<li>E-Error</li>
+<li>F-Fatal</li>
+<li>S-Silent(最高级别)</li>
+</ul>
+
+
+<h4>优先级和tagname过滤</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb logcat -s TAG_NAME:PRIORITY
+</span><span class='line'>adb logcat -s TAG_NAME_1:PRIORITY TAG_NAME_2:PROPRITY
+</span><span class='line'>//example
+</span><span class='line'>adb logcat -s TEST: W</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>grep过滤</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb logcat | grep "SEARCH_TERM"
+</span><span class='line'>adb logcat | grep "SEARCH_TERM_1\|SEARCH_TERM_2"
+</span><span class='line'>//example
+</span><span class='line'>adb logcat | grep "Exception"
+</span><span class='line'>adb logcat | grep "Exveption\|Error"</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>清除logcat日志</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb logcat -c</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>更多</h4>
+
+<p>更加细节，当然是官方文档，<a href="http://developer.android.com/tools/help/adb.html">传送门</a></p>
+</div>
+
+</article>
+
+	<div class="share">
+    <!-- 
+    <div class="addthis_toolbox addthis_default_style addthis_16x16_style">
+	
+	
+	
+	<a class="addthis_button_twitter"></a>
+	
+	
+	
+	<a class="addthis_button_compact"></a>
+	<a class="addthis_counter addthis_bubble_style"></a>
+
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid="></script>
+ -->
+
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js"></script>
+
+</div>
+
+
+
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Shao jie
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

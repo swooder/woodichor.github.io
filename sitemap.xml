@@ -2,47 +2,75 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://www.shaojie.name/blog/2014/02/16/da-jian-bo-ke-huan-jing/</loc>
-        <lastmod>2014-03-06T23:49:11+08:00</lastmod>
+        <lastmod>2014-04-27T13:21:16+08:00</lastmod>
     </url>
     <url>
         <loc>http://www.shaojie.name/blog/2014/02/22/searching-github/</loc>
-        <lastmod>2014-02-28T00:38:24+08:00</lastmod>
+        <lastmod>2014-04-27T13:21:16+08:00</lastmod>
     </url>
     <url>
         <loc>http://www.shaojie.name/blog/2014/02/23/advanced-search/</loc>
-        <lastmod>2014-02-28T00:34:46+08:00</lastmod>
+        <lastmod>2014-04-27T13:21:16+08:00</lastmod>
     </url>
     <url>
         <loc>http://www.shaojie.name/blog/2014/02/27/github-search-syntax/</loc>
-        <lastmod>2014-02-28T00:41:55+08:00</lastmod>
+        <lastmod>2014-04-27T13:21:16+08:00</lastmod>
     </url>
     <url>
         <loc>http://www.shaojie.name/blog/2014/03/03/android-asynchronous-jie-shao/</loc>
-        <lastmod>2014-03-03T23:09:53+08:00</lastmod>
+        <lastmod>2014-04-27T13:21:16+08:00</lastmod>
     </url>
     <url>
         <loc>http://www.shaojie.name/blog/2014/03/03/android-asynchronous-Thread/</loc>
-        <lastmod>2014-03-03T23:18:05+08:00</lastmod>
+        <lastmod>2014-04-27T13:21:16+08:00</lastmod>
     </url>
     <url>
         <loc>http://www.shaojie.name/blog/2014/03/06/android-asynchronous-executor/</loc>
-        <lastmod>2014-03-07T00:51:20+08:00</lastmod>
+        <lastmod>2014-04-27T13:21:16+08:00</lastmod>
     </url>
     <url>
         <loc>http://www.shaojie.name/blog/2014/03/17/android-asynchronous-handlerthread/</loc>
-        <lastmod>2014-03-17T23:53:53+08:00</lastmod>
+        <lastmod>2014-04-27T13:21:16+08:00</lastmod>
     </url>
     <url>
         <loc>http://www.shaojie.name/blog/2014/03/18/android-asynchronous-asynctask/</loc>
-        <lastmod>2014-03-19T00:39:54+08:00</lastmod>
+        <lastmod>2014-04-27T13:21:16+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.shaojie.name/blog/2014/03/24/android-asynchronous-IntentService/</loc>
+        <lastmod>2014-04-27T13:21:16+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.shaojie.name/blog/2014/03/24/android-asynchronous-Loader/</loc>
+        <lastmod>2014-04-27T13:21:16+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.shaojie.name/blog/2014/03/24/adb-commands-for-android/</loc>
+        <lastmod>2014-04-27T13:21:16+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.shaojie.name/blog/2014/03/24/4/</loc>
+        <lastmod>2014-04-27T13:21:16+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.shaojie.name/blog/2014/03/24/5/</loc>
+        <lastmod>2014-04-27T13:21:16+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.shaojie.name/about/</loc>
+        <lastmod>2014-04-27T12:48:21+08:00</lastmod>
     </url>
     <url>
         <loc>http://www.shaojie.name/blog/archives/</loc>
-        <lastmod>2014-03-19T00:39:54+08:00</lastmod>
+        <lastmod>2014-04-27T12:32:27+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.shaojie.name/blog/categories/</loc>
+        <lastmod>2014-04-27T12:32:27+08:00</lastmod>
     </url>
     <url>
         <loc>http://www.shaojie.name/</loc>
-        <lastmod>2014-03-19T00:39:54+08:00</lastmod>
+        <lastmod>2014-04-27T12:32:27+08:00</lastmod>
     </url>
     <url>
         <loc>http://www.shaojie.name/robots.txt</loc>

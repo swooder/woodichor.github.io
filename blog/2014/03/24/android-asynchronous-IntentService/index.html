@@ -1,0 +1,380 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Android Asynchrous IntentService - Shaojie's Blog</title>
+	<meta name="author" content="Shao jie">
+
+	
+	<meta name="description" content="Android Asynchrous IntentService Service Service种类 类别 区别 优点 缺点 应用 本地服务（Local) 该服务依附在主进程上 服务依附在主进程上而不是独立的进程，这样在一定程度上节约了资源，另外Local服务因为是在同一进程因此不需要IPC， &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Shaojie's Blog" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://www.shaojie.name/blog/2014/03/24/android-asynchronous-IntentService/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		document.write("<img src='http://s.gravatar.com/avatar/f46bfa290cab1bcbb8753835f05b302b?s=160" + MD5("") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+	</script>
+</div>
+<h1><a href="/">Shaojie's Blog</a></h1>
+<p class="subtitle">专注移动开发Android&IOS&PHP&NODEJS</p>
+<nav id="main-nav"><ul class="main">
+    <li><a href="/">Blog</a></li>
+    <li><a href="http://about.me/shashankmehta">About</a></li>
+    <li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		<a class="weibo" href="http://www.weibo.com/shaojie520" title="Weibo">Weibo</a>
+		
+		
+		
+		
+		
+		
+		<a class="dribbble" href="http://www.dribbble.com/shaojie" title="Dribbble">Dribbble</a>
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">Android Asynchrous IntentService</h1>
+	<div class="entry-content" itemprop="articleBody"><h4>Service</h4>
+
+<h6>Service种类</h6>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>类别 </th>
+<th> 区别  </th>
+<th>  优点   </th>
+<th>缺点   </th>
+<th>应用   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> 本地服务（Local)  </td>
+<td> 该服务依附在主进程上  </td>
+<td> 服务依附在主进程上而不是独立的进程，这样在一定程度上节约了资源，另外Local服务因为是在同一进程因此不需要IPC，也不需要AIDL。相应bindService会方便很多。  </td>
+<td> 主进程被Kill后，服务便会终止</td>
+<td>非常常见的应用如：音乐播放服务，Push服务。  |   </td>
+</tr>
+<tr>
+<td></td>
+<td> 远程服务（Remote）  </td>
+<td> 该服务是独立的进程  </td>
+<td> 服务为独立的进程，对应进程名格式为所在包名加上你指定的android:process字符串。由于是独立的进程，因此在Activity所在进程被Kill的时候，该服务依然在运行，不受其他进程影响，有利于为多个进程提供服务具有较高的灵活性  </td>
+<td> 该服务是独立的进程，会占用一定资源，并且使用AIDL进行IPC稍微麻烦一点</td>
+<td> 一些提供系统服务的Service，这种Service是常驻的  |   </td>
+</tr>
+</tbody>
+</table>
+
+
+<h5>service运行分类</h5>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>类别 </th>
+<th> 区别 </th>
+<th>应用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>前台服务</td>
+<td>会在通知一栏显示 ONGOING 的 Notification</td>
+<td>当服务被终止的时候，通知一栏的 Notification 也会消失，这样对于用户有一定的通知作用。常见的如音乐播放服务|</td>
+</tr>
+<tr>
+<td></td>
+<td>后台服务</td>
+<td>默认的服务即为后台服务，即不会在通知一栏显示 ONGOING 的 Notification</td>
+<td>当服务被终止的时候，用户是看不到效果的。某些不需要运行或终止提示的服务，如天气更新，日期同步，邮件同步等|</td>
+</tr>
+</tbody>
+</table>
+
+
+<h5>Service 与 Thread的区别</h5>
+
+<ol>
+<li>Thread：Thread是程序执行的最小单元，它是分配CPU的基本单位。可以用 Thread 来执行一些异步的操作。</li>
+<li>Service：Service 是Android的一种机制，当它运行的时候如果是Local Service，那么对应的 Service 是运行在主进程的 main 线程上的。如：onCreate，onStart 这些函数在被系统调用的时候都是在主进程的 main 线程上运行的。如果是Remote Service，那么对应的 Service 则是运行在独立进程的 main 线程上。</li>
+</ol>
+
+
+<p>那么我们为什么要用 Service 呢？其实这跟 android 的系统机制有关，我们先拿 Thread 来说。Thread 的运行是独立于 Activity 的，也就是说当一个 Activity 被 finish 之后，如果你没有主动停止 Thread 或者 Thread 里的 run 方法没有执行完毕的话，Thread 也会一直执行。因此这里会出现一个问题：当 Activity 被 finish 之后，你不再持有该 Thread 的引用。另一方面，你没有办法在不同的 Activity 中对同一 Thread 进行控制。</p>
+
+<h5>Service生命周期</h5>
+
+<ol>
+<li>三个阶段：创建-开始-销毁</li>
+<li>Oncreate();Service 声明周期的开始，完成Service的初始化工作</li>
+<li>OnStartCommand(); 服务声明周期开始，没有对应的停止函数</li>
+<li>OnDestory(); 声明周期的结束，释放Service所占用的资源</li>
+</ol>
+
+
+<h5>Service启动方式</h5>
+
+<ol>
+<li>Conetext.startService()</li>
+<li>Conetext.bindService();</li>
+</ol>
+
+
+<h4>IntentService</h4>
+
+<p>IntentService继承与Service，它最大的特点是对服务请求逐个进行处理。当我们要提供的服务不需要同时处理多个请求的时候，可以选择继承IntentService。</p>
+
+<h5>使用IntentService有几个需要注意的地方：</h5>
+
+<ol>
+<li>它不能直接与用户交互，如果想把数据传递给用户界面，需要把值先传递给Activity</li>
+<li>一个intentService可以处理多个任务，只不过是一个接着一个的顺序来处理的,后面的任务需要在前一个完成后才能执行</li>
+<li>运行在IntetService中的操作是不能被打断的</li>
+</ol>
+
+
+<h6>IntentService的特点</h6>
+
+<ol>
+<li><p>它创建了一个独立的工作线程来处理所有的通过onStartCommand()传递给服务的intents。</p></li>
+<li><p>创建了一个工作队列，来逐个发送intent给onHandleIntent()。</p></li>
+<li><p> 不需要主动调用stopSelft()来结束服务。因为，在所有的intent被处理完后，系统会自动关闭服务。</p></li>
+<li><p> 默认实现的onBind()返回null</p></li>
+<li><p>默认实现的onStartCommand()的目的是将intent插入到工作队列中。</p></li>
+</ol>
+
+
+<h6>源码分析</h6>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>java Interservice www.shaojie.name
+</span><span class='line'>public abstract class IntentService extends Service { 
+</span><span class='line'>
+</span><span class='line'>        private volatile Looper mServiceLooper; 
+</span><span class='line'>        private volatile ServiceHandler mServiceHandler; 
+</span><span class='line'>
+</span><span class='line'>        private String mName; 
+</span><span class='line'>        private boolean mRedelivery; 
+</span><span class='line'>    
+</span><span class='line'>
+</span><span class='line'>        private final class ServiceHandler extends Handler { 
+</span><span class='line'>
+</span><span class='line'>                public ServiceHandler(Looper looper) { 
+</span><span class='line'>                        super(looper); 
+</span><span class='line'>                } 
+</span><span class='line'>    
+</span><span class='line'>                @Override 
+</span><span class='line'>                public void handleMessage(Message msg) { 
+</span><span class='line'>                        onHandleIntent((Intent)msg.obj); 
+</span><span class='line'>                        stopSelf(msg.arg1); 
+</span><span class='line'>                } 
+</span><span class='line'>
+</span><span class='line'>        }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>从源码可以分析出:
+IntentService 实际上是Looper,Handler,Service 的集合体,他不仅有服务的功能,还有处理和循环消息的功能</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@Override 
+</span><span class='line'>public void onCreate() { 
+</span><span class='line'>        super.onCreate(); 
+</span><span class='line'>
+</span><span class='line'>        HandlerThread thread = new HandlerThread("IntentService[" + mName + "]"); 
+</span><span class='line'>        thread.start(); 
+</span><span class='line'>
+</span><span class='line'>        mServiceLooper = thread.getLooper(); 
+</span><span class='line'>        mServiceHandler = new ServiceHandler(mServiceLooper); 
+</span><span class='line'>        }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>IntentService创建时就会创建Handler线程(HandlerThread)并且启动,然后再得到当前线程的Looper对象来初始化IntentService的mServiceLooper,接着创建mServicehandler对象.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@Override 
+</span><span class='line'>        public void onStart(Intent intent, int startId) { 
+</span><span class='line'>                Message msg = mServiceHandler.obtainMessage(); 
+</span><span class='line'>                msg.arg1 = startId; 
+</span><span class='line'>                msg.obj = intent; 
+</span><span class='line'>
+</span><span class='line'>                mServiceHandler.sendMessage(msg); 
+</span><span class='line'>        }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>当你启动IntentService的时候,就会产生一条附带startId和Intent的Message并发送到MessageQueue中,接下来Looper发现MessageQueue中有Message的时候,就会停止Handler处理消息.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> @Override 
+</span><span class='line'>        public void handleMessage(Message msg) { 
+</span><span class='line'>                        onHandleIntent((Intent)msg.obj); 
+</span><span class='line'>                        stopSelf(msg.arg1); 
+</span><span class='line'>        }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>接着调用 onHandleIntent((Intent)msg.obj),这是一个抽象的方法,其实就是我们要重写实现的方法,我们可以在这个方法里面处理我们的工作.当任务完成时就会调用stopSelf(msg.arg1)这个方法来结束指定的工作</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@Override 
+</span><span class='line'>        public void onDestroy() { 
+</span><span class='line'>                mServiceLooper.quit(); 
+</span><span class='line'>        }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>当所有的工作执行完后:就会执行onDestroy方法,服务结束后调用这个方法 mServiceLooper.quit()使looper停下来.</p>
+</div>
+
+</article>
+
+	<div class="share">
+    <!-- 
+    <div class="addthis_toolbox addthis_default_style addthis_16x16_style">
+	
+	
+	
+	<a class="addthis_button_twitter"></a>
+	
+	
+	
+	<a class="addthis_button_compact"></a>
+	<a class="addthis_counter addthis_bubble_style"></a>
+
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid="></script>
+ -->
+
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js"></script>
+
+</div>
+
+
+
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2014
+
+    Shao jie
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

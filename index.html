@@ -1,81 +1,87 @@
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>Shaojie's Blog</title>
-  <meta name="author" content="Shao jie">
+	<meta charset="utf-8">
+	<title>Shaojie's Blog</title>
+	<meta name="author" content="Shao jie">
 
-  
-  <meta name="description" content="AsyncTask介绍 AsyncTask是Android为我们提供的方便编写异步任务的工具类，可以代替Thread和Handler。但是AsyncTask主要还是用来处理耗时不太长的操作，如果你需要保持一个线程在后台运行很长时间，建议使用java.util. &hellip;">
-  
+	
+	<meta name="description" content="Mar 24th, 2014 5 Mar 24th, 2014 Other 十四个很准的心里暗示 1、当你对某件事情抱着百分之一万的相信，它最后就会变成事实。 2、期望定律 期望定律告诉我们，当我们怀着对某件事情非常强烈期望的时候，我们所期望的事物就会出现。 3、情绪定律 情绪定律告诉我们， &hellip;">
+	
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  
-  <link rel="canonical" href="http://www.shaojie.name">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Shaojie's Blog" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-
+	<link href="/atom.xml" rel="alternate" title="Shaojie's Blog" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://www.shaojie.name/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Shaojie's Blog</a></h1>
-  
-    <h2>专注移动开发Android&IOS&PHP&NODEJS</h2>
-  
-</hgroup>
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		document.write("<img src='http://s.gravatar.com/avatar/f46bfa290cab1bcbb8753835f05b302b?s=160" + MD5("") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+	</script>
+</div>
+<h1><a href="/">Shaojie's Blog</a></h1>
+<p class="subtitle">专注移动开发Android&IOS&PHP&NODEJS</p>
+<nav id="main-nav"><ul class="main">
+    <li><a href="/">Blog</a></li>
+    <li><a href="http://about.me/shashankmehta">About</a></li>
+    <li><a href="/blog/archives">Archives</a></li>
 </ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:www.shaojie.name" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
-
 </nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/18/android-asynchronous-asynctask/">Android Asynchronous AsyncTask</a></h1>
-    
-    
-      <p class="meta">
-        
+<nav id="sub-nav">
+	<div class="social">
+		
+		<a class="weibo" href="http://www.weibo.com/shaojie520" title="Weibo">Weibo</a>
+		
+		
+		
+		
+		
+		
+		<a class="dribbble" href="http://www.dribbble.com/shaojie" title="Dribbble">Dribbble</a>
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner">
+<div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
 
 
 
@@ -87,14 +93,927 @@
   
 
 
-<time datetime="2014-03-18T00:03:02+08:00" pubdate data-updated="true">Mar 18<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
+<time datetime="2014-03-24T23:06:01+08:00" data-updated="true" itemprop="datePublished">Mar 24<span>th</span>, 2014</time></div>
+		<div class="tags">
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/03/24/5/" itemprop="url">5</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		
+
+		
+		
+	</div>
+
+</article>
 
 
-  <div class="entry-content"><h4>AsyncTask介绍</h4>
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-24T23:05:55+08:00" data-updated="true" itemprop="datePublished">Mar 24<span>th</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/other/'>Other</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/03/24/4/" itemprop="url">十四个很准的心里暗示</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>1、当你对某件事情抱着百分之一万的相信，它最后就会变成事实。</p>
+
+<p>2、期望定律 期望定律告诉我们，当我们怀着对某件事情非常强烈期望的时候，我们所期望的事物就会出现。</p>
+
+<p>3、情绪定律 情绪定律告诉我们，人百分之百是情绪化的。即使有人说某人很理性，其实当这个人很有&#8221;理性&#8221;地思考问题的时候，也是受到他当时情绪状态的影响，&#8221;理性地思考&#8221;本身也是一种情绪状态。所以人百分之百是情绪化的动物，而且任何时候的决定都是情绪化的决定。</p>
+
+<p>4、因果定律 任何事情的发生，都有其必然的原因。有因才有果。换句话说，当你看到任何现象的时候，你不用觉得不可理解或者奇怪，因为任何事情的发生都必有其原因。你今天的现状结果是你过去种下的因导致的结果。</p>
+
+<p>5、吸引定律 当你的思想专注在某一领域的时候，跟这个领域相关的人、事、物就会被你吸引而来。</p>
+
+<p> 6、重复定律 任何的行为和思维，只要你不断的重复就会得到不断的加强。在你的潜意识当中，只要你能够不断地重复一些人、事、物，它们都会在潜意识里变成事实。</p>
+
+<p> 7、累积定律 很多年轻人都曾梦想做一番大事业，其实天下并没有什么大事可做，有的只是小事。一件一件小事累积起来就形成了大事。任何大成就或者大灾难都是累积的结果。</p>
+
+<p>8、辐射定律 当你做一件事情的时候，影响的并不只是这件事情的本身，它还会辐射到相关的其他领域。任何事情都有辐射作用。</p>
+
+<p>9、相关定律 相关定律告诉我们：这个世界上的每一件事情之间都有一定的联系，没有一件事情是完全独立的。要解决某个难题最好从其他相关的某个地方人手，而不只是专注在一个困难点上。</p>
+
+<p> 10、专精定律 专精定律告诉我们，只有专精在一个领域，这个领域才能有所发展。所以无论你做任何的行业都要把做该行业的最顶尖为目标，只有当你能够专精的时候，你所做的领域才会出类拔萃地成长。</p>
+
+<p> 11、替换定律 替换定律就是说，当我们有一项不想要的记忆或者是负面的习惯，我们是无法完全去除掉，只能用一种新的记忆或新的习惯去替换他。</p>
+
+<p> 12、惯性定律 任何事情只要你能够持续不断去加强它，它终究会变成一种习惯。</p>
+
+<p>13、显现定律 显现定律就是说，当我们持续寻找、追问答案的时候，它们最终都必将显现。</p>
+
+<p> 14、需求定律 任何人做任何事情都是带有一种需求。尊重并满足对方的需求，别人才会尊重我们的需求</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-24T23:05:52+08:00" data-updated="true" itemprop="datePublished">Mar 24<span>th</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/android/'>Android</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/03/24/adb-commands-for-android/" itemprop="url">Handy Adb Commands for Android</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h4>查看连接的设备</h4>
+
+<p>使用这个命令查看当前连接的所有设备和它们的ID</p>
+
+<p><code>adb devices</code></p>
+
+<p>如果你有多个设备连接，使用<code>adb -s DEVICE_ID</code>选中你需要操作的设备</p>
+
+<h4>安装应用</h4>
+
+<p>使用<code>install</code>命令安装apk，如果你已经安装过当前程序，并且想保存当前的数据，可以加上&#8220;-r&#8220;`参数来覆盖安装当前程序</p>
+
+<p><code>
+adb
+</code>
+记录下在使用android adb操作时常用的命令，可以方便我们在开发过程中构建和测试程序。</p>
+
+<h4>卸载程序</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb uninstall PACKAGE_NAME
+</span><span class='line'>//example
+</span><span class='line'>adb uninstall com.shaojie.name.example</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>启动一个Activity</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb shell am start PACKAGE_NAME/ACTIVITY_IN_PACKAGE
+</span><span class='line'>adb shell am start PACKAGE_NAME/FULLY_QUALIFIED_ACTIVITY
+</span><span class='line'>//example
+</span><span class='line'>adb shell am start -n com.shaojie.name.example/.MainActiivty
+</span><span class='line'>adb shell am start -n com.shaojie.name.example/com.shaojie.name.MainActivity</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>进入设备的shell</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb shell</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>截屏</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' &gt; screen.png</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>点击电源键</h4>
+
+<p>这个命令发送一个关闭屏幕的事件到设备</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb shell input keyevent 26</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>屏幕解锁</h4>
+
+<p>与上面的命令作用相反，用于点亮屏幕解锁</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb shell input keyevent 82</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>显示安装的程序包</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb shell pm list packages -f</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Logging</h4>
+
+<p>显示系统的日志到命令行</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb logcat</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>TagName过滤</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb logcat -s TAG_NAME
+</span><span class='line'>adb logcat -s TAG_NAME_1 TAG_NAME_2
+</span><span class='line'>//
+</span><span class='line'>adb logcat -s TEST
+</span><span class='line'>adb logcat -s TEST MYAPP</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>优先级过滤</h4>
+
+<p>显示某个级别以及以上优先级的日志</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb logcat "*:PRIORITY"
+</span><span class='line'>//example
+</span><span class='line'>adb logcat "*:W"</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>V-Verbose</li>
+<li>D_Debug</li>
+<li>I-Info</li>
+<li>W-Warning</li>
+<li>E-Error</li>
+<li>F-Fatal</li>
+<li>S-Silent(最高级别)</li>
+</ul>
+
+
+<h4>优先级和tagname过滤</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb logcat -s TAG_NAME:PRIORITY
+</span><span class='line'>adb logcat -s TAG_NAME_1:PRIORITY TAG_NAME_2:PROPRITY
+</span><span class='line'>//example
+</span><span class='line'>adb logcat -s TEST: W</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>grep过滤</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb logcat | grep "SEARCH_TERM"
+</span><span class='line'>adb logcat | grep "SEARCH_TERM_1\|SEARCH_TERM_2"
+</span><span class='line'>//example
+</span><span class='line'>adb logcat | grep "Exception"
+</span><span class='line'>adb logcat | grep "Exveption\|Error"</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>清除logcat日志</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adb logcat -c</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>更多</h4>
+
+<p>更加细节，当然是官方文档，<a href="http://developer.android.com/tools/help/adb.html">传送门</a></p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-24T23:05:43+08:00" data-updated="true" itemprop="datePublished">Mar 24<span>th</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/android/'>Android</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/03/24/android-asynchronous-Loader/" itemprop="url">Android Asynchronous Loader</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h4>Loader概述</h4>
+
+<p>装载器从android3.0开始引进。它使得在activity或fragment中异步加载数据变得简单。装载器具有如下特性:</p>
+
+<ul>
+<li>它们对每个Activity和Fragment都有效</li>
+<li>他们提供了异步加载数据的能力</li>
+<li>它们监听数据，并在数数据发生变化时传递新的结果</li>
+<li>当由于配置改变而被重新创建后，它们自动重连到上一个加载器的游标，所以不必重新查询数据</li>
+</ul>
+
+
+<h5>API概述</h5>
+
+<h6>LoaderManager</h6>
+
+<p>一个抽像类，关联到一个Activity或Fragment，管理一个或多个装载器的实例。这帮助一个应用管理那些与Activity或Fragment的生命周期相关的长时间运行的的操作。最常见的方式是与一个CursorLoader一起使用，然而应用是可以随便写它们自己的装载器以加载其它类型的数据。
+每个activity或fragment只有一个LoaderManager。但是一个LoaderManager可以拥有多个装载器。</p>
+
+<h6>LoadManager.LoaderCallbacks</h6>
+
+<p>一个用于客户端与LoaderManager交互的回调接口。例如，你使用回调方法onCreateLoader()来创建一个新的装载器。</p>
+
+<h6>Loader</h6>
+
+<p>一个执行异步数据加载的抽象类。它是加载器的基类。你可以使用典型的CursorLoader，但是你也可以实现你自己的子类。一旦装载器被激活，它们将监视它们的数据源并且在数据改变时发送新的结果。</p>
+
+<h6>AsyncTaskLoader</h6>
+
+<p>提供一个AsyncTask来执行异步加载工作的抽象类。</p>
+
+<h6>CursorLoader</h6>
+
+<p>AsyncTaskLoader的子类，它查询ContentResolver然后返回一个Cursor。这个类为查询cursor以标准的方式实现了装载器的协议，它的游标查询是通过AsyncTaskLoader在后台线程中执行，从而不会阻塞界面。使用这个装载器是从一个ContentProvider异步加载数据的最好方式。相比之下，通过fragment或activity的API来执行一个被管理的查询就不行了</p>
+
+<h5>使用</h5>
+
+<p>一个使用装载器的应用会包含如下组件：</p>
+
+<ul>
+<li>一个Activity或Fragment</li>
+<li>一个LoaderManager的实例</li>
+<li>一个加载被ContentProvider所支持的数据的CursorLoader．或者，你可以从Loader或AsyncTaskLoader实现你自己的装载器来从其它源加载数据</li>
+<li>一个LoaderManager.LoaderCallbacks的实现．这是你创建新的装载器以及管理你的已有装载器的引用的地方</li>
+<li>一个显示装载器的数据的途径，例如使用一个SimpleCursorAdapter</li>
+<li>一个数据源，比如当是用CursorLoader时，它将是一个ContentProvider</li>
+</ul>
+
+
+<h5>启动一个装载器</h5>
+
+<p>LoaderManager管理一个Activiry或Fragment中的一个或多个装载器．但每个activity或fragment只拥有一个LoaderManager．</p>
+
+<p>你通常要在activity的onCreate()方法中或fragment的onActivityCreated()方法中初始化一个装载器．你可以如下创建：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>getLoaderManager().initLoader(0,null, this);  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>initLoader()方法有一下参数</p>
+
+<ul>
+<li>一个唯一ID来标志装载器．在这个例子中，ID是0</li>
+<li>可选的参数，用于装载器初始化时(本例中是null)</li>
+<li>一个LoaderManager.LoaderCallbacks的实现．被LoaderManager调用以报告装载器的事件，在这个例子中，类本实现了这个接口，所以传的是它自己：this</li>
+</ul>
+
+
+<p>initLoader()保证一个装载器被初始化并激活．它具有两种可能的结果：</p>
+
+<ul>
+<li>如果ID所指的装载器已经存在，那么这个装载器将被重用</li>
+<li>如果装载器不存在，initLoader()就触发LoaderManager.LoaderCallbacks的方法onCreateLoader()．这是你实例化并返回一个新装载器的地方</li>
+</ul>
+
+
+<p>在这两种情况中，传入的LoaderManager.LoaderCallbacks的实现都与装载器绑定在一起．并且会在装载器状态变化时被调用．如果在调用这个方法时，调用者正处于启动状态，并且所请求的装载器已存在并产生了数据，那么系统会马上调用onLoadFinished()(也就是说在initLoader()还在执行时)．所以你必须为这种情况的发生做好准备.</p>
+
+<h5>重启装载器</h5>
+
+<p>当你使用initLoader()时，如果指定ID的装载器已经存在，则它使用这个装载器．如果不存在呢，它将创建一个新的．但是有时你却是想丢弃旧的然后开始新的数据．</p>
+
+<p>要想丢弃旧数据，你应使用restartLoader()。</p>
+
+<h5>回调</h5>
+
+<p>LoaderManager.LoaderCallbacks是一个回调接口，它使得客户端可以与LoaderManager进行交互．</p>
+
+<p>装载器，一般指的是CursorLoader，我们希望在它停止后依然保持数据．这使得应用可以在activity或fragment的 onStop() 和onStart() 之间保持数据，所以当用户回到一个应用时，它们不需等待数据加载．你使用LoaderManager.LoaderCallbacks 的方法们，在需要时创建新的装载器，并且告诉应用什么时候要停止使用装载器的数据．</p>
+
+<p>LoaderManager.LoaderCallbacks 包含以下方法们:</p>
+
+<ul>
+<li>onCreateLoader() —跟据传入的ID，初始化并返回一个新的装载器．</li>
+<li>onLoadFinished() —当一个装载器完成了它的装载过程后被调用</li>
+<li>onLoaderReset() —当一个装载器被重置而什其数据无效时被调用</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>Loader www.shaojie.name</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">CursorLoaderListFragment</span> <span class="kd">extends</span> <span class="n">ListFragment</span>
+</span><span class='line'>        <span class="kd">implements</span> <span class="n">OnQueryTextListener</span><span class="o">,</span> <span class="n">LoaderManager</span><span class="o">.</span><span class="na">LoaderCallbacks</span><span class="o">&lt;</span><span class="n">Cursor</span><span class="o">&gt;</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// This is the Adapter being used to display the list&#39;s data.</span>
+</span><span class='line'>    <span class="n">SimpleCursorAdapter</span> <span class="n">mAdapter</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// If non-null, this is the current filter the user has provided.</span>
+</span><span class='line'>    <span class="n">String</span> <span class="n">mCurFilter</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="n">onActivityCreated</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="kd">super</span><span class="o">.</span><span class="na">onActivityCreated</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Give some text to display if there is no data.  In a real</span>
+</span><span class='line'>        <span class="c1">// application this would come from a resource.</span>
+</span><span class='line'>        <span class="n">setEmptyText</span><span class="o">(</span><span class="s">&quot;No phone numbers&quot;</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// We have a menu item to show in action bar.</span>
+</span><span class='line'>        <span class="n">setHasOptionsMenu</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Create an empty adapter we will use to display the loaded data.</span>
+</span><span class='line'>        <span class="n">mAdapter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SimpleCursorAdapter</span><span class="o">(</span><span class="n">getActivity</span><span class="o">(),</span>
+</span><span class='line'>                <span class="n">android</span><span class="o">.</span><span class="na">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">simple_list_item_2</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span>
+</span><span class='line'>                <span class="k">new</span> <span class="n">String</span><span class="o">[]</span> <span class="o">{</span> <span class="n">Contacts</span><span class="o">.</span><span class="na">DISPLAY_NAME</span><span class="o">,</span> <span class="n">Contacts</span><span class="o">.</span><span class="na">CONTACT_STATUS</span> <span class="o">},</span>
+</span><span class='line'>                <span class="k">new</span> <span class="kt">int</span><span class="o">[]</span> <span class="o">{</span> <span class="n">android</span><span class="o">.</span><span class="na">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">text1</span><span class="o">,</span> <span class="n">android</span><span class="o">.</span><span class="na">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">text2</span> <span class="o">},</span> <span class="mi">0</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">setListAdapter</span><span class="o">(</span><span class="n">mAdapter</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Prepare the loader.  Either re-connect with an existing one,</span>
+</span><span class='line'>        <span class="c1">// or start a new one.</span>
+</span><span class='line'>        <span class="n">getLoaderManager</span><span class="o">().</span><span class="na">initLoader</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="k">this</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="n">onCreateOptionsMenu</span><span class="o">(</span><span class="n">Menu</span> <span class="n">menu</span><span class="o">,</span> <span class="n">MenuInflater</span> <span class="n">inflater</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="c1">// Place an action bar item for searching.</span>
+</span><span class='line'>        <span class="n">MenuItem</span> <span class="n">item</span> <span class="o">=</span> <span class="n">menu</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&quot;Search&quot;</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">item</span><span class="o">.</span><span class="na">setIcon</span><span class="o">(</span><span class="n">android</span><span class="o">.</span><span class="na">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">ic_menu_search</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">item</span><span class="o">.</span><span class="na">setShowAsAction</span><span class="o">(</span><span class="n">MenuItem</span><span class="o">.</span><span class="na">SHOW_AS_ACTION_IF_ROOM</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">SearchView</span> <span class="n">sv</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SearchView</span><span class="o">(</span><span class="n">getActivity</span><span class="o">());</span>
+</span><span class='line'>        <span class="n">sv</span><span class="o">.</span><span class="na">setOnQueryTextListener</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">item</span><span class="o">.</span><span class="na">setActionView</span><span class="o">(</span><span class="n">sv</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">onQueryTextChange</span><span class="o">(</span><span class="n">String</span> <span class="n">newText</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="c1">// Called when the action bar search text has changed.  Update</span>
+</span><span class='line'>        <span class="c1">// the search filter, and restart the loader to do a new query</span>
+</span><span class='line'>        <span class="c1">// with this filter.</span>
+</span><span class='line'>        <span class="n">mCurFilter</span> <span class="o">=</span> <span class="o">!</span><span class="n">TextUtils</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="n">newText</span><span class="o">)</span> <span class="o">?</span> <span class="n">newText</span> <span class="o">:</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>        <span class="n">getLoaderManager</span><span class="o">().</span><span class="na">restartLoader</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="k">this</span><span class="o">);</span>
+</span><span class='line'>        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="n">onQueryTextSubmit</span><span class="o">(</span><span class="n">String</span> <span class="n">query</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="c1">// Don&#39;t care about this.</span>
+</span><span class='line'>        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="n">onListItemClick</span><span class="o">(</span><span class="n">ListView</span> <span class="n">l</span><span class="o">,</span> <span class="n">View</span> <span class="n">v</span><span class="o">,</span> <span class="kt">int</span> <span class="n">position</span><span class="o">,</span> <span class="kt">long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="c1">// Insert desired behavior here.</span>
+</span><span class='line'>        <span class="n">Log</span><span class="o">.</span><span class="na">i</span><span class="o">(</span><span class="s">&quot;FragmentComplexList&quot;</span><span class="o">,</span> <span class="s">&quot;Item clicked: &quot;</span> <span class="o">+</span> <span class="n">id</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// These are the Contacts rows that we will retrieve.</span>
+</span><span class='line'>    <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span><span class="o">[]</span> <span class="n">CONTACTS_SUMMARY_PROJECTION</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[]</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">Contacts</span><span class="o">.</span><span class="na">_ID</span><span class="o">,</span>
+</span><span class='line'>        <span class="n">Contacts</span><span class="o">.</span><span class="na">DISPLAY_NAME</span><span class="o">,</span>
+</span><span class='line'>        <span class="n">Contacts</span><span class="o">.</span><span class="na">CONTACT_STATUS</span><span class="o">,</span>
+</span><span class='line'>        <span class="n">Contacts</span><span class="o">.</span><span class="na">CONTACT_PRESENCE</span><span class="o">,</span>
+</span><span class='line'>        <span class="n">Contacts</span><span class="o">.</span><span class="na">PHOTO_ID</span><span class="o">,</span>
+</span><span class='line'>        <span class="n">Contacts</span><span class="o">.</span><span class="na">LOOKUP_KEY</span><span class="o">,</span>
+</span><span class='line'>    <span class="o">};</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="n">Loader</span><span class="o">&lt;</span><span class="n">Cursor</span><span class="o">&gt;</span> <span class="nf">onCreateLoader</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">,</span> <span class="n">Bundle</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="c1">// This is called when a new Loader needs to be created.  This</span>
+</span><span class='line'>        <span class="c1">// sample only has one Loader, so we don&#39;t care about the ID.</span>
+</span><span class='line'>        <span class="c1">// First, pick the base URI to use depending on whether we are</span>
+</span><span class='line'>        <span class="c1">// currently filtering.</span>
+</span><span class='line'>        <span class="n">Uri</span> <span class="n">baseUri</span><span class="o">;</span>
+</span><span class='line'>        <span class="k">if</span> <span class="o">(</span><span class="n">mCurFilter</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">baseUri</span> <span class="o">=</span> <span class="n">Uri</span><span class="o">.</span><span class="na">withAppendedPath</span><span class="o">(</span><span class="n">Contacts</span><span class="o">.</span><span class="na">CONTENT_FILTER_URI</span><span class="o">,</span>
+</span><span class='line'>                    <span class="n">Uri</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">mCurFilter</span><span class="o">));</span>
+</span><span class='line'>        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">baseUri</span> <span class="o">=</span> <span class="n">Contacts</span><span class="o">.</span><span class="na">CONTENT_URI</span><span class="o">;</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Now create and return a CursorLoader that will take care of</span>
+</span><span class='line'>        <span class="c1">// creating a Cursor for the data being displayed.</span>
+</span><span class='line'>        <span class="n">String</span> <span class="n">select</span> <span class="o">=</span> <span class="s">&quot;((&quot;</span> <span class="o">+</span> <span class="n">Contacts</span><span class="o">.</span><span class="na">DISPLAY_NAME</span> <span class="o">+</span> <span class="s">&quot; NOTNULL) AND (&quot;</span>
+</span><span class='line'>                <span class="o">+</span> <span class="n">Contacts</span><span class="o">.</span><span class="na">HAS_PHONE_NUMBER</span> <span class="o">+</span> <span class="s">&quot;=1) AND (&quot;</span>
+</span><span class='line'>                <span class="o">+</span> <span class="n">Contacts</span><span class="o">.</span><span class="na">DISPLAY_NAME</span> <span class="o">+</span> <span class="s">&quot; != &#39;&#39; ))&quot;</span><span class="o">;</span>
+</span><span class='line'>        <span class="k">return</span> <span class="k">new</span> <span class="nf">CursorLoader</span><span class="o">(</span><span class="n">getActivity</span><span class="o">(),</span> <span class="n">baseUri</span><span class="o">,</span>
+</span><span class='line'>                <span class="n">CONTACTS_SUMMARY_PROJECTION</span><span class="o">,</span> <span class="n">select</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span>
+</span><span class='line'>                <span class="n">Contacts</span><span class="o">.</span><span class="na">DISPLAY_NAME</span> <span class="o">+</span> <span class="s">&quot; COLLATE LOCALIZED ASC&quot;</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onLoadFinished</span><span class="o">(</span><span class="n">Loader</span><span class="o">&lt;</span><span class="n">Cursor</span><span class="o">&gt;</span> <span class="n">loader</span><span class="o">,</span> <span class="n">Cursor</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="c1">// Swap the new cursor in.  (The framework will take care of closing the</span>
+</span><span class='line'>        <span class="c1">// old cursor once we return.)</span>
+</span><span class='line'>        <span class="n">mAdapter</span><span class="o">.</span><span class="na">swapCursor</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onLoaderReset</span><span class="o">(</span><span class="n">Loader</span><span class="o">&lt;</span><span class="n">Cursor</span><span class="o">&gt;</span> <span class="n">loader</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="c1">// This is called when the last Cursor provided to onLoadFinished()</span>
+</span><span class='line'>        <span class="c1">// above is about to be closed.  We need to make sure we are no</span>
+</span><span class='line'>        <span class="c1">// longer using it.</span>
+</span><span class='line'>        <span class="n">mAdapter</span><span class="o">.</span><span class="na">swapCursor</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Loader的使用分一下几个步骤：</p>
+
+<ul>
+<li>实现自己的异步Loader ,如本篇的AsyncTaskLoader或者CursorLoader或者自己继承Loader，第二步需要用到这个Loader</li>
+<li>创建数据源 XXXAdapter.</li>
+<li>在Activity 或者Fragments 上实现OnQueryTextListener,LoaderManager.LoaderCallbacks接口</li>
+<li>在onCreateLoader里面返回Loader，在onLoadfinished里面做清除动作，在onQueryTextChange或者onQueryTextSubmit改变数据源，在onCreate里面让Loader去执行请求数据getLoaderManager().initLoader(0, null, this)</li>
+</ul>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-24T23:05:38+08:00" data-updated="true" itemprop="datePublished">Mar 24<span>th</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/android/'>Android</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/03/24/android-asynchronous-IntentService/" itemprop="url">Android Asynchrous IntentService</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h4>Service</h4>
+
+<h6>Service种类</h6>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>类别 </th>
+<th> 区别  </th>
+<th>  优点   </th>
+<th>缺点   </th>
+<th>应用   </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> 本地服务（Local)  </td>
+<td> 该服务依附在主进程上  </td>
+<td> 服务依附在主进程上而不是独立的进程，这样在一定程度上节约了资源，另外Local服务因为是在同一进程因此不需要IPC，也不需要AIDL。相应bindService会方便很多。  </td>
+<td> 主进程被Kill后，服务便会终止</td>
+<td>非常常见的应用如：音乐播放服务，Push服务。  |   </td>
+</tr>
+<tr>
+<td></td>
+<td> 远程服务（Remote）  </td>
+<td> 该服务是独立的进程  </td>
+<td> 服务为独立的进程，对应进程名格式为所在包名加上你指定的android:process字符串。由于是独立的进程，因此在Activity所在进程被Kill的时候，该服务依然在运行，不受其他进程影响，有利于为多个进程提供服务具有较高的灵活性  </td>
+<td> 该服务是独立的进程，会占用一定资源，并且使用AIDL进行IPC稍微麻烦一点</td>
+<td> 一些提供系统服务的Service，这种Service是常驻的  |   </td>
+</tr>
+</tbody>
+</table>
+
+
+<h5>service运行分类</h5>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>类别 </th>
+<th> 区别 </th>
+<th>应用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>前台服务</td>
+<td>会在通知一栏显示 ONGOING 的 Notification</td>
+<td>当服务被终止的时候，通知一栏的 Notification 也会消失，这样对于用户有一定的通知作用。常见的如音乐播放服务|</td>
+</tr>
+<tr>
+<td></td>
+<td>后台服务</td>
+<td>默认的服务即为后台服务，即不会在通知一栏显示 ONGOING 的 Notification</td>
+<td>当服务被终止的时候，用户是看不到效果的。某些不需要运行或终止提示的服务，如天气更新，日期同步，邮件同步等|</td>
+</tr>
+</tbody>
+</table>
+
+
+<h5>Service 与 Thread的区别</h5>
+
+<ol>
+<li>Thread：Thread是程序执行的最小单元，它是分配CPU的基本单位。可以用 Thread 来执行一些异步的操作。</li>
+<li>Service：Service 是Android的一种机制，当它运行的时候如果是Local Service，那么对应的 Service 是运行在主进程的 main 线程上的。如：onCreate，onStart 这些函数在被系统调用的时候都是在主进程的 main 线程上运行的。如果是Remote Service，那么对应的 Service 则是运行在独立进程的 main 线程上。</li>
+</ol>
+
+
+<p>那么我们为什么要用 Service 呢？其实这跟 android 的系统机制有关，我们先拿 Thread 来说。Thread 的运行是独立于 Activity 的，也就是说当一个 Activity 被 finish 之后，如果你没有主动停止 Thread 或者 Thread 里的 run 方法没有执行完毕的话，Thread 也会一直执行。因此这里会出现一个问题：当 Activity 被 finish 之后，你不再持有该 Thread 的引用。另一方面，你没有办法在不同的 Activity 中对同一 Thread 进行控制。</p>
+
+<h5>Service生命周期</h5>
+
+<ol>
+<li>三个阶段：创建-开始-销毁</li>
+<li>Oncreate();Service 声明周期的开始，完成Service的初始化工作</li>
+<li>OnStartCommand(); 服务声明周期开始，没有对应的停止函数</li>
+<li>OnDestory(); 声明周期的结束，释放Service所占用的资源</li>
+</ol>
+
+
+<h5>Service启动方式</h5>
+
+<ol>
+<li>Conetext.startService()</li>
+<li>Conetext.bindService();</li>
+</ol>
+
+
+<h4>IntentService</h4>
+
+<p>IntentService继承与Service，它最大的特点是对服务请求逐个进行处理。当我们要提供的服务不需要同时处理多个请求的时候，可以选择继承IntentService。</p>
+
+<h5>使用IntentService有几个需要注意的地方：</h5>
+
+<ol>
+<li>它不能直接与用户交互，如果想把数据传递给用户界面，需要把值先传递给Activity</li>
+<li>一个intentService可以处理多个任务，只不过是一个接着一个的顺序来处理的,后面的任务需要在前一个完成后才能执行</li>
+<li>运行在IntetService中的操作是不能被打断的</li>
+</ol>
+
+
+<h6>IntentService的特点</h6>
+
+<ol>
+<li><p>它创建了一个独立的工作线程来处理所有的通过onStartCommand()传递给服务的intents。</p></li>
+<li><p>创建了一个工作队列，来逐个发送intent给onHandleIntent()。</p></li>
+<li><p> 不需要主动调用stopSelft()来结束服务。因为，在所有的intent被处理完后，系统会自动关闭服务。</p></li>
+<li><p> 默认实现的onBind()返回null</p></li>
+<li><p>默认实现的onStartCommand()的目的是将intent插入到工作队列中。</p></li>
+</ol>
+
+
+<h6>源码分析</h6>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>java Interservice www.shaojie.name
+</span><span class='line'>public abstract class IntentService extends Service { 
+</span><span class='line'>
+</span><span class='line'>        private volatile Looper mServiceLooper; 
+</span><span class='line'>        private volatile ServiceHandler mServiceHandler; 
+</span><span class='line'>
+</span><span class='line'>        private String mName; 
+</span><span class='line'>        private boolean mRedelivery; 
+</span><span class='line'>    
+</span><span class='line'>
+</span><span class='line'>        private final class ServiceHandler extends Handler { 
+</span><span class='line'>
+</span><span class='line'>                public ServiceHandler(Looper looper) { 
+</span><span class='line'>                        super(looper); 
+</span><span class='line'>                } 
+</span><span class='line'>    
+</span><span class='line'>                @Override 
+</span><span class='line'>                public void handleMessage(Message msg) { 
+</span><span class='line'>                        onHandleIntent((Intent)msg.obj); 
+</span><span class='line'>                        stopSelf(msg.arg1); 
+</span><span class='line'>                } 
+</span><span class='line'>
+</span><span class='line'>        }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>从源码可以分析出:
+IntentService 实际上是Looper,Handler,Service 的集合体,他不仅有服务的功能,还有处理和循环消息的功能</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@Override 
+</span><span class='line'>public void onCreate() { 
+</span><span class='line'>        super.onCreate(); 
+</span><span class='line'>
+</span><span class='line'>        HandlerThread thread = new HandlerThread("IntentService[" + mName + "]"); 
+</span><span class='line'>        thread.start(); 
+</span><span class='line'>
+</span><span class='line'>        mServiceLooper = thread.getLooper(); 
+</span><span class='line'>        mServiceHandler = new ServiceHandler(mServiceLooper); 
+</span><span class='line'>        }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>IntentService创建时就会创建Handler线程(HandlerThread)并且启动,然后再得到当前线程的Looper对象来初始化IntentService的mServiceLooper,接着创建mServicehandler对象.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@Override 
+</span><span class='line'>        public void onStart(Intent intent, int startId) { 
+</span><span class='line'>                Message msg = mServiceHandler.obtainMessage(); 
+</span><span class='line'>                msg.arg1 = startId; 
+</span><span class='line'>                msg.obj = intent; 
+</span><span class='line'>
+</span><span class='line'>                mServiceHandler.sendMessage(msg); 
+</span><span class='line'>        }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>当你启动IntentService的时候,就会产生一条附带startId和Intent的Message并发送到MessageQueue中,接下来Looper发现MessageQueue中有Message的时候,就会停止Handler处理消息.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> @Override 
+</span><span class='line'>        public void handleMessage(Message msg) { 
+</span><span class='line'>                        onHandleIntent((Intent)msg.obj); 
+</span><span class='line'>                        stopSelf(msg.arg1); 
+</span><span class='line'>        }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>接着调用 onHandleIntent((Intent)msg.obj),这是一个抽象的方法,其实就是我们要重写实现的方法,我们可以在这个方法里面处理我们的工作.当任务完成时就会调用stopSelf(msg.arg1)这个方法来结束指定的工作</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@Override 
+</span><span class='line'>        public void onDestroy() { 
+</span><span class='line'>                mServiceLooper.quit(); 
+</span><span class='line'>        }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>当所有的工作执行完后:就会执行onDestroy方法,服务结束后调用这个方法 mServiceLooper.quit()使looper停下来.</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-18T00:03:02+08:00" data-updated="true" itemprop="datePublished">Mar 18<span>th</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/android/'>Android</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/03/18/android-asynchronous-asynctask/" itemprop="url">Android Asynchronous AsyncTask</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h4>AsyncTask介绍</h4>
 
 <p>AsyncTask是Android为我们提供的方便编写异步任务的工具类，可以代替Thread和Handler。但是AsyncTask主要还是用来处理耗时不太长的操作，如果你需要保持一个线程在后台运行很长时间，建议使用java.util.concurrent包下的Executor, ThreadpoolExecutor和FutureTask。
 由于AsyncTask是一个抽象类，所以如果我们想使用它，就必须要创建一个子类去继承它。在继承时我们可以为AsyncTask类指定三个泛型参数，这三个参数的用途如下</p>
@@ -182,42 +1101,41 @@
 
 
 
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-17T23:06:29+08:00" data-updated="true" itemprop="datePublished">Mar 17<span>th</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/android/'>Android</a>
+
+
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/17/android-asynchronous-handlerthread/">Android Asynchronous HandlerThread</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-17T23:06:29+08:00" pubdate data-updated="true">Mar 17<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h4>Looper</h4>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/03/17/android-asynchronous-handlerthread/" itemprop="url">Android Asynchronous HandlerThread</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h4>Looper</h4>
 
 <p>Looper是用于给一个线程添加一个消息队列(MessageQueue)，并且循环等待，当有消息时会唤起线程来处理消息的一个工具，直到线程结束为止。通常情况下不会用到Looper，因为对于Activity，Service等系统组件，Frameworks已经为我们初始化好了线程(俗称的UI线程或主线程)，在其内含有一个Looper，和由Looper创建的消息队列，所以主线程会一直运行，处理用户事件，直到某些事件(BACK）退出。
 如果，我们需要新建一个线程，并且这个线程要能够循环处理其他线程发来的消息事件，或者需要长期与其他线程进行复杂的交互，这时就需要用到Looper来给线程建立消息队列.</p>
@@ -500,42 +1418,41 @@ mHandler.post(new Runnable(){&hellip;});
 
 
 
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-06T00:22:27+08:00" data-updated="true" itemprop="datePublished">Mar 6<span>th</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/android/'>Android</a>
+
+
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/06/android-asynchronous-executor/">Android Asynchronous Executor</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-06T00:22:27+08:00" pubdate data-updated="true">Mar 6<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Executor框架便是Java 5中引入的，其内部使用了线程池机制，它在java.util.cocurrent 包下，通过该框架来控制线程的启动、执行和关闭，可以简化并发编程的操作。因此，在Java 5之后，通过Executor来启动线程比使用Thread的start方法更好，除了更易管理，效率更好（用线程池实现，节约开销）外，还有关键的一点：有助于避免this逃逸问题——如果我们在构造器中启动一个线程，因为另一个任务可能会在构造器结束之前开始执行，此时可能会访问到初始化了一半的对象用Executor在构造器中。</p>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/03/06/android-asynchronous-executor/" itemprop="url">Android Asynchronous Executor</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Executor框架便是Java 5中引入的，其内部使用了线程池机制，它在java.util.cocurrent 包下，通过该框架来控制线程的启动、执行和关闭，可以简化并发编程的操作。因此，在Java 5之后，通过Executor来启动线程比使用Thread的start方法更好，除了更易管理，效率更好（用线程池实现，节约开销）外，还有关键的一点：有助于避免this逃逸问题——如果我们在构造器中启动一个线程，因为另一个任务可能会在构造器结束之前开始执行，此时可能会访问到初始化了一半的对象用Executor在构造器中。</p>
 
 <p>Executor框架包括：线程池，Executor，Executors，ExecutorService，CompletionService，Future，Callable等。</p>
 
@@ -672,42 +1589,41 @@ cache池线程数支持0-Integer.MAX_VALUE(显然完全没考虑主机的资源�
 
 
 
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-03T22:32:57+08:00" data-updated="true" itemprop="datePublished">Mar 3<span>rd</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/android/'>Android</a>
+
+
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/03/android-asynchronous-Thread/">Android Asynchronous Thread</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-03T22:32:57+08:00" pubdate data-updated="true">Mar 3<span>rd</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>线程概述</h3>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/03/03/android-asynchronous-Thread/" itemprop="url">Android Asynchronous Thread</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h3>线程概述</h3>
 
 <p>线程是一个程序的多个执行路径，执行调度的单位，依托于进程存在。 线程不仅可以共享进程的内存，而且还拥有一个属于自己的内存空间，这段内存空间也叫做线程栈，是在建立线程时由系统分配的，主要用来保存线程内部所使用的数据，如线程执行函数中所定义的变量。</p>
 
@@ -829,42 +1745,41 @@ cache池线程数支持0-Integer.MAX_VALUE(显然完全没考虑主机的资源�
 
 
 
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-03T22:02:37+08:00" data-updated="true" itemprop="datePublished">Mar 3<span>rd</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/android/'>Android</a>
+
+
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/03/android-asynchronous-jie-shao/">Android Asynchronous 介绍</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-03T22:02:37+08:00" pubdate data-updated="true">Mar 3<span>rd</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>进程与线程</h3>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/03/03/android-asynchronous-jie-shao/" itemprop="url">Android Asynchronous 介绍</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h3>进程与线程</h3>
 
 <p>如果某个应用程序组件是第一次被启动，且这时应用程序也没有其他组件在运行，则Android系统会为应用程序创建一个包含单个线程的linux进程。默认情况下，同一个应用程序的所有组件都运行在同一个进程和线程里（叫做“main”主线程）。如果组件启动时，已经存在应用程序的进程了（因为应用程序的其它组件已经在运行了），则此组件会在已有的进程和线程中启动运行。不过，可以指定组件运行在其他进程里，也可以为任何进程创建额外的线程。</p>
 
@@ -999,697 +1914,42 @@ cache池线程数支持0-Integer.MAX_VALUE(显然完全没考虑主机的资源�
 <li>Loader</li>
 </ol>
 
+
+		
+		
+	</div>
+
+</article>
+
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/27/github-search-syntax/">GitHub Search Syntax</a></h1>
+<nav id="pagenavi">
     
     
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-27T23:36:54+08:00" pubdate data-updated="true">Feb 27<span>th</span>, 2014</time>
-        
-      </p>
+        <a href="/blog/page/2/" class="next">Next</a>
     
-  </header>
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav></div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2014
 
+    Shao jie
 
-  <div class="entry-content"><h3>Search Syntax</h3>
 
-<p>如果你想精确的查找搜索结果，你可以一直使用<a href="/blog/2014/02/23/advanced-search/">高级搜索</a>,但是，使用正确的搜索语法可以帮助你更快速的找到你想要的结果，下面就介绍几种搜索语法。</p>
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
 
-<h4>Greater Than Queries</h4>
 
-<p>设想你想找所有与‘cats’有关的项目，而且筛选出它被用户标记星号(stars)的次数大于10次。你可以使用一些操作符帮助你完成。</p>
 
-<p><p>><code>&gt;</code> 和 <code>&gt;=</code>符号代表“大于”和&#8221;大于等于&#8221;。例如下边的两个例子是等价的
-<p>><code>cats stars:"&gt;10"</code>
-<p>><code>cats stars:"&gt;=10"</code>
-<br>
-<br>
-<p>>你也可以使用更加程序化的符号<code>..*</code>,它等价于<code>&gt;=</code>,代表查找所有大于等于10的。
-<p>><code>cats stars:"10..*"</code>
-<br>
-<br></p>
 
-<p><p>>符号<code>*</code>可以代表任意数字，所以<code>10 .. 50</code>等价于&#8221;所有大约等于10取小于等于50&#8221;。</p>
 
-<h4>Less Than Queries</h4>
 
-<p>如果你想找所有与‘cats’有关的项目，而且筛选出它被用户标记星号(stars)的次数小于10次。你可以使用类似的一些操作符帮助你完成。
-<p>><code>&lt;</code> 和 <code>&lt;=</code>符号代表“小于”和&#8221;小于等于&#8221;。例如下边的两个例子是等价的
-<p>><code>cats stars:"&lt;10"</code>
-<p>><code>cats stars:"&lt;=9"</code>
-<br>
-<br>
-<p>>你也可以使用更加程序化的符号<code>*..</code>,它等价于<code>&lt;=</code>,代表查找所有小等于10的。
-<p>><code>cats stars:"*..10"</code>
-<br>
-<br></p>
-
-<p><p>>符号<code>*</code>可以代表任意数字，所以<code>1 .. 10</code>等价于&#8221;所有大约等于1取小于等于10&#8221;。</p>
-
-<h4>Range Queries</h4>
-
-<p>当你要查找一些没有‘数量’标记的项目时，range查询这时就能显出2它的威力来了，比如你还是要查找与&#8217;cat&#8217;相关的项目，并且上次的更新时间在2014年1月低到今天的2014年2月28
-<p>><code>cats pushed:2014-01-31..2014-02-28</code></p>
-
-<h4>Omitting Spaces</h4>
-
-<p>如果你更倾向更短的标记和更少的字符的话，你可以删除引号以及查询条件中多余的空格，仅当查询的条件中包含空格的时候才需要引号
-<p>><code>cats stars:&gt;10</code>
-<p>><code>cats stars:&lt;10</code>
-<p>><code>cats pushed:2014-01-30..2014-02-28</code></p>
-
-<h4>The power of NOT</h4>
-
-<p>你可以使用<code>NOT</code>符号从你的搜索条件中排除关键字的项目，比如搜索···Hello···会返回很多包含<code>Hello World</code>相关的项目，但是如果在搜索条件中加入NOT像这样：
-<p>><code>Hello NOT World</code>
-<p>就会过滤掉排除包含<code>World</code>的。
-<p><code>`NOT</code>符号只能用于String类型的关键字</p>
-
-<h4>Filtering using Exclusion</h4>
-
-<p>另一种缩小搜索范围的方式是排除子集。在搜索的条件的前面带上<code>-</code>，就能排除所有符合条件的结果集
-<p>比如你想查找所有包含&#8217;cats&#8217;并且&#8217;stars&#8217;数量大于10并且不使用&#8217;javascript&#8217;
-<p>><code>cats stars:&gt;10 -language:javascript</code></p>
-
-<p><p>查找所有没有@defunkt的issues:
-<p>><code>mentions:defunkt -user:github</code></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/23/advanced-search/">Github高级搜索</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-23T01:24:57+08:00" pubdate data-updated="true">Feb 23<span>rd</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>Advanced Search</h3>
-
-<p>使用<a href="https://github.com/search/advanced">高级搜索</a>可以让你近一步缩小搜索范围，你可以通过stars数目、forks数目、文件后缀名等过滤。当你在条件输入框填写条件的时候，它会自动的把高级查询拼接到上面的输入框中。</p>
-
-<p><img src="https://github-images.s3.amazonaws.com/help/search/advanced_search.png" alt="Github " /></p>
-
-<h3>总结</h3>
-
-<p>关于高级查询，我们可以指定很多的参数，以方便我们快速查询，下一篇介绍<a href="/blog/2014/02/27/github-search-syntax/">搜索语法</a>;</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/22/searching-github/">Searching Github</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-22T23:41:43+08:00" pubdate data-updated="true">Feb 22<span>nd</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>Searching Github</h3>
-
-<p><p>目前Gihtub上有数以万计的开源项目、用户、代码段，要想从中搜索到自己想要的真是件让人头疼的事情。幸好，有一些搜索技巧可以帮助你快速找到你的结果。</p>
-
-<h3>Find all the Things</h3>
-
-<p><a href="https://github.com/search">Github Search</a> 的功能是基于<a href="https://help.github.com/articles/using-the-command-bar">CommandBar</a>。你可以输入任何你想要的查询条件，它会把所有符合条件的结果高亮显示出来。你也可以点击左侧选择一种编程语言或者点击搜索结果项目列表来进一步缩小搜索范围。</p>
-
-<p>在这个搜索引擎下，搜索就像一个弹性的搜索集合，当有push代码到Github你就可以实时的检索到它们。这些结果来自Github上的开源项目，也包括你有权限操作的私有项目。</p>
-
-<p>为了让搜索关联性更加准确，Github很保守的给出搜索索引，例如，forks的项目一般是不会被搜索出来的，除非这个项目比原始项目有更多的stars。</p>
-
-<p><img src="https://github-images.s3.amazonaws.com/help/search/search_overview.png" alt="Github " /></p>
-
-<h3>搜索类型</h3>
-
-<h4>项目（Repositories）</h4>
-
-<p>每个搜索项目都有一个项目活动的展示，这个可以帮助你找到一些活跃的项目，当然也包括你的私有项目
-当你的搜索结果很多足有好几页的搜索结果，你可以对这些结果按照条件进行排序以便更容易找到结果</p>
-
-<p>关于更好的搜索项目相关说明，你查看<a href="/https://help.github.com/articles/searching-repositories">搜索项目</a></p>
-
-<h4>问题(Issues)</h4>
-
-<p>Issues search可以让你浏览所有的public的项目以及你有权限的私有项目的问答。你可以选择查看某个组织的问答，也可以选择与某个用户相关的问答。</p>
-
-<p>更多关于如何查找问题。请查看<a href="/https://help.github.com/articles/searching-issues">搜索问题</a></p>
-
-<h4>代码(code)</h4>
-
-<p>代码搜索可以让你查看所有的public项目以及你有权限的私有项目的代码。你可以带上下边的参数</p>
-
-<ul>
-<li>搜索结果的行号</li>
-<li>代码语法的高亮显示</li>
-<li>上次检索时间</li>
-<li>通过文件后缀查找</li>
-<li>通过路径查找</li>
-<li>只查找我自己的项目</li>
-</ul>
-
-
-<p>更多关于如何搜索代码，请查看<a href="/https://help.github.com/articles/searching-code">代码搜索</a></p>
-
-<h4>用户(Users)</h4>
-
-<p>用户搜索界面包含所有你要的一切：精确的结果、你可以直接Follow这些用户
-更多关于如果搜索用户，请查看<a href="/https://help.github.com/articles/searching-users">搜索用户</a></p>
-
-<h3>结果排序</h3>
-
-<p>默认，Github搜索结果以搜索匹配(best match)降序排序的，当然你也可以选择其他的排序方式。比如，你可以现在按照 Star fork 数量排序。对于问答（Issues），你可以按照创建时间或者更新时间排序</p>
-
-<h3>总结</h3>
-
-<p>Github Seaching基本的内容介绍完了，下一篇<a href="/blog/2014/02/23/advanced-search/">高级搜索</a>;</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/16/da-jian-bo-ke-huan-jing/">搭建博客环境</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-16T00:33:40+08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>1.Octopress需要Ruby环境，RVM(Ruby Version Manager)负责安装和管理Ruby的环境。所以我们先在终端输入如下命令，来安装RVM</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>curl -L https://get.rvm.io | bash -s stable --ruby</span></code></pre></td></tr></table></div></figure>
-
-
-<p>安装ruby1.9.3</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rvm install 1.9.3
-</span><span class='line'>rvm use 1.9.3
-</span><span class='line'>rvm rubygems lastest</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>2.安装Octpress</h3>
-
-<p>在安装octpress之前，确保安装了git。
-下载octpress</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/imathis/octopress.git octopress
-</span><span class='line'>cd octpress</span></code></pre></td></tr></table></div></figure>
-
-
-<p>安装相关依赖</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gem install bundler
-</span><span class='line'>rbenv rehash
-</span><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure>
-
-
-<p>安装默认的Octpress主题</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake install</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>3.将博客部署到Github上</h3>
-
-<p>Github的Page service可以免费托管博客，并且还可以自定义域名。</p>
-
-<p>首先需要在GitHub上创建一个仓库，并将仓库名称按照这样的方式进行命名：<code>username.github.com</code>或<code>organization.github.com</code>。等后面配置完毕之后，我们就可以在浏览器中使用页面地址<code>http://username.github.com</code>来访问我们的博客。一般来说，我们希望在将博客的源码放到source分支下，并把生成的内容提交到master分支。</p>
-
-<p>创建好仓库之后，我们需要利用octopress的一个配置rake任务来自动配置上面创建的仓库：可以让我们方便的部署GitHub page。在终端输入如下命令：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake setup_github_pages</span></code></pre></td></tr></table></div></figure>
-
-
-<p>完成上面的命令之后，我们就可以生成博客并真正的部署到仓库中了。执行如下命令：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake generate
-</span><span class='line'>rake deploy</span></code></pre></td></tr></table></div></figure>
-
-
-<p>现在可以访问<code>http://username.github.com</code>了。注意：有时候可能会有延时，要等等10分钟左右才能打开。</p>
-
-<p>不过博客的source需要单独提交，执行如下命令就可以将source提交到仓库的source分支下。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git add .
-</span><span class='line'>git commit -m 'Initial souece comment'
-</span><span class='line'>git push origin source</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果在部署到仓库之前，需要先预览一下博客，可以在终端输入</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake preview</span></code></pre></td></tr></table></div></figure>
-
-
-<p>然后就能在浏览器中进行本地预览访问了：<code>http://127.0.0.1:4000/</code>或<code>http://localhost:4000/</code>，效果跟仓库中的一样。</p>
-
-<h3>4.开始写博客</h3>
-
-<p>新建一篇文章</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake 'new_post[title]'
-</span><span class='line'>其中title为博文的文件名，创建出来的文件默认是markdown格式。上面的命令会创建出这样一个文件：source/_posts/2014-2-16-title.markdown</span></code></pre></td></tr></table></div></figure>
-
-
-<p>打开这篇文章，可以看到</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>---
-</span><span class='line'>layout: post
-</span><span class='line'>title: title
-</span><span class='line'>date: 2014-0-16 00:33:40 +0800
-</span><span class='line'>comments: true
-</span><span class='line'>categoryies:
-</span><span class='line'>---</span></code></pre></td></tr></table></div></figure>
-
-
-<p>categories 填写文章的分类名</p>
-
-<p>接着我们就可以在这个文件中写我们的博文。完成之后，我们可以预览和部署博文。下面是创建并部署博文的一个完整过程</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rake 'new_post[title]'
-</span><span class='line'>rake generate
-</span><span class='line'>git add .
-</span><span class='line'>git commit -am "add new post"
-</span><span class='line'>git push origin source
-</span><span class='line'>rake deploy</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>5.添加分类列表</h3>
-
-<p>保存一下代码到 plugins/category_list_tag.rb:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>module Jekyll
-</span><span class='line'>  class CategoryListTag &lt; Liquid::Tag
-</span><span class='line'>    def render(context)
-</span><span class='line'>      html = ""
-</span><span class='line'>      categories = context.registers[:site].categories.keys
-</span><span class='line'>      categories.sort.each do |category|
-</span><span class='line'>        posts_in_category = context.registers[:site].categories[category].size
-</span><span class='line'>        category_dir = context.registers[:site].config['category_dir']
-</span><span class='line'>        category_url = File.join(category_dir, category.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').downcase)
-</span><span class='line'>        html &lt;&lt; "&lt;li class='category'&gt;&lt;a href='/#{category_url}/'&gt;#{category} (#{posts_in_category})&lt;/a&gt;&lt;/li&gt;\n"
-</span><span class='line'>      end
-</span><span class='line'>      html
-</span><span class='line'>    end
-</span><span class='line'>  end
-</span><span class='line'>end
-</span><span class='line'>
-</span><span class='line'>Liquid::Template.register_tag('category_list', Jekyll::CategoryListTag)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这个插件会向liquid注册一个名为category_list的tag，该tag就是以li的形式将站点所有的category组织起来。如果要将category加入到侧边导航栏，需要增加一个aside。
-增加aside
-复制以下代码到source/_includes/asides/category_list.html。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>
-</span><span class='line'>&lt;section&gt;
-</span><span class='line'>  &lt;h1&gt;Categories&lt;/h1&gt;
-</span><span class='line'>  &lt;ul id="categories"&gt;
-</span><span class='line'>    {% category_list %}
-</span><span class='line'>  &lt;/ul&gt;
-</span><span class='line'>&lt;/section&gt;
-</span><span class='line'></span></code></pre></td></tr></table></div></figure>
-
-
-<p>配置侧边栏需要修改_config.yml文件，修改其default_asides项:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>default_asides: [asides/category_list.html, asides/recent_posts.html]</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>6.添加微博秀</h3>
-
-<p>先到微博秀里面生成自己的微博秀嵌入代码</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;iframe width="100%"
-</span><span class='line'> height="550" 
-</span><span class='line'> class="share_self"  
-</span><span class='line'> frameborder="0" 
-</span><span class='line'> scrolling="no" 
-</span><span class='line'> src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2
-</span><span class='line'>&ptype=1&speed=0&skin=1&isTitle=1&noborder=1
-</span><span class='line'>&isWeibo=1&isFans=1&uid=1706688983
-</span><span class='line'>&verifier=1a722b18&dpc=1"&gt;
-</span><span class='line'>&lt;/iframe&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>新建一个weibo.html 到source/_include/asides的下面</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>
-</span><span class='line'>{% if site.weibo_uid %}
-</span><span class='line'>&lt;section&gt;
-</span><span class='line'>  &lt;h1&gt;新浪微博&lt;/h1&gt;
-</span><span class='line'>  &lt;ul id="weibo"&gt;
-</span><span class='line'>    &lt;li&gt;
-</span><span class='line'>      &lt;iframe 
-</span><span class='line'>        width="100%" 
-</span><span class='line'>        height="550" 
-</span><span class='line'>        class="share_self" 
-</span><span class='line'>        frameborder="0" 
-</span><span class='line'>        scrolling="no" 
-</span><span class='line'>        src="http://widget.weibo.com/weiboshow/index.php?width=0&height=550
-</span><span class='line'>        &ptype={% if site.weibo_pic %}1{% else %}0{% endif %}&speed=0&skin={{weibo_skin}}&isTitle=0&noborder=1
-</span><span class='line'>&isWeibo={% if site.weibo_show %}1{% else %}0{% endif %}&isFans={{weibo_fansline}}&uid={{site.weibo_uid}}&verifier={{site.weibo_verifier}}"&gt;
-</span><span class='line'>      &lt;/iframe&gt;
-</span><span class='line'>    &lt;/li&gt;
-</span><span class='line'>  &lt;/ul&gt;
-</span><span class='line'>&lt;/section&gt;
-</span><span class='line'>{% endif %}
-</span><span class='line'></span></code></pre></td></tr></table></div></figure>
-
-
-<p>修改_config.xml中default_aside部分</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>... 
-</span><span class='line'>default_asides: [asides/recent_posts.html, asides/weibo.html, asides/github.html, asides/[Twitter][].html, asides/googleplus.html]
-</span><span class='line'>...
-</span><span class='line'>weibo_uid: 1098907490
-</span><span class='line'>weibo_verifier: abd54ad9
-</span><span class='line'>weibo_fansline: 0   # 粉丝显示多少行
-</span><span class='line'>weibo_show: true    # 是否显示最近微博内容
-</span><span class='line'>weibo_pic: true     # 是否显示微博中的图片
-</span><span class='line'>weibo_skin: 10      # 使用哪种配色风格，数字为从1开始的微博秀风格序号
-</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>7.评论和分享</h3>
-
-<p>在<em>config.yml中增加一项： weibo_share: true
-修改 source/</em>includes/post/sharing.html ，增加：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>
-</span><span class='line'>{% if site.weibo_share %}
-</span><span class='line'>     {% include post/weibo.html %}
-</span><span class='line'> {% endif %}
-</span><span class='line'> </span></code></pre></td></tr></table></div></figure>
-
-
-<p>增加文件：source/_includes/post/weibo.html</p>
-
-<p>访问<a href="http://www.jiathis.com/">http://www.jiathis.com/</a> , 获取分享的代码</p>
-
-<p>访问<a href="http://uyan.cc/,">http://uyan.cc/,</a> 获取评论的代码</p>
-
-<p>把代码都加到weibo.html中</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Categories</h1>
-  <ul id="categories">
-    <li class='category'><a href='/blog/categories/android/'>Android (5)</a></li>
-<li class='category'><a href='/blog/categories/github/'>Github (3)</a></li>
-<li class='category'><a href='/blog/categories/other/'>Other (1)</a></li>
-
-  </ul>
-</section>
-
-<section>
-  <h1>新浪微博</h1>
-  <ul id="weibo">
-    <li>
-      <iframe 
-        width="100%" 
-        height="550" 
-        class="share_self" 
-        frameborder="0" 
-        scrolling="no" 
-        src="http://widget.weibo.com/weiboshow/index.php?width=0&height=550&ptype=1&speed=0&skin=&isTitle=0&noborder=1&isWeibo=1&isFans=&uid=1706688983&verifier=1a722b18">
-      </iframe>
-    </li>
-  </ul>
-</section>
-
-<div class="github-card" data-github="shaojie519" data-width="400" data-height="150"></div>
-<script src="http://lab.lepture.com/github-cards/widget.js"></script>
-
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2014/03/18/android-asynchronous-asynctask/">Android Asynchronous AsyncTask</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/03/17/android-asynchronous-handlerthread/">Android Asynchronous HandlerThread</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/03/06/android-asynchronous-executor/">Android Asynchronous Executor</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/03/03/android-asynchronous-Thread/">Android Asynchronous Thread</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/03/03/android-asynchronous-jie-shao/">Android Asynchronous 介绍</a>
-      </li>
-    
-  </ul>
-</section>
-
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Shao jie -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-
-
-
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-
+		</div>
+	</div>
 </body>
 </html>

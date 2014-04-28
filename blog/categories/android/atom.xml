@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Android | Shaojie's Blog]]></title>
   <link href="http://www.shaojie.name/blog/categories/android/atom.xml" rel="self"/>
   <link href="http://www.shaojie.name/"/>
-  <updated>2014-04-27T23:09:28+08:00</updated>
+  <updated>2014-04-28T22:32:17+08:00</updated>
   <id>http://www.shaojie.name/</id>
   <author>
     <name><![CDATA[Shao jie]]></name>
@@ -12,6 +12,222 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Android MVP 模式]]></title>
+    <link href="http://www.shaojie.name/blog/2014/03/24/android-mvp/"/>
+    <updated>2014-03-24T23:06:01+08:00</updated>
+    <id>http://www.shaojie.name/blog/2014/03/24/android-mvp</id>
+    <content type="html"><![CDATA[<h4>MVP模式与MVC模式</h4>
+
+<p>MVP 是从经典的模式MVC演变而来，它们的基本思想有相通的地方：Controller/Presenter负责逻辑的处理，Model提供数据，View负责显示。作为一种新的模式，MVP与MVC有着一个重大的区别：在MVP中View并不直接使用Model，它们之间的通信是通过Presenter (MVC中的Controller)来进行的，所有的交互都发生在Presenter内部，而在MVC中View会从直接Model中读取数据而不是通过 Controller
+<img src="http://img.hb.aicdn.com/c098e0b36a1be7bb989ca451e2f084d5758eb88b4e76-x3xslP_fw658" alt="" /></p>
+
+<h4>什么是MVC(Model View Presenter)模式</h4>
+
+<ol>
+<li>为了使得视图接口可以与模型和控制器进行交互，控制器执行一些初始化事件</li>
+<li>用户通过视图（用户接口）执行一些操作</li>
+<li>控制器处理用户行为(可以用观察着模式实现)并通知模型进行更新</li>
+<li>模型引发一些事件，以便将改变发告知视图</li>
+<li>视图处理模型变更的事件，然后显示新的模型数据</li>
+<li>用户接口等待用户的进一步操作</li>
+</ol>
+
+
+<h4>Example</h4>
+
+<p>首先，我们先申明View的接口，有2个简单的方法</p>
+
+<p>``` java viewInterface
+public inteface IResultsView {</p>
+
+<pre><code>//set title
+public void showTitle(String title);
+
+//set result text
+public void showResults(String results);
+</code></pre>
+
+<p>}
+```</p>
+
+<p>这些方法是说明我希望View中视图的变化，这里不关心它怎么发生的</p>
+
+<p>然后再定义一个Presenter的接口
+``` java presenterInteface <a href="http://www.shaojie.name">http://www.shaojie.name</a>
+public interface IResultsPresenter{</p>
+
+<pre><code>public void onResume(Context context);
+</code></pre>
+
+<p>}
+<code>
+在视图里（Activity/Fragemnt）里onResume()触发的时候，调用Presenter。
+</code>
+java ResultsPreseter
+public class ResultsPresenter implements IResultsPresenter {</p>
+
+<pre><code>private IResultsView resultsView;
+
+public ResultsPresenter(IResultsView resultsView) {
+    this.resultsView = resultsView;
+}
+
+@Override
+public void onResume(Context context) {
+
+    // Get a title
+    getTitle(context);
+
+
+    // Get results
+    getResults(context);
+
+}
+</code></pre>
+
+<p>}
+```
+这里，会触发IResultView里定义的2个函数</p>
+
+<p>```
+public class FragmentResults extends Fragment implements IResultsView {</p>
+
+<pre><code>private View view;
+private TextView title, content;
+private IResultsPresenter presenter;
+
+public FragmentResults() {
+    // Required empty public constructor
+}
+
+
+@Override
+public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                         Bundle savedInstanceState) {
+    view = inflater.inflate(R.layout.fragment_results, null);
+
+    return view;
+}
+
+@Override
+public void onViewCreated(View view, Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+
+    presenter = new ResultsPresenter(this);
+
+    title = (TextView) view.findViewById(R.id.results_title);
+    content = (TextView) view.findViewById(R.id.results_text);
+}
+
+@Override
+public void onResume() {
+    super.onResume();
+
+    presenter.onResume(getActivity());
+}
+
+@Override
+public void showTitle(String title) {
+
+    this.title.setText(title);
+}
+
+@Override
+public void showResults(String results) {
+
+    content.setText(results);
+}
+</code></pre>
+
+<p>```</p>
+
+<p>很明显，我们就可以脱离用户接口来测试这些逻辑
+```
+public class TestResultsPresenter extends AndroidTestCase {</p>
+
+<pre><code>private IResultsPresenter resultsPresenter;
+private String resultTitle;
+private String resultData;
+
+public TestResultsPresenter() {
+    super();
+}
+
+@Override
+protected void setUp() throws Exception {
+    super.setUp();
+
+    IResultsView resultsView = new TestResultsView();
+    resultsPresenter = new ResultsPresenter(resultsView);
+}
+
+@Override
+protected void tearDown() throws Exception {
+    super.tearDown();
+    resultsPresenter = null;
+}
+
+public void testResultFormat() {
+    Utilities.SmsResultManager smsResultManager = Utilities.SmsResultManager.getInstance(getContext());
+    smsResultManager.removeAllSmsResults();
+    smsResultManager.saveResult("foo", new SmsResult("ark", "foo"));
+
+    // Build expected Content
+    String expectedContent = "ark\t\tfoo\t\tUnknown\n";
+
+    resultsPresenter.onResume(getContext());
+
+    assertEquals(expectedContent, resultData);
+}
+
+
+public void testResultTitle(){
+
+    // put something
+    Date nowDate = new Date();
+    DateFormat df = DateFormat.getDateTimeInstance(
+            DateFormat.SHORT,
+            DateFormat.SHORT,
+            Locale.getDefault());
+
+    // Set date time in prefs
+    Preferences.writePreferenceValue(getContext(),
+            getContext().getString(R.string.pref_emergency_date_time_key), nowDate.getTime());
+
+    String formattedDateTime = df.format(nowDate);
+    String expectedTitle = String.format(getContext().getString(R.string.results_title),
+            formattedDateTime);
+
+    // Trigger onResume event in Results Presenter
+    resultsPresenter.onResume(getContext());
+
+    // Test not null
+    assertNotNull(resultTitle);
+
+    // Test as expected
+    assertEquals(expectedTitle, resultTitle);
+}
+
+
+private class TestResultsView implements IResultsView {
+
+    @Override
+    public void showTitle(String title) {
+        resultTitle = title;
+    }
+
+    @Override
+    public void showResults(String results) {
+        resultData = results;
+    }
+}
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Handy adb commands for Android]]></title>
@@ -652,201 +868,6 @@ private class DownloadFilesTask extends AsyncTask&lt;URL, Integer, Long> {</p>
 执行Task:
 </code>
 new DownloadFilesTask().execute(url1, url2, url3);
-```</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Android Asynchronous HandlerThread]]></title>
-    <link href="http://www.shaojie.name/blog/2014/03/17/android-asynchronous-handlerthread/"/>
-    <updated>2014-03-17T23:06:29+08:00</updated>
-    <id>http://www.shaojie.name/blog/2014/03/17/android-asynchronous-handlerthread</id>
-    <content type="html"><![CDATA[<h4>Looper</h4>
-
-<p>Looper是用于给一个线程添加一个消息队列(MessageQueue)，并且循环等待，当有消息时会唤起线程来处理消息的一个工具，直到线程结束为止。通常情况下不会用到Looper，因为对于Activity，Service等系统组件，Frameworks已经为我们初始化好了线程(俗称的UI线程或主线程)，在其内含有一个Looper，和由Looper创建的消息队列，所以主线程会一直运行，处理用户事件，直到某些事件(BACK）退出。
-如果，我们需要新建一个线程，并且这个线程要能够循环处理其他线程发来的消息事件，或者需要长期与其他线程进行复杂的交互，这时就需要用到Looper来给线程建立消息队列.</p>
-
-<h5>使用Looper:</h5>
-
-<p>```java  Looper <a href="http://www.shaojie.name">http://www.shaojie.name</a>
-  class LooperThread extends Thread {</p>
-
-<pre><code>  public Handler mHandler;
-
-  public void run() {
-      Looper.prepare();
-
-      mHandler = new Handler() {
-          public void handleMessage(Message msg) {
-              // process incoming messages here
-          }
-      };
-
-      Looper.loop();
-  }
-</code></pre>
-
-<p>  }
-```</p>
-
-<p>这样你的线程就具有了消息处理机制了，在Handler中进行消息处理.
-Looper最主要的有四个:
-<code>
- public static prepare();
- public static myLooper();
- public static loop();
- public void quit();
-</code>
-使用方法如下：</p>
-
-<ol>
-<li>在每个线程的run()方法中的最开始调用Looper.prepare()，这是为线程初始化消息队列。</li>
-<li>之后调用Looper.myLooper()获取此Looper对象的引用。这不是必须的，但是如果你需要保存Looper对象的话，一定要在prepare()之后，否则调用在此对象上的方法不一定有效果，如looper.quit()就不会退出。</li>
-<li>在run()方法中添加Handler来处理消息</li>
-<li>添加Looper.loop()调用，这是让线程的消息队列开始运行，可以接收消息了。</li>
-<li>在想要退出消息循环时，调用Looper.quit()注意，这个方法是要在对象上面调用，很明显，用对象的意思就是要退出具体哪个Looper。如果run()中无其他操作，线程也将终止运行。</li>
-</ol>
-
-
-<h4>Handler</h4>
-
-<p>Handler是用于操作线程内部的消息队列的类。Looper是用于给线程创建消息队列用的，也就是说Looper可以让消息队列(MessageQueue)附属在线程之内，并让消息队列循环起来，接收并处理消息。但，我们并不直接的操作消息队列，而是用Handler来操作消息队列，给消息队列发送消息，和从消息队列中取出消息并处理。这就是Handler的职责。</p>
-
-<p>Handler主要有二个用途，一个是用于线程内部消息循环； 另外一个就是用于线程间通讯，主要方法：
-<code>
-Handler.sendEmptyMessageDelayed(int msgid, long after);
-Handler.sendMessageDelayed(Message msg, long after);
-Handler.postDelayed(Runnable task, long after);
-Handler.sendMessageAtTime(Message msg, long timeMillis);
-Handler.sendEmptyMessageAtTime(int id, long timeMiilis);
-Handler.postAtTime(Runnable task, long timeMillis);
-</code>
-需要注意一点的是，线程内部消息循环并不是并发处理，也就是所有的消息都是在Handler所属的线程内处理的，所以虽然你用post(Runnable r)，发给MessageQueue一个Runnable，但这并不会创建新的线程来执行，处理此消息时仅是调用r.run()。（想要另起线程执行，必须把Runnable放到一个Thread中）。</p>
-
-<h4>Handler</h4>
-
-<p>一般会使用Handler handler = new Handler(){&hellip;}创建Handler。这样创建的handler是在主线程即UI线程下的Handler，
-即这个Handler是与UI线程下的默认Looper绑定的。Looper是用于实现消息队列和消息循环机制的。
-因此，如果是默认创建Handler那么如果线程是做一些耗时操作如网络获取数据等操作，这样创建Handler是不行的.
-Android API提供了HandlerThread来创建线程。官网的解释是：Handy class for starting a new thread that has a looper.
-The looper can then be used to create handler classes. Note that start() must still be called.</p>
-
-<p>HandlerThread实际上就一个Thread，只不过它比普通的Thread多了一个Looper。
-```
-public class HandlerThread extends Thread {
- private int mPriority;
- private int mTid = -1;
- private Looper mLooper;
- &hellip;.
- public void run(){</p>
-
-<pre><code> mTid = Process.myTid();
-    Looper.prepare();
-    synchronized (this) {
-        mLooper = Looper.myLooper();
-        Process.setThreadPriority(mPriority);
-        notifyAll();
-    }
-    onLooperPrepared();
-    Looper.loop();
-    mTid = -1;
-</code></pre>
-
-<p> }
- &hellip;.
- }
-```</p>
-
-<p>创建HandlerThread时要把它启动了，即调用start()方法。然后创建Handler时将HandlerThread中的looper对象传入。
-HandlerThread thread = new HandlerThread(&ldquo;MyHandlerThread&rdquo;);
-thread.start();
-mHandler = new Handler(thread.getLooper());
-mHandler.post(new Runnable(){&hellip;});
-那么这个Handler对象就是与HandlerThread这个线程绑定了（这时就不再是与UI线程绑定了，这样它处理耗时操作将不会阻塞UI。</p>
-
-<p>```
-private Handler mHandler;
-private HandlerThread mHandlerThread;</p>
-
-<p>private boolean mRunning;</p>
-
-<p>private Button btn;</p>
-
-<p>@Override
-protected void onCreate(Bundle savedInstanceState) {</p>
-
-<pre><code>super.onCreate(savedInstanceState);
-setContentView(R.layout.activity_main);
-
-btn = (Button) findViewById(R.id.btn);
-btn.setOnClickListener(this);
-
-mHandlerThread = new HandlerThread("Test", 5);
-mHandlerThread.start();
-mHandler = new Handler(mHandlerThread.getLooper());
-</code></pre>
-
-<p>}</p>
-
-<p>private Runnable mRunnable = new Runnable() {</p>
-
-<pre><code>@Override
-public void run() {
-    while (mRunning) {
-        Log.d("MainActivity", "test HandlerThread...");
-        try {
-            Thread.sleep(200);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-}
-</code></pre>
-
-<p>};</p>
-
-<p>@Override
-public void onClick(View v) {</p>
-
-<pre><code>switch(v.getId()) {
-case R.id.btn :
-    mHandler.post(mRunnable);
-    break;
-default :
-    break;
-}
-</code></pre>
-
-<p>}</p>
-
-<p>@Override
-protected void onDestroy() {</p>
-
-<pre><code>mRunning = false;
-mHandler.removeCallbacks(mRunnable);
-super.onDestroy();
-</code></pre>
-
-<p>}</p>
-
-<p>@Override
-protected void onResume() {</p>
-
-<pre><code>mRunning = true;
-super.onResume();
-</code></pre>
-
-<p>}</p>
-
-<p>@Override
-protected void onStop() {</p>
-
-<pre><code>mRunning = false;
-super.onStop();
-</code></pre>
-
-<p>}
 ```</p>
 ]]></content>
   </entry>

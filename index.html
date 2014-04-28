@@ -7,7 +7,7 @@
 	<meta name="author" content="Shao jie">
 
 	
-	<meta name="description" content="Mar 24th, 2014 5 Mar 24th, 2014 Other 十四个很准的心里暗示 1、当你对某件事情抱着百分之一万的相信，它最后就会变成事实。 2、期望定律 期望定律告诉我们，当我们怀着对某件事情非常强烈期望的时候，我们所期望的事物就会出现。 3、情绪定律 情绪定律告诉我们， &hellip;">
+	<meta name="description" content="Mar 24th, 2014 Android Android MVP 模式 MVP模式与MVC模式 MVP 是从经典的模式MVC演变而来，它们的基本思想有相通的地方：Controller/Presenter负责逻辑的处理，Model提供数据，View负责显示。作为一种新的模式， &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,12 +103,368 @@
 <time datetime="2014-03-24T23:06:01+08:00" data-updated="true" itemprop="datePublished">Mar 24<span>th</span>, 2014</time></div>
 		<div class="tags">
 
+
+	<a class='category' href='/blog/categories/android/'>Android</a>
+
+
 </div>
 		
 	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2014/03/24/5/" itemprop="url">5</a></h1>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/03/24/android-mvp/" itemprop="url">Android MVP 模式</a></h1>
 	<div class="entry-content" itemprop="articleBody">
-		
+		<h4>MVP模式与MVC模式</h4>
+
+<p>MVP 是从经典的模式MVC演变而来，它们的基本思想有相通的地方：Controller/Presenter负责逻辑的处理，Model提供数据，View负责显示。作为一种新的模式，MVP与MVC有着一个重大的区别：在MVP中View并不直接使用Model，它们之间的通信是通过Presenter (MVC中的Controller)来进行的，所有的交互都发生在Presenter内部，而在MVC中View会从直接Model中读取数据而不是通过 Controller
+<img src="http://img.hb.aicdn.com/c098e0b36a1be7bb989ca451e2f084d5758eb88b4e76-x3xslP_fw658" alt="" /></p>
+
+<h4>什么是MVC(Model View Presenter)模式</h4>
+
+<ol>
+<li>为了使得视图接口可以与模型和控制器进行交互，控制器执行一些初始化事件</li>
+<li>用户通过视图（用户接口）执行一些操作</li>
+<li>控制器处理用户行为(可以用观察着模式实现)并通知模型进行更新</li>
+<li>模型引发一些事件，以便将改变发告知视图</li>
+<li>视图处理模型变更的事件，然后显示新的模型数据</li>
+<li>用户接口等待用户的进一步操作</li>
+</ol>
+
+
+<h4>Example</h4>
+
+<p>首先，我们先申明View的接口，有2个简单的方法</p>
+
+<figure class='code'><figcaption><span>viewInterface </span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="n">inteface</span> <span class="n">IResultsView</span> <span class="o">{</span>
+</span><span class='line'>  <span class="c1">//set title</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">showTitle</span><span class="o">(</span><span class="n">String</span> <span class="n">title</span><span class="o">);</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="c1">//set result text</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">showResults</span><span class="o">(</span><span class="n">String</span> <span class="n">results</span><span class="o">);</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这些方法是说明我希望View中视图的变化，这里不关心它怎么发生的</p>
+
+<p>然后再定义一个Presenter的接口</p>
+
+<figure class='code'><figcaption><span>presenterInteface</span><a href='http://www.shaojie.name'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">IResultsPresenter</span><span class="o">{</span>
+</span><span class='line'>  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onResume</span><span class="o">(</span><span class="n">Context</span> <span class="n">context</span><span class="o">);</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在视图里（Activity/Fragemnt）里onResume()触发的时候，调用Presenter。</p>
+
+<figure class='code'><figcaption><span>presenterInteface</span><a href='http://www.shaojie.name'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">java</span> <span class="n">ResultsPreseter</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ResultsPresenter</span> <span class="kd">implements</span> <span class="n">IResultsPresenter</span> <span class="o">{</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="n">IResultsView</span> <span class="n">resultsView</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="nf">ResultsPresenter</span><span class="o">(</span><span class="n">IResultsView</span> <span class="n">resultsView</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">this</span><span class="o">.</span><span class="na">resultsView</span> <span class="o">=</span> <span class="n">resultsView</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Override</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onResume</span><span class="o">(</span><span class="n">Context</span> <span class="n">context</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Get a title</span>
+</span><span class='line'>        <span class="n">getTitle</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Get results</span>
+</span><span class='line'>        <span class="n">getResults</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这里，会触发IResultView里定义的2个函数</p>
+
+<figure class='code'><figcaption><span>presenterInteface</span><a href='http://www.shaojie.name'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FragmentResults</span> <span class="kd">extends</span> <span class="n">Fragment</span> <span class="kd">implements</span> <span class="n">IResultsView</span> <span class="o">{</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="n">View</span> <span class="n">view</span><span class="o">;</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="n">TextView</span> <span class="n">title</span><span class="o">,</span> <span class="n">content</span><span class="o">;</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="n">IResultsPresenter</span> <span class="n">presenter</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="nf">FragmentResults</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>        <span class="c1">// Required empty public constructor</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Override</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="n">View</span> <span class="nf">onCreateView</span><span class="o">(</span><span class="n">LayoutInflater</span> <span class="n">inflater</span><span class="o">,</span> <span class="n">ViewGroup</span> <span class="n">container</span><span class="o">,</span>
+</span><span class='line'>                             <span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">view</span> <span class="o">=</span> <span class="n">inflater</span><span class="o">.</span><span class="na">inflate</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">fragment_results</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">return</span> <span class="n">view</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Override</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onViewCreated</span><span class="o">(</span><span class="n">View</span> <span class="n">view</span><span class="o">,</span> <span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="kd">super</span><span class="o">.</span><span class="na">onViewCreated</span><span class="o">(</span><span class="n">view</span><span class="o">,</span> <span class="n">savedInstanceState</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">presenter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ResultsPresenter</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">title</span> <span class="o">=</span> <span class="o">(</span><span class="n">TextView</span><span class="o">)</span> <span class="n">view</span><span class="o">.</span><span class="na">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">results_title</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">content</span> <span class="o">=</span> <span class="o">(</span><span class="n">TextView</span><span class="o">)</span> <span class="n">view</span><span class="o">.</span><span class="na">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">results_text</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Override</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onResume</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>        <span class="kd">super</span><span class="o">.</span><span class="na">onResume</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">presenter</span><span class="o">.</span><span class="na">onResume</span><span class="o">(</span><span class="n">getActivity</span><span class="o">());</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Override</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">showTitle</span><span class="o">(</span><span class="n">String</span> <span class="n">title</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">this</span><span class="o">.</span><span class="na">title</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">title</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Override</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">showResults</span><span class="o">(</span><span class="n">String</span> <span class="n">results</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">content</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">results</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>很明显，我们就可以脱离用户接口来测试这些逻辑</p>
+
+<figure class='code'><figcaption><span>presenterInteface</span><a href='http://www.shaojie.name'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestResultsPresenter</span> <span class="kd">extends</span> <span class="n">AndroidTestCase</span> <span class="o">{</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="n">IResultsPresenter</span> <span class="n">resultsPresenter</span><span class="o">;</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="n">String</span> <span class="n">resultTitle</span><span class="o">;</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="n">String</span> <span class="n">resultData</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="nf">TestResultsPresenter</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>        <span class="kd">super</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Override</span>
+</span><span class='line'>    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">setUp</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+</span><span class='line'>        <span class="kd">super</span><span class="o">.</span><span class="na">setUp</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">IResultsView</span> <span class="n">resultsView</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TestResultsView</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">resultsPresenter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ResultsPresenter</span><span class="o">(</span><span class="n">resultsView</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Override</span>
+</span><span class='line'>    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">tearDown</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+</span><span class='line'>        <span class="kd">super</span><span class="o">.</span><span class="na">tearDown</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">resultsPresenter</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testResultFormat</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">Utilities</span><span class="o">.</span><span class="na">SmsResultManager</span> <span class="n">smsResultManager</span> <span class="o">=</span> <span class="n">Utilities</span><span class="o">.</span><span class="na">SmsResultManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="n">getContext</span><span class="o">());</span>
+</span><span class='line'>        <span class="n">smsResultManager</span><span class="o">.</span><span class="na">removeAllSmsResults</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">smsResultManager</span><span class="o">.</span><span class="na">saveResult</span><span class="o">(</span><span class="s">&quot;foo&quot;</span><span class="o">,</span> <span class="k">new</span> <span class="n">SmsResult</span><span class="o">(</span><span class="s">&quot;ark&quot;</span><span class="o">,</span> <span class="s">&quot;foo&quot;</span><span class="o">));</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Build expected Content</span>
+</span><span class='line'>        <span class="n">String</span> <span class="n">expectedContent</span> <span class="o">=</span> <span class="s">&quot;ark\t\tfoo\t\tUnknown\n&quot;</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">resultsPresenter</span><span class="o">.</span><span class="na">onResume</span><span class="o">(</span><span class="n">getContext</span><span class="o">());</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">assertEquals</span><span class="o">(</span><span class="n">expectedContent</span><span class="o">,</span> <span class="n">resultData</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testResultTitle</span><span class="o">(){</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// put something</span>
+</span><span class='line'>        <span class="n">Date</span> <span class="n">nowDate</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Date</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">DateFormat</span> <span class="n">df</span> <span class="o">=</span> <span class="n">DateFormat</span><span class="o">.</span><span class="na">getDateTimeInstance</span><span class="o">(</span>
+</span><span class='line'>                <span class="n">DateFormat</span><span class="o">.</span><span class="na">SHORT</span><span class="o">,</span>
+</span><span class='line'>                <span class="n">DateFormat</span><span class="o">.</span><span class="na">SHORT</span><span class="o">,</span>
+</span><span class='line'>                <span class="n">Locale</span><span class="o">.</span><span class="na">getDefault</span><span class="o">());</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Set date time in prefs</span>
+</span><span class='line'>        <span class="n">Preferences</span><span class="o">.</span><span class="na">writePreferenceValue</span><span class="o">(</span><span class="n">getContext</span><span class="o">(),</span>
+</span><span class='line'>                <span class="n">getContext</span><span class="o">().</span><span class="na">getString</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">string</span><span class="o">.</span><span class="na">pref_emergency_date_time_key</span><span class="o">),</span> <span class="n">nowDate</span><span class="o">.</span><span class="na">getTime</span><span class="o">());</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">String</span> <span class="n">formattedDateTime</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">nowDate</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">String</span> <span class="n">expectedTitle</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">getContext</span><span class="o">().</span><span class="na">getString</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">string</span><span class="o">.</span><span class="na">results_title</span><span class="o">),</span>
+</span><span class='line'>                <span class="n">formattedDateTime</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Trigger onResume event in Results Presenter</span>
+</span><span class='line'>        <span class="n">resultsPresenter</span><span class="o">.</span><span class="na">onResume</span><span class="o">(</span><span class="n">getContext</span><span class="o">());</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Test not null</span>
+</span><span class='line'>        <span class="n">assertNotNull</span><span class="o">(</span><span class="n">resultTitle</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Test as expected</span>
+</span><span class='line'>        <span class="n">assertEquals</span><span class="o">(</span><span class="n">expectedTitle</span><span class="o">,</span> <span class="n">resultTitle</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">private</span> <span class="kd">class</span> <span class="nc">TestResultsView</span> <span class="kd">implements</span> <span class="n">IResultsView</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nd">@Override</span>
+</span><span class='line'>        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">showTitle</span><span class="o">(</span><span class="n">String</span> <span class="n">title</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">resultTitle</span> <span class="o">=</span> <span class="n">title</span><span class="o">;</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nd">@Override</span>
+</span><span class='line'>        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">showResults</span><span class="o">(</span><span class="n">String</span> <span class="n">results</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">resultData</span> <span class="o">=</span> <span class="n">results</span><span class="o">;</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>    <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
 
 		
 		
